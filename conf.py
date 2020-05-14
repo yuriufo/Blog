@@ -15,7 +15,7 @@ template = {
 }
 enable_jsdelivr = {
     "enabled": True,
-    "repo": "yuriufo/yurisec.github.io@gh-pages"
+    "repo": "yuriufo/yurisec.github.io@master"
 }
 
 # 站点设置
