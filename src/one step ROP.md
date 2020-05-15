@@ -187,7 +187,7 @@ payload1 += p64(main)
 
 ### 通用gadgets part2
 
-`_dl_runtime_resolve()`下**（在内存中的地址是随机的）**: 
+`_dl_runtime_resolve()`下**(在内存中的地址是随机的)**: 
 
 ```bash
 0x7ffff7def200 <_dl_runtime_resolve>:       sub     rsp,0x38
