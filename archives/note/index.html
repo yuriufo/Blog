@@ -19,22 +19,22 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/2b0d5f86a48c4ec71b728d89c6a5ef16.json"
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/8b3187bf059b6398e9931fa36ad78c15.json"
         }
     </script>
     
 <title>一步一步学ROP笔记 - yurisec</title>
 <meta name="author" content="yuri" />
-<meta name="description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP，ASLR等)." />
+<meta name="description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等)." />
 <meta property="og:title" content="一步一步学ROP笔记 - yurisec" />
-<meta property="og:description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP，ASLR等)." />
+<meta property="og:description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等)." />
 <meta property="og:site_name" content="yurisec" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/archives/note/" />
 <meta property="og:image" content="" />
 <meta property="article:published_time" content="2018-03-28T14:45:00-00.00" />
 <meta name="twitter:title" content="一步一步学ROP笔记 - yurisec" />
-<meta name="twitter:description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP，ASLR等)." />
+<meta name="twitter:description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等)." />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="" />
 
@@ -80,7 +80,17 @@
                 
             </span>
             <div class="ga-content_body">
-                
+                <h1>一步一步学ROP笔记</h1>
+<blockquote><p>原文地址: <a href="drops.wooyun.org/tips/6597">一步一步学ROP</a></p>
+</blockquote>
+<h2>x86</h2>
+<h3>无保护</h3>
+<ul>
+<li>关掉canary:  <strong>-fno-stack-protector</strong> </li>
+<li>关掉NX:  <strong>-z execstack</strong> </li>
+<li>关掉PIE:  <strong>sudo -s echo 0 &gt; /proc/sys/kernel/randomize_va_space</strong> </li>
+</ul>
+
             </div>
         </article>
         <div id="ga-tags">

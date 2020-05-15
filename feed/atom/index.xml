@@ -1,2 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-15T06:33:40.929639+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/note/</id><title>一步一步学ROP笔记</title><updated>2020-05-15T06:33:40.929681+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content/><link href="/archives/note/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry></feed>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-15T06:46:23.170340+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/note/</id><title>一步一步学ROP笔记</title><updated>2020-05-15T06:46:23.170426+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+&lt;blockquote&gt;&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;x86&lt;/h2&gt;
+&lt;h3&gt;无保护&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;关掉canary:  &lt;strong&gt;-fno-stack-protector&lt;/strong&gt; &lt;/li&gt;
+&lt;li&gt;关掉NX:  &lt;strong&gt;-z execstack&lt;/strong&gt; &lt;/li&gt;
+&lt;li&gt;关掉PIE:  &lt;strong&gt;sudo -s echo 0 &amp;gt; /proc/sys/kernel/randomize_va_space&lt;/strong&gt; &lt;/li&gt;
+&lt;/ul&gt;
+</content><link href="/archives/note/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry></feed>
