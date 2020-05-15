@@ -20,24 +20,19 @@ enable_jsdelivr = {
 
 # 站点设置
 site_name = "yurisec"
-site_logo = "${static_prefix}logo.png"
+site_logo = "${static_prefix}favicon.svg"
 site_build_date = "2019-12-18T16:51+08:00"
 author = "Yuri"
 email = "yuripwn@gmail.com"
 author_homepage = "https://www.yurisec.cn"
-description = "unknow"
+description = "A simple static blog."
 key_words = ['Yuri', 'blog']
 language = 'zh-CN'
 external_links = [
     {
-        "name": "Maverick",
-        "url": "https://github.com/AlanDecode/Maverick",
-        "brief": "🏄‍ Go My Own Way."
-    },
-    {
-        "name": "三無計劃",
-        "url": "https://www.imalan.cn",
-        "brief": "熊猫小A的主页。"
+        "name": "ycdxsb",
+        "url": "https://blog.ycdxsb.cn/",
+        "brief": "🐷"
     }
 ]
 nav = [
@@ -60,18 +55,13 @@ nav = [
 
 social_links = [
     {
-        "name": "Twitter",
-        "url": "https://twitter.com/AlanDecode",
-        "icon": "gi gi-twitter"
-    },
-    {
         "name": "GitHub",
-        "url": "https://github.com/AlanDecode",
+        "url": "https://github.com/yuriufo",
         "icon": "gi gi-github"
     },
     {
         "name": "Weibo",
-        "url": "https://weibo.com/5245109677/",
+        "url": "https://weibo.com/qq771739864",
         "icon": "gi gi-weibo"
     }
 ]

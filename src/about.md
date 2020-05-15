@@ -17,6 +17,5 @@ tags:
 
 ## Contact
 
-Email: hi#imalan.cn (replace # with @)
+Email: yuripwn@gmail.com
 
-Telegram：[AlanDecode](https://t.me/alandecode)
