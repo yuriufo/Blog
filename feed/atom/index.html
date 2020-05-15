@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-15T07:18:29.110088+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/note/</id><title>一步一步学ROP笔记</title><updated>2020-05-15T07:18:29.110143+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-15T07:34:40.548002+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/note/</id><title>一步一步学ROP笔记</title><updated>2020-05-15T07:34:40.548085+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;x86&lt;/h2&gt;
@@ -54,4 +54,17 @@
 &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DynELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;leak&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./level2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;system_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;libc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2&gt;x64&lt;/h2&gt;
+&lt;h3&gt;传参区别&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;前六个参数保存顺序 : &lt;strong&gt;RDI, RSI, RDX, RCX, R8, R9&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;gadgets&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;找ROP:  &lt;strong&gt;ROPgadget --binary level4 --only "pop|ret"&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;过滤:  &lt;strong&gt;ROPgadget --binary libc.so.6 --only "pop|ret" | grep rdi&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;通用gadgets part1&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;__libc_csu_init()&lt;/code&gt;下:&lt;/p&gt;
 </content><link href="/archives/note/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry></feed>

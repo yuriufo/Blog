@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/854cf620dc055f7b894dd1e3f4c28556.json"
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/2f08d8d15baae16469e02165dc75fd4a.json"
         }
     </script>
     
@@ -135,6 +135,19 @@
 <span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./level2&#39;</span><span class="p">))</span>
 <span class="n">system_addr</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span>
 </pre></div>
+<hr>
+<h2>x64</h2>
+<h3>传参区别</h3>
+<ul>
+<li>前六个参数保存顺序 : <strong>RDI, RSI, RDX, RCX, R8, R9</strong></li>
+</ul>
+<h3>gadgets</h3>
+<ul>
+<li>找ROP:  <strong>ROPgadget --binary level4 --only "pop|ret"</strong></li>
+<li>过滤:  <strong>ROPgadget --binary libc.so.6 --only "pop|ret" | grep rdi</strong></li>
+</ul>
+<h3>通用gadgets part1</h3>
+<p><code>__libc_csu_init()</code>下:</p>
 
             </div>
         </article>
