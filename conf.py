@@ -9,10 +9,9 @@ build_dir = "../dist/"
 index_page_size = 10
 archives_page_size = 20
 template = {
-    "name": "Galileo",
-    "type": "git",
-    "url": "https://github.com/AlanDecode/Maverick-Theme-Galileo.git",
-    "branch": "latest"
+    "name": "Kepler",
+    "type": "local",
+    "path": "../Kepler"
 }
 enable_jsdelivr = {
     "enabled": True,
@@ -22,7 +21,7 @@ enable_jsdelivr = {
 # 站点设置
 site_name = "yurisec"
 site_logo = "${static_prefix}logo.png"
-site_build_date = "2019-12-18T16:51+08:00"
+site_build_date = "2020-05-14T00:00+08:00"
 author = "Yuri"
 email = "yuripwn@gmail.com"
 author_homepage = "https://www.yurisec.cn"
