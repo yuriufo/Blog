@@ -3,7 +3,7 @@
 """
 
 # For Maverick
-site_prefix = "/"
+site_prefix = "/yuriufo-blog.github.io/"
 source_dir = "../src/"
 build_dir = "../dist/"
 index_page_size = 10
@@ -15,14 +15,14 @@ template = {
 }
 enable_jsdelivr = {
     "enabled": True,
-    "repo": "yuriufo/yuriufo.github.io@master"
+    "repo": "yuriufo/yuriufo-blog.github.io@gh-pages"
 }
 locale = "Asia/Shanghai"
 
 
 # 站点设置
 site_name = "YuriSec"
-site_logo = "logo.png"
+site_logo = "${static_prefix}logo.png"
 site_build_date = "2018-03-28T00:00+08:00"
 author = "Yuri"
 email = "yuripwn@gmail.com"
