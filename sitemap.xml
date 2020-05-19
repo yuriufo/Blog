@@ -5,15 +5,15 @@ xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitem
 xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">	
 
 <url>
-    <loc>/about/</loc>
-    <lastmod>2017-06-28</lastmod>
+    <loc>/yuriufo-blog.github.io/about/</loc>
+    <lastmod>2018-03-28</lastmod>
     <changefreq>always</changefreq>
     <priority>0.8</priority>
 </url>
 
 <url>
-    <loc>/archives/typography/</loc>
-    <lastmod>2019-12-18</lastmod>
+    <loc>/yuriufo-blog.github.io/archives/RopNote/</loc>
+    <lastmod>2018-03-28</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
 </url>
