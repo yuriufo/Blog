@@ -13,9 +13,9 @@ enable_jsdelivr = {
     "repo": "yuriufo/yuriufo.github.io@master"
 }
 template = {
-    "name": "Kepler",
+    "name": "Galileo",
     "type": "local",
-    "path": "../Kepler"
+    "path": "../Galileo"
 }
 locale = "Asia/Shanghai"
 
