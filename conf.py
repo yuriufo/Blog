@@ -8,14 +8,14 @@ source_dir = "../src/"
 build_dir = "../dist/"
 index_page_size = 10
 archives_page_size = 20
-enable_jsdelivr = {
-    "enabled": True,
-    "repo": "yuriufo/yuriufo.github.io@master"
-}
 template = {
     "name": "Galileo",
     "type": "local",
     "path": "../Galileo"
+}
+enable_jsdelivr = {
+    "enabled": True,
+    "repo": "yuriufo/yuriufo.github.io@master"
 }
 locale = "Asia/Shanghai"
 
@@ -78,6 +78,8 @@ head_addon = r'''
 <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
 '''
 
-footer_addon = ''
+footer_addon = r'''
+<a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备20016612号</a>
+'''
 
 body_addon = ''
