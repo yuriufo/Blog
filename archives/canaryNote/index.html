@@ -1,0 +1,209 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Yuri,blog" />
+    <meta name="generator" content="Maverick 1.1" />
+    <meta name="template" content="Galileo" />
+    <link rel="alternate" type="application/rss+xml" title="yurisec &raquo; RSS 2.0" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="yurisec &raquo; ATOM 1.0" href="/feed/atom/index.xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/galileo-3f4dcc35c9.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/ExSearch-182e5a8868.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700&display=swap">
+    <script>
+        var ExSearchConfig = {
+            root: "",
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/78d0ead8d57d2d351686eb568b1cb861.json"
+        }
+    </script>
+    
+<title>canary笔记 - yurisec</title>
+<meta name="author" content="yuri" />
+<meta name="description" content="canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。" />
+<meta property="og:title" content="canary笔记 - yurisec" />
+<meta property="og:description" content="canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。" />
+<meta property="og:site_name" content="yurisec" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/archives/canaryNote/" />
+<meta property="og:image" content="" />
+<meta property="article:published_time" content="2018-03-30T13:57:11-00.00" />
+<meta name="twitter:title" content="canary笔记 - yurisec" />
+<meta name="twitter:description" content="canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="" />
+
+
+    
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <header id="ga-header">
+                <div first>
+                    <aside id="ga-brand">
+                        <h1 class="brand"><a class="no-style" href="/">yurisec</a></h1>
+                        <p>A simple static blog.</p>
+                    </aside>
+                </div>
+                <div second id="ga-nav">
+                    <nav class="navs">
+                        <ul><li><a class="ga-highlight" href="/" target="_self">首页</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/archives/" target="_self">归档</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/about/" target="_self">关于</a></li><span class="separator">·</span><li><a href="#" target="_self" class="search-form-input ga-highlight">搜索</a></li></ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="wrapper">
+                
+<main>    
+    <section class="ga-section ga-content">
+        <article class="yue">
+            <h1 class="ga-post_title">canary笔记</h1>
+            <span class="ga-post_meta ga-mono">
+                <span>yuri</span>
+                <time>
+                    2018-03-30
+                </time>
+                
+                in <a no-style class="category" href="/category/pwn/">
+                    pwn
+                </a>
+                
+                
+            </span>
+            <div class="ga-content_body">
+                <h1>canary笔记</h1>
+<h2>布局</h2>
+<p><figure style="flex: 44.227353463587924" ><img width="498" height="563" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e48b1e1a0f1feb6251e21c65e12c87bf.png" /><figcaption>canary布局</figcaption></figure></p>
+<h2>more</h2>
+<h3>直接泄漏</h3>
+<p>因为canary最低字节必是<code>'\x00'</code>(防止填满把它打印出来)，则满足下面条件：</p>
+<blockquote><ul>
+<li>缓冲区溢出可以填充到且只填充到canary最低字节</li>
+<li>程序可以输出填充的内容</li>
+<li>函数返回前还有再次填充机会</li>
+</ul>
+</blockquote>
+<p><figure style="flex: 90.28497409326425" ><img width="697" height="386" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/2bb8d910437826ae78a9c4daa4fb598c.png" /><figcaption>填充到canary最低字节</figcaption></figure></p>
+<p>这样就可以读出canary后再把它加到payload上，从而绕过canary。</p>
+<h3>格式化字符串</h3>
+<p>格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行<code>___stack_chk_fail()</code>，具体用法：<a href="http://yurixo.top/2018/03/29/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AC%94%E8%AE%B0/">格式化字符串笔记</a>。</p>
+<h3>爆破</h3>
+<p>若程序有<code>fork()</code>使子程序循环执行，可以通过子程序栈与主程序一致慢慢爆破。</p>
+<h3>ssp leak</h3>
+<p>因为函数返回前会检查canary，若不通过会跳转到<code>___stack_chk_fail()</code>：</p>
+<p><figure style="flex: 112.82051282051282" ><img width="264" height="117" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/69476bafed7d2ca0e9e4b9477e23b270.png" /><figcaption>___stack_chk_fail()</figcaption></figure></p>
+<p>因此可以通过修改<code>___stack_chk_fail()</code>地址和覆盖canary来劫持程序流程，但这里也有一种可以利用的东西：</p>
+<p>看一下源码：
+<code>__stack_chk_fail</code>:</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> 
+<span class="nf">__attribute__</span> <span class="p">((</span><span class="n">noreturn</span><span class="p">))</span> 
+<span class="n">__stack_chk_fail</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>   
+    <span class="n">__fortify_fail</span> <span class="p">(</span><span class="s">&quot;stack smashing detected&quot;</span><span class="p">);</span> 
+<span class="p">}</span>
+</pre></div>
+<p><code>fortify_fail</code>:</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> 
+<span class="nf">__attribute__</span> <span class="p">((</span><span class="n">noreturn</span><span class="p">))</span> 
+<span class="n">__fortify_fail</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+   <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">;</span> <span class="p">{</span>
+      <span class="cm">/* The loop is added only to keep gcc happy. */</span>
+         <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+              <span class="n">__libc_message</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;*** %s ***: %s terminated</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">__libc_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">?:</span> <span class="s">&quot;&lt;unknown&gt;&quot;</span><span class="p">)</span> 
+<span class="p">}</span> 
+<span class="n">libc_hidden_def</span> <span class="p">(</span><span class="n">__fortify_fail</span><span class="p">)</span>
+</pre></div>
+<p><code>__libc_message</code> 的第二个%s输出的是<code>argv[0]</code>，<code>argv[0]</code>是指向第一个启动参数字符串的指针,由此我们可以通过缓冲区溢出覆盖掉<code>argv[0]</code>打印我们想要的地址上的值。</p>
+
+            </div>
+        </article>
+        <div id="ga-tags">
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/tag/pwn/">#pwn</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/tag/canary/">#canary</a>
+    </span>
+    
+</div>
+    </section>
+
+    
+<section id="ga-content_pager">
+
+    <div class="next">
+        <h3>没有了</h3>
+        <p class="yue">这是最新的文章</p>
+    </div>
+
+
+    <div class="prev">
+        <a class="ga-highlight" href="/archives/ropNote/">一步一步学ROP笔记</a>
+        <p class="yue">ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等).</p>
+    </div>
+
+</section>
+
+
+    
+
+</main>
+
+                <footer class="ga-mono" id="ga-footer">
+                    <section>
+                        <span id="ga-uptime"></span>
+                        <span class="brand">yurisec</span>
+                    </section>
+                    <section>
+                        <p class="copyright">
+                            <span>Copyright © 2020 Yuri</span>
+                            <span>Powered by <a no-style href="https://github.com/AlanDecode/Maverick" target="_blank">Maverick & Galileo</a></span>
+                        </p>
+                        <div class="copyright">
+                            <span class="footer-addon">
+                                
+                            </span>
+                            <nav class="social-links">
+                                <ul><li><a class="no-style" title="GitHub" href="https://github.com/yuriufo" target="_blank"><i class="gi gi-github"></i>GitHub</a></li><span class="separator">·</span><li><a class="no-style" title="Weibo" href="https://weibo.com/qq771739864" target="_blank"><i class="gi gi-weibo"></i>Weibo</a></li></ul>
+                            </nav>
+                        </div>
+                    </section>
+                    <script>
+                        var site_build_date = "2020-05-14T00:00+08:00"
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/galileo-dc4baa7cf4.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!--katex-->
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/katex.min.js"></script>
+    <script>
+    mathOpts = {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "\\[", right: "\\]", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\(", right: "\\)", display: false}
+        ]
+    };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/auto-render.min.js" onload="renderMathInElement(document.body, mathOpts);"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/ExSearch-493cb9cd89.js"></script>
+
+    
+    </body>
+</html>
