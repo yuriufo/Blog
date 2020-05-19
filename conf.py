@@ -14,8 +14,7 @@ template = {
     "path": "../Galileo"
 }
 enable_jsdelivr = {
-    "enabled": True,
-    "repo": "yuriufo/yuriufo.github.io@master"
+    "enabled": False
 }
 
 # 站点设置
