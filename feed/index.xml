@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>yurisec</title><link>/</link><description>A simple static blog.</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</url><title>yurisec</title><link>/</link></image><language>zh-CN</language><lastBuildDate>Sat, 16 May 2020 09:19:38 +0806</lastBuildDate><pubDate>Sat, 16 May 2020 09:19:38 +0806</pubDate><item><title>一步一步学ROP笔记</title><link>/archives/note/</link><description>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>yurisec</title><link>/</link><description>A simple static blog.</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/logo.png</url><title>yurisec</title><link>/</link></image><language>zh-CN</language><lastBuildDate>Tue, 19 May 2020 11:54:13 +0806</lastBuildDate><pubDate>Tue, 19 May 2020 11:54:13 +0806</pubDate><item><title>一步一步学ROP笔记</title><link>/archives/note/</link><description>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;&lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2&gt;x86&lt;/h2&gt;
@@ -192,4 +192,46 @@
 &lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pop_rax_ret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mmap_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linker_addr&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mh"&gt;0x35&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;34&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shellcode_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</description><author>yuripwn@gmail.com (yuri)</author><guid isPermaLink="true">/archives/note/</guid><pubDate>Wed, 28 Mar 2018 14:45:00 +0806</pubDate></item></channel></rss>
+</description><author>yuripwn@gmail.com (yuri)</author><guid isPermaLink="true">/archives/note/</guid><pubDate>Wed, 28 Mar 2018 14:45:00 +0806</pubDate></item><item><title>canary笔记</title><link>/archives/note/</link><description>&lt;h1&gt;canary笔记&lt;/h1&gt;
+&lt;h2&gt;布局&lt;/h2&gt;
+&lt;p&gt;&lt;figure style="flex: 44.227353463587924" &gt;&lt;img width="498" height="563" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e48b1e1a0f1feb6251e21c65e12c87bf.png" /&gt;&lt;figcaption&gt;canary布局&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2&gt;more&lt;/h2&gt;
+&lt;h3&gt;直接泄漏&lt;/h3&gt;
+&lt;p&gt;因为canary最低字节必是&lt;code&gt;'\x00'&lt;/code&gt;(防止填满把它打印出来)，则满足下面条件：&lt;/p&gt;
+&lt;blockquote&gt;&lt;ul&gt;
+&lt;li&gt;缓冲区溢出可以填充到且只填充到canary最低字节&lt;/li&gt;
+&lt;li&gt;程序可以输出填充的内容&lt;/li&gt;
+&lt;li&gt;函数返回前还有再次填充机会&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style="flex: 90.28497409326425" &gt;&lt;img width="697" height="386" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/2bb8d910437826ae78a9c4daa4fb598c.png" /&gt;&lt;figcaption&gt;填充到canary最低字节&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这样就可以读出canary后再把它加到payload上，从而绕过canary。&lt;/p&gt;
+&lt;h3&gt;格式化字符串&lt;/h3&gt;
+&lt;p&gt;格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行&lt;code&gt;___stack_chk_fail()&lt;/code&gt;，具体用法：&lt;a href="http://yurixo.top/2018/03/29/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AC%94%E8%AE%B0/"&gt;格式化字符串笔记&lt;/a&gt;。&lt;/p&gt;
+&lt;h3&gt;爆破&lt;/h3&gt;
+&lt;p&gt;若程序有&lt;code&gt;fork()&lt;/code&gt;使子程序循环执行，可以通过子程序栈与主程序一致慢慢爆破。&lt;/p&gt;
+&lt;h3&gt;ssp leak&lt;/h3&gt;
+&lt;p&gt;因为函数返回前会检查canary，若不通过会跳转到&lt;code&gt;___stack_chk_fail()&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 112.82051282051282" &gt;&lt;img width="264" height="117" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/69476bafed7d2ca0e9e4b9477e23b270.png" /&gt;&lt;figcaption&gt;___stack_chk_fail()&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;因此可以通过修改&lt;code&gt;___stack_chk_fail()&lt;/code&gt;地址和覆盖canary来劫持程序流程，但这里也有一种可以利用的东西：&lt;/p&gt;
+&lt;p&gt;看一下源码：
+&lt;code&gt;__stack_chk_fail&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; 
+&lt;span class="nf"&gt;__attribute__&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;noreturn&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+&lt;span class="n"&gt;__stack_chk_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
+    &lt;span class="n"&gt;__fortify_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stack smashing detected&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;fortify_fail&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; 
+&lt;span class="nf"&gt;__attribute__&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;noreturn&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+&lt;span class="n"&gt;__fortify_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="cm"&gt;/* The loop is added only to keep gcc happy. */&lt;/span&gt;
+         &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="n"&gt;__libc_message&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*** %s ***: %s terminated&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;__libc_argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;?:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;unknown&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt; 
+&lt;span class="n"&gt;libc_hidden_def&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__fortify_fail&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;__libc_message&lt;/code&gt; 的第二个%s输出的是&lt;code&gt;argv[0]&lt;/code&gt;，&lt;code&gt;argv[0]&lt;/code&gt;是指向第一个启动参数字符串的指针,由此我们可以通过缓冲区溢出覆盖掉&lt;code&gt;argv[0]&lt;/code&gt;打印我们想要的地址上的值。&lt;/p&gt;
+</description><author>yuripwn@gmail.com (yuri)</author><guid isPermaLink="true">/archives/note/</guid><pubDate>Fri, 30 Mar 2018 13:57:11 +0806</pubDate></item></channel></rss>
