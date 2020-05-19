@@ -9,8 +9,9 @@ build_dir = "../dist/"
 index_page_size = 10
 archives_page_size = 20
 enable_jsdelivr = {
-    "enabled": True,
-    "repo": "yuriufo/yuriufo.github.io@master"
+    "name": "Kepler",
+    "type": "local",
+    "path": "../Kepler"
 }
 template = "Kepler"
 locale = "Asia/Shanghai"
