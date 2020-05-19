@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 一步一步学ROP笔记
-slug: ropNote
+slug: RopNote
 date: 2018-03-28 14:45
 status: publish
 author: yuri
