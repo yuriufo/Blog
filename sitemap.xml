@@ -12,7 +12,14 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-    <loc>/archives/canaryNote/</loc>
+    <loc>/archives/nextrsa/</loc>
+    <lastmod>2018-03-30</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.5</priority>
+</url>
+
+<url>
+    <loc>/archives/CanaryNote/</loc>
     <lastmod>2018-03-30</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
