@@ -1,7 +1,7 @@
 ---
 layout: post
 title: canary笔记
-slug: canaryNote
+slug: CanaryNote
 date: 2018-03-30 13:57:11
 status: publish
 author: yuri
