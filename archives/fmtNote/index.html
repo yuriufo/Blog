@@ -23,18 +23,18 @@
         }
     </script>
     
-<title>canary笔记 - YuriSec</title>
+<title>格式化字符串笔记 - YuriSec</title>
 <meta name="author" content="yuri" />
-<meta name="description" content="canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。" />
-<meta property="og:title" content="canary笔记 - YuriSec" />
-<meta property="og:description" content="canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。" />
+<meta name="description" content="格式化字符串函数可以接受可变数量的参数，并将第一个参数作为格式化字符串，根据其来解析之后的参数。通俗来说，格式化字符串函数就是将计算机内存中表示的数据转化为我们人类可读的字符串格式。" />
+<meta property="og:title" content="格式化字符串笔记 - YuriSec" />
+<meta property="og:description" content="格式化字符串函数可以接受可变数量的参数，并将第一个参数作为格式化字符串，根据其来解析之后的参数。通俗来说，格式化字符串函数就是将计算机内存中表示的数据转化为我们人类可读的字符串格式。" />
 <meta property="og:site_name" content="YuriSec" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/archives/CanaryNote/" />
+<meta property="og:url" content="/archives/fmtNote/" />
 <meta property="og:image" content="" />
 <meta property="article:published_time" content="2018-03-30T13:57:11-00.00" />
-<meta name="twitter:title" content="canary笔记 - YuriSec" />
-<meta name="twitter:description" content="canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。" />
+<meta name="twitter:title" content="格式化字符串笔记 - YuriSec" />
+<meta name="twitter:description" content="格式化字符串函数可以接受可变数量的参数，并将第一个参数作为格式化字符串，根据其来解析之后的参数。通俗来说，格式化字符串函数就是将计算机内存中表示的数据转化为我们人类可读的字符串格式。" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="" />
 
@@ -66,7 +66,7 @@
 <main>    
     <section class="ga-section ga-content">
         <article class="yue">
-            <h1 class="ga-post_title">canary笔记</h1>
+            <h1 class="ga-post_title">格式化字符串笔记</h1>
             <span class="ga-post_meta ga-mono">
                 <span>yuri</span>
                 <time>
@@ -80,49 +80,117 @@
                 
             </span>
             <div class="ga-content_body">
-                <h1>canary笔记</h1>
-<h2>布局</h2>
-<p><figure style="flex: 44.227353463587924" ><img width="498" height="563" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e48b1e1a0f1feb6251e21c65e12c87bf.png" /><figcaption>canary布局</figcaption></figure></p>
-<h2>more</h2>
-<h3>直接泄漏</h3>
-<p>因为canary最低字节必是<code>'\x00'</code>(防止填满把它打印出来)，则满足下面条件：</p>
-<blockquote>
+                <h1>格式化字符串笔记</h1>
+<h2>基本格式</h2>
+<p><code>%[parameter][flags][field width][.precision][length]type</code></p>
 <ul>
-<li>缓冲区溢出可以填充到且只填充到canary最低字节</li>
-<li>程序可以输出填充的内容</li>
-<li>函数返回前还有再次填充机会</li>
+<li><strong>parameter</strong> :<ul>
+<li>n$，获取格式化字符串中的第n个参数</li>
 </ul>
-</blockquote>
-<p><figure style="flex: 90.28497409326425" ><img width="697" height="386" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/2bb8d910437826ae78a9c4daa4fb598c.png" /><figcaption>填充到canary最低字节</figcaption></figure></p>
-<p>这样就可以读出canary后再把它加到payload上，从而绕过canary。</p>
-<h3>格式化字符串</h3>
-<p>格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行<code>___stack_chk_fail()</code>，具体用法：<a href="http://yurixo.top/2018/03/29/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AC%94%E8%AE%B0/">格式化字符串笔记</a>。</p>
-<h3>爆破</h3>
-<p>若程序有<code>fork()</code>使子程序循环执行，可以通过子程序栈与主程序一致慢慢爆破。</p>
-<h3>ssp leak</h3>
-<p>因为函数返回前会检查canary，若不通过会跳转到<code>___stack_chk_fail()</code>：</p>
-<p><figure style="flex: 112.82051282051282" ><img width="264" height="117" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/69476bafed7d2ca0e9e4b9477e23b270.png" /><figcaption>___stack_chk_fail()</figcaption></figure></p>
-<p>因此可以通过修改<code>___stack_chk_fail()</code>地址和覆盖canary来劫持程序流程，但这里也有一种可以利用的东西：</p>
-<p>看一下源码：
-<code>__stack_chk_fail</code>:</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> 
-<span class="nf">__attribute__</span> <span class="p">((</span><span class="n">noreturn</span><span class="p">))</span> 
-<span class="n">__stack_chk_fail</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>   
-    <span class="n">__fortify_fail</span> <span class="p">(</span><span class="s">&quot;stack smashing detected&quot;</span><span class="p">);</span> 
-<span class="p">}</span>
+</li>
+<li><strong>length</strong> : 输出的长度<ul>
+<li>$hhn，写入一个字节</li>
+<li>$hn，写入两个字节</li>
+<li>$n，​写入四个字节</li>
+<li>$lln，写入八个字节</li>
+</ul>
+</li>
+</ul>
+<h2>类型</h2>
+<table>
+<thead>
+<tr>
+  <th>参数</th>
+  <th>输入类型</th>
+  <th>输出类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>%c</td>
+  <td>值</td>
+  <td>字符，通常用来配合%n写</td>
+</tr>
+<tr>
+  <td>%d</td>
+  <td>值</td>
+  <td>十进制整数</td>
+</tr>
+<tr>
+  <td>%x</td>
+  <td>值</td>
+  <td>十六进制整数</td>
+</tr>
+<tr>
+  <td>%p</td>
+  <td>值</td>
+  <td>十六进制整数，与%x基本一样，只是附加了前缀0x，可用来判断目标环境是32bit还是64bit</td>
+</tr>
+<tr>
+  <td>%s</td>
+  <td>指针</td>
+  <td>字符串，经常用来读GOT表内容，遇'\x00'截断</td>
+</tr>
+<tr>
+  <td>%n</td>
+  <td>指针</td>
+  <td>写入已经输出字节个数</td>
+</tr>
+</tbody>
+</table>
+<h2>more</h2>
+<h3>基础</h3>
+<ul>
+<li><code>%n$x</code>可以获取到对应的第<code>n+1</code>个参数的数值</li>
+<li>利用<code>%x</code>来获取对应栈的内存，但建议使用<code>%p</code>，可以不用考虑位数的区别</li>
+<li>利用<code>%s</code>来获取变量所对应地址的内容，只不过有零截断</li>
+<li>利用<code>%order$x</code>来获取指定参数的值，利用<code>%order$s</code>来获取指定参数对应地址的内容</li>
+</ul>
+<h3>踩坑</h3>
+<ul>
+<li>利用任意写建议不要一次性写完，可以分字节写</li>
+<li>遇到过滤<code>$h</code>和<code>$n</code>,可以用<code>$+hn</code>,等同于<code>$hn</code></li>
+</ul>
+<h3>64位前六个参数问题</h3>
+<ul>
+<li>%1$lx: RSI</li>
+<li>%2$lx: RDX</li>
+<li>%3$lx: RCX</li>
+<li>%4$lx: R8</li>
+<li>%5$lx: R9</li>
+<li>%6$lx: 栈上的第一个QWORD</li>
+</ul>
+<h3>FmtStr</h3>
+<p>自动查找偏移地址：</p>
+<div class="highlight"><pre><span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">exec_fmt</span><span class="p">(</span><span class="n">payload</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;a.out&#39;</span><span class="p">)</span>     <span class="c1">#文件路径</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">info</span>
+
+<span class="n">autofmt</span> <span class="o">=</span> <span class="n">FmtStr</span><span class="p">(</span><span class="n">exec_fmt</span><span class="p">)</span>
+<span class="nb">print</span> <span class="n">autofmt</span><span class="o">.</span><span class="n">offset</span>
 </pre></div>
-<p><code>fortify_fail</code>:</p>
-<div class="highlight"><pre><span></span><span class="kt">void</span> 
-<span class="nf">__attribute__</span> <span class="p">((</span><span class="n">noreturn</span><span class="p">))</span> 
-<span class="n">__fortify_fail</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-   <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">;</span> <span class="p">{</span>
-      <span class="cm">/* The loop is added only to keep gcc happy. */</span>
-         <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-              <span class="n">__libc_message</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;*** %s ***: %s terminated</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">__libc_argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">?:</span> <span class="s">&quot;&lt;unknown&gt;&quot;</span><span class="p">)</span> 
-<span class="p">}</span> 
-<span class="n">libc_hidden_def</span> <span class="p">(</span><span class="n">__fortify_fail</span><span class="p">)</span>
+<h3>fmtstr</h3>
+<p>产生格式化字符串工具：
+<code>payload = fmtstr_payload(offset, writes, numbwritten=0, write_size='byte')</code></p>
+<ul>
+<li>offset (int) – 第一个格式化偏移</li>
+<li>writes (dict) – 字典，向哪个地址写入什么值 {addr: value, addr2: value2}</li>
+<li>numbwritten (int) – 输出字符串已经写入字节数</li>
+<li>write_size (str) – byte, short or int.即每次写一个字节、两个字节还是四个字节,默认按字节</li>
+</ul>
+<h3>fmtarg</h3>
+<p>pwngdb来判断某个参数的偏移</p>
+<div class="highlight"><pre><span></span>gef➤  fmtarg 0x00007fffffffdb28
+The index of format argument : <span class="m">10</span>
 </pre></div>
-<p><code>__libc_message</code> 的第二个%s输出的是<code>argv[0]</code>，<code>argv[0]</code>是指向第一个启动参数字符串的指针,由此我们可以通过缓冲区溢出覆盖掉<code>argv[0]</code>打印我们想要的地址上的值。</p>
 
             </div>
         </article>
@@ -133,7 +201,7 @@
     </span>
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/tag/canary/">#canary</a>
+        <a class="ga-highlight" href="/tag/fmt/">#fmt</a>
     </span>
     
 </div>
@@ -143,14 +211,14 @@
 <section id="ga-content_pager">
 
     <div class="next">
-        <a class="ga-highlight" href="/archives/nextrsa/">第二届强网杯nextrsa</a>
-        <p class="yue">有九关的RSA。</p>
+        <h3>没有了</h3>
+        <p class="yue">这是最新的文章</p>
     </div>
 
 
     <div class="prev">
-        <a class="ga-highlight" href="/archives/nextrsa/">pwntools使用</a>
-        <p class="yue">Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。</p>
+        <a class="ga-highlight" href="/archives/nextrsa/">第二届强网杯nextrsa</a>
+        <p class="yue">有九关的RSA。</p>
     </div>
 
 </section>
