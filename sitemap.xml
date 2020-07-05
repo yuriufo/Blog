@@ -12,6 +12,20 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+    <loc>/archives/Radare2Note/</loc>
+    <lastmod>2020-07-05</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.5</priority>
+</url>
+
+<url>
+    <loc>/archives/CanaryNote/</loc>
+    <lastmod>2018-03-30</lastmod>
+    <changefreq>always</changefreq>
+    <priority>0.5</priority>
+</url>
+
+<url>
     <loc>/archives/fmtNote/</loc>
     <lastmod>2018-03-30</lastmod>
     <changefreq>always</changefreq>
@@ -20,13 +34,6 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
     <loc>/archives/nextrsa/</loc>
-    <lastmod>2018-03-30</lastmod>
-    <changefreq>always</changefreq>
-    <priority>0.5</priority>
-</url>
-
-<url>
-    <loc>/archives/CanaryNote/</loc>
     <lastmod>2018-03-30</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
