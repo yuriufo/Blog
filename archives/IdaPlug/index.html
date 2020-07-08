@@ -23,18 +23,18 @@
         }
     </script>
     
-<title>Radare2笔记 - YuriSec</title>
+<title>IDA Pro 插件记录 - YuriSec</title>
 <meta name="author" content="yuri" />
-<meta name="description" content="Radare2笔记（不断更新）。" />
-<meta property="og:title" content="Radare2笔记 - YuriSec" />
-<meta property="og:description" content="Radare2笔记（不断更新）。" />
+<meta name="description" content="记录使用的IDA Pro插件。" />
+<meta property="og:title" content="IDA Pro 插件记录 - YuriSec" />
+<meta property="og:description" content="记录使用的IDA Pro插件。" />
 <meta property="og:site_name" content="YuriSec" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/archives/Radare2Note/" />
+<meta property="og:url" content="/archives/IdaPlug/" />
 <meta property="og:image" content="" />
-<meta property="article:published_time" content="2020-07-05T17:20:00-00.00" />
-<meta name="twitter:title" content="Radare2笔记 - YuriSec" />
-<meta name="twitter:description" content="Radare2笔记（不断更新）。" />
+<meta property="article:published_time" content="2020-07-08T22:18:00-00.00" />
+<meta name="twitter:title" content="IDA Pro 插件记录 - YuriSec" />
+<meta name="twitter:description" content="记录使用的IDA Pro插件。" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="" />
 
@@ -66,11 +66,11 @@
 <main>    
     <section class="ga-section ga-content">
         <article class="yue">
-            <h1 class="ga-post_title">Radare2笔记</h1>
+            <h1 class="ga-post_title">IDA Pro 插件记录</h1>
             <span class="ga-post_meta ga-mono">
                 <span>yuri</span>
                 <time>
-                    2020-07-05
+                    2020-07-08
                 </time>
                 
                 in <a no-style class="category" href="/category/reverse/">
@@ -80,46 +80,57 @@
                 
             </span>
             <div class="ga-content_body">
-                <h1>Radare2笔记</h1>
-<h2>命令</h2>
-<table>
-<thead>
-<tr>
-  <th>Command</th>
-  <th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>aaaa</td>
-  <td>Fully analyze the binary</td>
-</tr>
-<tr>
-  <td>afl</td>
-  <td>List all the functions in the binary</td>
-</tr>
-<tr>
-  <td>ii</td>
-  <td>List imports</td>
-</tr>
-<tr>
-  <td>iI</td>
-  <td>Information about the binary</td>
-</tr>
-<tr>
-  <td>iz</td>
-  <td>List strings in the binary</td>
-</tr>
-<tr>
-  <td>sf function</td>
-  <td>Seek to a function</td>
-</tr>
-<tr>
-  <td>pdb</td>
-  <td>Print disassembly of the basic block</td>
-</tr>
-</tbody>
-</table>
+                <h1>IDA Pro 插件记录</h1>
+<blockquote>
+<p><code>version: 7.5</code></p>
+</blockquote>
+<h2><a href="https://github.com/binaryai/sdk">BinaryAI</a></h2>
+<div class="highlight"><pre><span></span>pip install --upgrade binaryai
+<span class="c1"># then you can add the binaryai plugin into $IDAUSR</span>
+binaryai install_ida_plugin
+</pre></div>
+<h2><a href="https://github.com/fireeye/flare-emu">flare-emu</a></h2>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">flare_emu</span>
+
+<span class="k">def</span> <span class="nf">decrypt</span><span class="p">(</span><span class="n">argv</span><span class="p">):</span>
+    <span class="n">myEH</span> <span class="o">=</span> <span class="n">flare_emu</span><span class="o">.</span><span class="n">EmuHelper</span><span class="p">()</span>
+    <span class="n">myEH</span><span class="o">.</span><span class="n">emulateRange</span><span class="p">(</span><span class="n">myEH</span><span class="o">.</span><span class="n">analysisHelper</span><span class="o">.</span><span class="n">getNameAddr</span><span class="p">(</span><span class="s2">&quot;decryptString&quot;</span><span class="p">),</span> <span class="n">registers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;arg1&quot;</span><span class="p">:</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;arg2&quot;</span><span class="p">:</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+                           <span class="s2">&quot;arg3&quot;</span><span class="p">:</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;arg4&quot;</span><span class="p">:</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">]})</span>
+    <span class="k">return</span> <span class="n">myEH</span><span class="o">.</span><span class="n">getEmuString</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="k">def</span> <span class="nf">iterateCallback</span><span class="p">(</span><span class="n">eh</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span> <span class="n">userData</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">decrypt</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">eh</span><span class="o">.</span><span class="n">hexString</span><span class="p">(</span><span class="n">address</span><span class="p">),</span> <span class="n">s</span><span class="p">))</span>
+    <span class="n">eh</span><span class="o">.</span><span class="n">analysisHelper</span><span class="o">.</span><span class="n">setComment</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>   
+    <span class="n">eh</span> <span class="o">=</span> <span class="n">flare_emu</span><span class="o">.</span><span class="n">EmuHelper</span><span class="p">()</span>
+    <span class="n">eh</span><span class="o">.</span><span class="n">iterate</span><span class="p">(</span><span class="n">eh</span><span class="o">.</span><span class="n">analysisHelper</span><span class="o">.</span><span class="n">getNameAddr</span><span class="p">(</span><span class="s2">&quot;decryptString&quot;</span><span class="p">),</span> <span class="n">iterateCallback</span><span class="p">)</span>
+</pre></div>
+<h2><a href="https://github.com/x64dbg/x64dbgida">x64dbgida</a></h2>
+<p>官方插件</p>
+<h2><a href="https://github.com/VirusTotal/vt-ida-plugin">VT-IDA Plugin</a></h2>
+<p>官方插件，还在开发，极其不稳定</p>
+<h2><a href="https://github.com/L4ys/LazyIDA">LazyIDA</a></h2>
+<p>shortcuts:</p>
+<ul>
+<li>Disasm Window:<ul>
+<li><code>w</code>: Copy address of current line into clipboard</li>
+</ul>
+</li>
+<li>Hex-rays Window:<ul>
+<li><code>w</code>: Copy address of current item into clipboard</li>
+<li><code>c</code>: Copy name of current item into clipboard</li>
+<li><code>v</code>: Remove return type of current item</li>
+</ul>
+</li>
+</ul>
+<h2><a href="https://github.com/illera88/Ponce">Ponce</a></h2>
+<p>符号执行+污点传播</p>
+<h2><a href="https://github.com/CheckPointSW/Karta">Karta</a></h2>
+<ul>
+<li><a href="https://karta.readthedocs.io/en/latest/">Docs</a></li>
+</ul>
 
             </div>
         </article>
@@ -130,7 +141,7 @@
     </span>
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/tag/radare2/">#radare2</a>
+        <a class="ga-highlight" href="/tag/ida/">#ida</a>
     </span>
     
 </div>
@@ -140,14 +151,14 @@
 <section id="ga-content_pager">
 
     <div class="next">
-        <a class="ga-highlight" href="/archives/IdaPlug/">IDA Pro 插件记录</a>
-        <p class="yue">记录使用的IDA Pro插件。</p>
+        <h3>没有了</h3>
+        <p class="yue">这是最新的文章</p>
     </div>
 
 
     <div class="prev">
-        <a class="ga-highlight" href="/archives/CanaryNote/">canary笔记</a>
-        <p class="yue">canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。</p>
+        <a class="ga-highlight" href="/archives/Radare2Note/">Radare2笔记</a>
+        <p class="yue">Radare2笔记（不断更新）。</p>
     </div>
 
 </section>

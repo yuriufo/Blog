@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>YuriSec</title><link>/</link><description>A simple static blog.</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>logo.png</url><title>YuriSec</title><link>/</link></image><language>zh-CN</language><lastBuildDate>Sun, 05 Jul 2020 09:31:49 +0806</lastBuildDate><pubDate>Sun, 05 Jul 2020 09:31:49 +0806</pubDate><item><title>一步一步学ROP笔记</title><link>/archives/RopNote/</link><description>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>YuriSec</title><link>/</link><description>A simple static blog.</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>logo.png</url><title>YuriSec</title><link>/</link></image><language>zh-CN</language><lastBuildDate>Wed, 08 Jul 2020 14:19:49 +0806</lastBuildDate><pubDate>Wed, 08 Jul 2020 14:19:49 +0806</pubDate><item><title>一步一步学ROP笔记</title><link>/archives/RopNote/</link><description>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -863,4 +863,55 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-</description><author>yuripwn@gmail.com (yuri)</author><guid isPermaLink="true">/archives/Radare2Note/</guid><pubDate>Sun, 05 Jul 2020 17:20:00 +0806</pubDate></item></channel></rss>
+</description><author>yuripwn@gmail.com (yuri)</author><guid isPermaLink="true">/archives/Radare2Note/</guid><pubDate>Sun, 05 Jul 2020 17:20:00 +0806</pubDate></item><item><title>IDA Pro 插件记录</title><link>/archives/IdaPlug/</link><description>&lt;h1&gt;IDA Pro 插件记录&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;version: 7.5&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;&lt;a href="https://github.com/binaryai/sdk"&gt;BinaryAI&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install --upgrade binaryai
+&lt;span class="c1"&gt;# then you can add the binaryai plugin into $IDAUSR&lt;/span&gt;
+binaryai install_ida_plugin
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;&lt;a href="https://github.com/fireeye/flare-emu"&gt;flare-emu&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;flare_emu&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;myEH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flare_emu&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;EmuHelper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;myEH&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;emulateRange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;myEH&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;analysisHelper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getNameAddr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;decryptString&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;registers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;arg1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;arg2&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; 
+                           &lt;span class="s2"&gt;&amp;quot;arg3&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;arg4&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;]})&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;myEH&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getEmuString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;iterateCallback&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eh&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;userData&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;decrypt&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;argv&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eh&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;hexString&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;eh&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;analysisHelper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;setComment&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;address&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;   
+    &lt;span class="n"&gt;eh&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;flare_emu&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;EmuHelper&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;eh&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iterate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;eh&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;analysisHelper&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getNameAddr&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;decryptString&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;iterateCallback&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;&lt;a href="https://github.com/x64dbg/x64dbgida"&gt;x64dbgida&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;官方插件&lt;/p&gt;
+&lt;h2&gt;&lt;a href="https://github.com/VirusTotal/vt-ida-plugin"&gt;VT-IDA Plugin&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;官方插件，还在开发，极其不稳定&lt;/p&gt;
+&lt;h2&gt;&lt;a href="https://github.com/L4ys/LazyIDA"&gt;LazyIDA&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;shortcuts:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Disasm Window:&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;w&lt;/code&gt;: Copy address of current line into clipboard&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Hex-rays Window:&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;w&lt;/code&gt;: Copy address of current item into clipboard&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;c&lt;/code&gt;: Copy name of current item into clipboard&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;v&lt;/code&gt;: Remove return type of current item&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;a href="https://github.com/illera88/Ponce"&gt;Ponce&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;符号执行+污点传播&lt;/p&gt;
+&lt;h2&gt;&lt;a href="https://github.com/CheckPointSW/Karta"&gt;Karta&lt;/a&gt;&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://karta.readthedocs.io/en/latest/"&gt;Docs&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description><author>yuripwn@gmail.com (yuri)</author><guid isPermaLink="true">/archives/IdaPlug/</guid><pubDate>Wed, 08 Jul 2020 22:18:00 +0806</pubDate></item></channel></rss>
