@@ -40,7 +40,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-    <loc>/archives/fmtNote/</loc>
+    <loc>/archives/nextrsa/</loc>
     <lastmod>2018-03-30</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
@@ -54,7 +54,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-    <loc>/archives/nextrsa/</loc>
+    <loc>/archives/fmtNote/</loc>
     <lastmod>2018-03-30</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
