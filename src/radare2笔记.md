@@ -17,6 +17,8 @@ excerpt: Radare2笔记（不断更新）。
 
 ## radare2
 
+common:
+
 | Command     | Description                          |
 | ----------- | ------------------------------------ |
 | aaaa        | Fully analyze the binary             |
@@ -28,6 +30,15 @@ excerpt: Radare2笔记（不断更新）。
 | sf function | Seek to a function                   |
 | pdb         | Print disassembly of the basic block |
 | pdf         | Print disassembly of the function    |
+
+breakpoint:
+
+| Command       | Description                                  |
+| ------------- | -------------------------------------------- |
+| db memaddress | Set a breakpoint                             |
+| dc            | Continue the execution flow to breakpoint(s) |
+| dt            | Run the current instruction                  |
+| dr            | Inspect the registers                        |
 
 ## rahash2
 

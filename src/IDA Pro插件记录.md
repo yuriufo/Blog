@@ -88,3 +88,8 @@ shortcuts:
 
 * [Docs](https://karta.readthedocs.io/en/latest/)
 
+
+## [Lighthouse](https://github.com/gaasedelen/lighthouse)
+
+A Code Coverage Explorer
+
