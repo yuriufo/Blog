@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/9841954d9715097f4eb840108266d45c.json"
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/344a34d92b9ed9996d6b59867ab0d501.json"
         }
     </script>
     
@@ -167,18 +167,18 @@ $$
 $$
 Z_{out}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_{in}W_{aug})
 $$
-其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$D_{kii} = \sum_j \tilde{A} <em>{kij}$，增强参数$W</em>{aug} \in R^{F1 \times F2}$。</p>
+其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$ D_{kii} = \sum_{j} \tilde{A} <em>{kij} $，增强参数$W</em>{aug} \in R^{F1 \times F2}$。</p>
 <ul>
 <li>Network of MDGCN</li>
 </ul>
 <p>作者利用所提出的naive directed GCN和gated convolutional neural network，提出了更好提取特征的MDGCN。</p>
-<p>对于MDGCN的$l+1$层，该层的输入特征向量为$Z_1^l$，$Z_2^l$，$Z_3^l$。参考公式$Z_k^{l+1}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_k^lW_k^l)$但不共享权值，我们可以得到$Z_{\alpha 1}^l$和$\hat{Z}<em>{\alpha 1}^l$，$Z</em>{\alpha 2}^l$和$\hat{Z}<em>{\alpha 2}^l$，$Z</em>{\alpha 3}^l$和$\hat{Z}<em>{\alpha 3}^l$。然后，为了获取带注意力的结点特征，用以下公式获取新的结点嵌入特征：
-$$
-Z_1^{l+1}=Z</em>{\alpha 1}^l + (\hat{Z}<em>{\alpha 1}^l \bigotimes \sigma(Z</em>{\alpha 1}^l)) \
-Z_2^{l+1}=Z_{\alpha 2}^l + (\hat{Z}<em>{\alpha 2}^l \bigotimes \sigma(Z</em>{\alpha 2}^l)) \
-Z_3^{l+1}=Z_{\alpha 3}^l + (\hat{Z}<em>{\alpha 3}^l \bigotimes \sigma(Z</em>{\alpha 3}^l))
-$$
-其中$\bigotimes$为哈达玛积，$\sigma()$是sigmoid函数，用于获得带注意力的结点嵌入。</p>
+<p>对于MDGCN的$l+1$层，该层的输入特征向量为$Z_1^l$，$Z_2^l$，$Z_3^l$。参考公式$Z_k^{l+1}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_k^lW_k^l)$但不共享权值，我们可以得到$Z_{\alpha 1}^l$和$\hat{Z} <em>{\alpha 1} ^l$，$Z</em>{\alpha 2}^l$和$\hat{Z} <em>{\alpha 2} ^l$，$Z</em>{\alpha 3}^l$和$\hat{Z} _{\alpha 3} ^l$。然后，为了获取带注意力的结点特征，用以下公式获取新的结点嵌入特征：</p>
+<p>$$
+Z_1^{l+1} = Z_{\alpha 1}^l + (\hat{Z} _{\alpha 1} ^l \bigotimes \sigma(Z_{\alpha 1}^l)) \\
+Z_2^{l+1} = Z_{\alpha 2}^l + (\hat{Z} _{\alpha 2} ^l \bigotimes \sigma(Z_{\alpha 2}^l)) \\
+Z_3^{l+1} = Z_{\alpha 3}^l + (\hat{Z} _{\alpha 3} ^l \bigotimes \sigma(Z_{\alpha 3}^l))
+$$</p>
+<p>其中$\bigotimes$为哈达玛积，$\sigma()$是sigmoid函数，用于获得带注意力的结点嵌入。</p>
 <p>在计算这些结点嵌入特征后，我们需要将它们融合在一起，以获得更全面的图特征。使用全连接层去扩展维度，我们可以得到增强结点嵌入$Z_{out1}$，它侧重于直接建立原始结点的信息。同时，使用Augment GCN，我们可以得到另一种增强结点嵌入$Z_{out2}$，它侧重于图结构中邻接结点特征的影响。通过使用参数$\alpha$将$Z_{out1}$和$Z_{out2}$结合，我们可以得到最终结点嵌入$Z_f$：</p>
 <p>$$
 Z_f=(1-\alpha)Z_{out1}+\alpha Z_{out2}
@@ -193,24 +193,24 @@ $$</p>
 <ul>
 <li>分类损失</li>
 </ul>
-<p>交叉损失作为分类所示。对于N个样本的K类分类任务，分类损失为：
-$$
+<p>交叉损失作为分类所示。对于N个样本的K类分类任务，分类损失为：</p>
+<p>$$
 L_c (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{k=0}^{K-1} y_{i,k} log p_{i,k}
-$$
-其中$Y$是ground truth，$P$是预测结果。</p>
+$$</p>
+<p>其中$Y$是ground truth，$P$是预测结果。</p>
 <ul>
 <li>图特征损失</li>
 </ul>
-<p>为了训练3层MDGCNs以获得更好的分类性能，作者使用图特征损失作为一种正则化方法。
-$$
-L_{gf} (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{j=0}^{J-1} f(x)sigmoid(log(\frac{|d_{i,j}\cdot m_{i,j}|}{|d_{i,j}|\cdot |m_{i,j}|})) \
+<p>为了训练3层MDGCNs以获得更好的分类性能，作者使用图特征损失作为一种正则化方法。</p>
+<p>$$
+L_{gf} (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{j=0}^{J-1} f(x)sigmoid(log(\frac{|d_{i,j}\cdot m_{i,j}|}{|d_{i,j}|\cdot |m_{i,j}|})) \\
 f(x) = \begin{cases} 
--1,  &amp; \mbox{if } y_{i,k}=\bar{p}<em>{i,k}; \
+-1,  &amp; \mbox{if } y_{i,k}=\bar{p}_{i,k}; \\
 +1, &amp; \mbox{otherwise}
-\end{cases} \
-\bar{p}</em>{i,k}=k, p_{i,k} \mbox{is the biggest in } p_i \mbox{.}
-$$
-其中$d_{i,j}$代表第$i$个样本在MDGCN第1层的输出图表示$Z_{\beta}^{1}$的第$j$维结点特征向量，$m_{i,j}$代表第$i$个样本在MDGCN第3层的输出图表示$Z_{\beta}^{3}$的第$j$维结点特征向量。</p>
+\end{cases} \\
+\bar{p}_{i,k}=k, p_{i,k} \mbox{is the biggest in } p_i \mbox{.}
+$$</p>
+<p>其中$d_{i,j}$代表第$i$个样本在MDGCN第1层的输出图表示$Z_{\beta}^{1}$的第$j$维结点特征向量，$m_{i,j}$代表第$i$个样本在MDGCN第3层的输出图表示$Z_{\beta}^{3}$的第$j$维结点特征向量。</p>
 <h2>3、实验</h2>
 <h3>3.1 实验设置</h3>
 <ul>

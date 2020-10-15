@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>YuriSec</title><link>/</link><description>A simple static blog.</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>logo.png</url><title>YuriSec</title><link>/</link></image><language>zh-CN</language><lastBuildDate>Thu, 15 Oct 2020 07:09:47 +0806</lastBuildDate><pubDate>Thu, 15 Oct 2020 07:09:47 +0806</pubDate><item><title>一步一步学ROP笔记</title><link>/archives/RopNote/</link><description>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>YuriSec</title><link>/</link><description>A simple static blog.</description><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>logo.png</url><title>YuriSec</title><link>/</link></image><language>zh-CN</language><lastBuildDate>Thu, 15 Oct 2020 07:23:37 +0806</lastBuildDate><pubDate>Thu, 15 Oct 2020 07:23:37 +0806</pubDate><item><title>一步一步学ROP笔记</title><link>/archives/RopNote/</link><description>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1817,18 +1817,18 @@ $$
 $$
 Z_{out}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_{in}W_{aug})
 $$
-其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$D_{kii} = \sum_j \tilde{A} &lt;em&gt;{kij}$，增强参数$W&lt;/em&gt;{aug} \in R^{F1 \times F2}$。&lt;/p&gt;
+其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$ D_{kii} = \sum_{j} \tilde{A} &lt;em&gt;{kij} $，增强参数$W&lt;/em&gt;{aug} \in R^{F1 \times F2}$。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Network of MDGCN&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;作者利用所提出的naive directed GCN和gated convolutional neural network，提出了更好提取特征的MDGCN。&lt;/p&gt;
-&lt;p&gt;对于MDGCN的$l+1$层，该层的输入特征向量为$Z_1^l$，$Z_2^l$，$Z_3^l$。参考公式$Z_k^{l+1}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_k^lW_k^l)$但不共享权值，我们可以得到$Z_{\alpha 1}^l$和$\hat{Z}&lt;em&gt;{\alpha 1}^l$，$Z&lt;/em&gt;{\alpha 2}^l$和$\hat{Z}&lt;em&gt;{\alpha 2}^l$，$Z&lt;/em&gt;{\alpha 3}^l$和$\hat{Z}&lt;em&gt;{\alpha 3}^l$。然后，为了获取带注意力的结点特征，用以下公式获取新的结点嵌入特征：
-$$
-Z_1^{l+1}=Z&lt;/em&gt;{\alpha 1}^l + (\hat{Z}&lt;em&gt;{\alpha 1}^l \bigotimes \sigma(Z&lt;/em&gt;{\alpha 1}^l)) \
-Z_2^{l+1}=Z_{\alpha 2}^l + (\hat{Z}&lt;em&gt;{\alpha 2}^l \bigotimes \sigma(Z&lt;/em&gt;{\alpha 2}^l)) \
-Z_3^{l+1}=Z_{\alpha 3}^l + (\hat{Z}&lt;em&gt;{\alpha 3}^l \bigotimes \sigma(Z&lt;/em&gt;{\alpha 3}^l))
-$$
-其中$\bigotimes$为哈达玛积，$\sigma()$是sigmoid函数，用于获得带注意力的结点嵌入。&lt;/p&gt;
+&lt;p&gt;对于MDGCN的$l+1$层，该层的输入特征向量为$Z_1^l$，$Z_2^l$，$Z_3^l$。参考公式$Z_k^{l+1}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_k^lW_k^l)$但不共享权值，我们可以得到$Z_{\alpha 1}^l$和$\hat{Z} &lt;em&gt;{\alpha 1} ^l$，$Z&lt;/em&gt;{\alpha 2}^l$和$\hat{Z} &lt;em&gt;{\alpha 2} ^l$，$Z&lt;/em&gt;{\alpha 3}^l$和$\hat{Z} _{\alpha 3} ^l$。然后，为了获取带注意力的结点特征，用以下公式获取新的结点嵌入特征：&lt;/p&gt;
+&lt;p&gt;$$
+Z_1^{l+1} = Z_{\alpha 1}^l + (\hat{Z} _{\alpha 1} ^l \bigotimes \sigma(Z_{\alpha 1}^l)) \\
+Z_2^{l+1} = Z_{\alpha 2}^l + (\hat{Z} _{\alpha 2} ^l \bigotimes \sigma(Z_{\alpha 2}^l)) \\
+Z_3^{l+1} = Z_{\alpha 3}^l + (\hat{Z} _{\alpha 3} ^l \bigotimes \sigma(Z_{\alpha 3}^l))
+$$&lt;/p&gt;
+&lt;p&gt;其中$\bigotimes$为哈达玛积，$\sigma()$是sigmoid函数，用于获得带注意力的结点嵌入。&lt;/p&gt;
 &lt;p&gt;在计算这些结点嵌入特征后，我们需要将它们融合在一起，以获得更全面的图特征。使用全连接层去扩展维度，我们可以得到增强结点嵌入$Z_{out1}$，它侧重于直接建立原始结点的信息。同时，使用Augment GCN，我们可以得到另一种增强结点嵌入$Z_{out2}$，它侧重于图结构中邻接结点特征的影响。通过使用参数$\alpha$将$Z_{out1}$和$Z_{out2}$结合，我们可以得到最终结点嵌入$Z_f$：&lt;/p&gt;
 &lt;p&gt;$$
 Z_f=(1-\alpha)Z_{out1}+\alpha Z_{out2}
@@ -1843,24 +1843,24 @@ $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;分类损失&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;交叉损失作为分类所示。对于N个样本的K类分类任务，分类损失为：
-$$
+&lt;p&gt;交叉损失作为分类所示。对于N个样本的K类分类任务，分类损失为：&lt;/p&gt;
+&lt;p&gt;$$
 L_c (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{k=0}^{K-1} y_{i,k} log p_{i,k}
-$$
-其中$Y$是ground truth，$P$是预测结果。&lt;/p&gt;
+$$&lt;/p&gt;
+&lt;p&gt;其中$Y$是ground truth，$P$是预测结果。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;图特征损失&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;为了训练3层MDGCNs以获得更好的分类性能，作者使用图特征损失作为一种正则化方法。
-$$
-L_{gf} (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{j=0}^{J-1} f(x)sigmoid(log(\frac{|d_{i,j}\cdot m_{i,j}|}{|d_{i,j}|\cdot |m_{i,j}|})) \
+&lt;p&gt;为了训练3层MDGCNs以获得更好的分类性能，作者使用图特征损失作为一种正则化方法。&lt;/p&gt;
+&lt;p&gt;$$
+L_{gf} (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{j=0}^{J-1} f(x)sigmoid(log(\frac{|d_{i,j}\cdot m_{i,j}|}{|d_{i,j}|\cdot |m_{i,j}|})) \\
 f(x) = \begin{cases} 
--1,  &amp;amp; \mbox{if } y_{i,k}=\bar{p}&lt;em&gt;{i,k}; \
+-1,  &amp;amp; \mbox{if } y_{i,k}=\bar{p}_{i,k}; \\
 +1, &amp;amp; \mbox{otherwise}
-\end{cases} \
-\bar{p}&lt;/em&gt;{i,k}=k, p_{i,k} \mbox{is the biggest in } p_i \mbox{.}
-$$
-其中$d_{i,j}$代表第$i$个样本在MDGCN第1层的输出图表示$Z_{\beta}^{1}$的第$j$维结点特征向量，$m_{i,j}$代表第$i$个样本在MDGCN第3层的输出图表示$Z_{\beta}^{3}$的第$j$维结点特征向量。&lt;/p&gt;
+\end{cases} \\
+\bar{p}_{i,k}=k, p_{i,k} \mbox{is the biggest in } p_i \mbox{.}
+$$&lt;/p&gt;
+&lt;p&gt;其中$d_{i,j}$代表第$i$个样本在MDGCN第1层的输出图表示$Z_{\beta}^{1}$的第$j$维结点特征向量，$m_{i,j}$代表第$i$个样本在MDGCN第3层的输出图表示$Z_{\beta}^{3}$的第$j$维结点特征向量。&lt;/p&gt;
 &lt;h2&gt;3、实验&lt;/h2&gt;
 &lt;h3&gt;3.1 实验设置&lt;/h3&gt;
 &lt;ul&gt;
