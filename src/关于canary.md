@@ -34,7 +34,7 @@ excerpt: canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。
 
 ### 格式化字符串
 
-格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行`___stack_chk_fail()`，具体用法：[格式化字符串笔记](http://yurixo.top/2018/03/29/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AC%94%E8%AE%B0/)。
+格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行`___stack_chk_fail()`，具体用法：[格式化字符串笔记](https://yurisec.cn/archives/fmtNote/)。
 
 ### 爆破
 

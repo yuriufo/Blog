@@ -1,7 +1,7 @@
 ---
 layout: post
 title: pwntools使用
-slug: nextrsa
+slug: pwntools
 date: 2018-03-28 17:00:36
 status: publish
 author: yuri
