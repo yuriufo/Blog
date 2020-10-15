@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>YuriSec</title><updated>2020-10-15T06:42:45.112772+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/RopNote/</id><title>一步一步学ROP笔记</title><updated>2020-10-15T06:42:45.113096+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>YuriSec</title><updated>2020-10-15T07:09:47.947541+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/RopNote/</id><title>一步一步学ROP笔记</title><updated>2020-10-15T07:09:47.947897+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -193,7 +193,7 @@
 &lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pop_rax_ret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mmap_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linker_addr&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mh"&gt;0x35&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;34&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shellcode_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/RopNote/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry><entry><id>/archives/pwntools/</id><title>pwntools使用</title><updated>2020-10-15T06:42:45.113071+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;pwntools使用&lt;/h1&gt;
+</content><link href="/archives/RopNote/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry><entry><id>/archives/pwntools/</id><title>pwntools使用</title><updated>2020-10-15T07:09:47.947870+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;pwntools使用&lt;/h1&gt;
 &lt;h2&gt;安装&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apt-get update
 $ apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essential
@@ -343,7 +343,7 @@ aaaabaaacaaadaaaeaaa
 &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;pwnlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gdb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;attach&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/pwntools/" rel="alternate"/><published>2018-03-28T17:00:36+08:06</published></entry><entry><id>/archives/fmtNote/</id><title>格式化字符串笔记</title><updated>2020-10-15T06:42:45.113046+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;格式化字符串笔记&lt;/h1&gt;
+</content><link href="/archives/pwntools/" rel="alternate"/><published>2018-03-28T17:00:36+08:06</published></entry><entry><id>/archives/fmtNote/</id><title>格式化字符串笔记</title><updated>2020-10-15T07:09:47.947842+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;格式化字符串笔记&lt;/h1&gt;
 &lt;h2&gt;基本格式&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;%[parameter][flags][field width][.precision][length]type&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -454,7 +454,7 @@ aaaabaaacaaadaaaeaaa
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gef➤  fmtarg 0x00007fffffffdb28
 The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/fmtNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/nextrsa/</id><title>第二届强网杯nextrsa</title><updated>2020-10-15T06:42:45.113022+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;nextrsa&lt;/h1&gt;
+</content><link href="/archives/fmtNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/nextrsa/</id><title>第二届强网杯nextrsa</title><updated>2020-10-15T07:09:47.947814+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;nextrsa&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2&gt;第一关&lt;/h2&gt;
 &lt;p&gt;&lt;figure style="flex: 368.1159420289855" &gt;&lt;img width="508" height="69" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/7eae39a24e332b9ad6d647d48c7c233b.png" /&gt;&lt;figcaption&gt;第一关&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -780,7 +780,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;hr /&gt;
 &lt;h2&gt;flag&lt;/h2&gt;
 &lt;p&gt;&lt;figure style="flex: 304.4117647058824" &gt;&lt;img width="414" height="68" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/d444509a94f7c25ba9e2c6804aa94c06.png" /&gt;&lt;figcaption&gt;flag&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
-</content><link href="/archives/nextrsa/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/CanaryNote/</id><title>canary笔记</title><updated>2020-10-15T06:42:45.112998+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;canary笔记&lt;/h1&gt;
+</content><link href="/archives/nextrsa/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/CanaryNote/</id><title>canary笔记</title><updated>2020-10-15T07:09:47.947786+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;canary笔记&lt;/h1&gt;
 &lt;h2&gt;布局&lt;/h2&gt;
 &lt;p&gt;&lt;figure style="flex: 44.227353463587924" &gt;&lt;img width="498" height="563" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e48b1e1a0f1feb6251e21c65e12c87bf.png" /&gt;&lt;figcaption&gt;canary布局&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h2&gt;more&lt;/h2&gt;
@@ -823,7 +823,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="n"&gt;libc_hidden_def&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__fortify_fail&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;code&gt;__libc_message&lt;/code&gt; 的第二个%s输出的是&lt;code&gt;argv[0]&lt;/code&gt;，&lt;code&gt;argv[0]&lt;/code&gt;是指向第一个启动参数字符串的指针,由此我们可以通过缓冲区溢出覆盖掉&lt;code&gt;argv[0]&lt;/code&gt;打印我们想要的地址上的值。&lt;/p&gt;
-</content><link href="/archives/CanaryNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/PPCNote/</id><title>读研机试准备</title><updated>2020-10-15T06:42:45.112972+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;经典入门&lt;/h1&gt;
+</content><link href="/archives/CanaryNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/PPCNote/</id><title>读研机试准备</title><updated>2020-10-15T07:09:47.947759+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;经典入门&lt;/h1&gt;
 &lt;h2&gt;排序&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 所需头文件&lt;/span&gt;
 &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class="c1"&gt; // sort()&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
@@ -1401,7 +1401,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</content><link href="/archives/PPCNote/" rel="alternate"/><published>2018-06-28T14:17:00+08:06</published></entry><entry><id>/archives/Return-to-dl-resolve/</id><title>Return-to-dl-resolve笔记</title><updated>2020-10-15T06:42:45.112947+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Return-to-dl-resolve&lt;/h1&gt;
+</content><link href="/archives/PPCNote/" rel="alternate"/><published>2018-06-28T14:17:00+08:06</published></entry><entry><id>/archives/Return-to-dl-resolve/</id><title>Return-to-dl-resolve笔记</title><updated>2020-10-15T07:09:47.947730+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Return-to-dl-resolve&lt;/h1&gt;
 &lt;h2&gt;&lt;code&gt;x86&lt;/code&gt;&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pwn&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
 &lt;span class="n"&gt;elf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./bin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1594,7 +1594,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 
     &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/Return-to-dl-resolve/" rel="alternate"/><published>2019-07-17T15:26:00+08:06</published></entry><entry><id>/archives/Radare2Note/</id><title>Radare2笔记</title><updated>2020-10-15T06:42:45.112919+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Radare2笔记&lt;/h1&gt;
+</content><link href="/archives/Return-to-dl-resolve/" rel="alternate"/><published>2019-07-17T15:26:00+08:06</published></entry><entry><id>/archives/Radare2Note/</id><title>Radare2笔记</title><updated>2020-10-15T07:09:47.947700+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Radare2笔记&lt;/h1&gt;
 &lt;h2&gt;radare2&lt;/h2&gt;
 &lt;p&gt;common:&lt;/p&gt;
 &lt;table&gt;
@@ -1677,7 +1677,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;li&gt;字符串哈希：&lt;code&gt;rahash2 -a md5 -s admin&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;文件哈希：&lt;code&gt;rahash2 -a md5 bin&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content><link href="/archives/Radare2Note/" rel="alternate"/><published>2020-07-05T17:20:00+08:06</published></entry><entry><id>/archives/IdaPlug/</id><title>IDA Pro 插件记录</title><updated>2020-10-15T06:42:45.112888+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;IDA Pro 插件记录&lt;/h1&gt;
+</content><link href="/archives/Radare2Note/" rel="alternate"/><published>2020-07-05T17:20:00+08:06</published></entry><entry><id>/archives/IdaPlug/</id><title>IDA Pro 插件记录</title><updated>2020-10-15T07:09:47.947665+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;IDA Pro 插件记录&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;version: 7.5&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1730,7 +1730,7 @@ binaryai install_ida_plugin
 &lt;/ul&gt;
 &lt;h2&gt;&lt;a href="https://github.com/gaasedelen/lighthouse"&gt;Lighthouse&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A Code Coverage Explorer&lt;/p&gt;
-</content><link href="/archives/IdaPlug/" rel="alternate"/><published>2020-07-08T22:18:00+08:06</published></entry><entry><id>/archives/SDGNet/</id><title>Spectral-based Directed Graph Network for Malware Detection 阅读笔记</title><updated>2020-10-15T06:42:45.112831+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;基于谱域有向图网络的恶意软件检测方法&lt;/h1&gt;
+</content><link href="/archives/IdaPlug/" rel="alternate"/><published>2020-07-08T22:18:00+08:06</published></entry><entry><id>/archives/SDGNet/</id><title>Spectral-based Directed Graph Network for Malware Detection 阅读笔记</title><updated>2020-10-15T07:09:47.947602+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;基于谱域有向图网络的恶意软件检测方法&lt;/h1&gt;
 &lt;h2&gt;1、背景&lt;/h2&gt;
 &lt;h3&gt;1.1、刊物/会议级别&lt;/h3&gt;
 &lt;p&gt;IEEE TNSE.2020.3024557&lt;/p&gt;
@@ -1768,30 +1768,30 @@ binaryai install_ida_plugin
 &lt;ul&gt;
 &lt;li&gt;Normal Normalization&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;直接将各边权重缩放到[0,1]，得到$A_1''$。
-$$
-A'=\frac{1}{2}(A+A^T) \
-(A_1'')&lt;em&gt;{ij}=\frac{A'&lt;/em&gt;{ij}}{max(A')}
+&lt;p&gt;直接将各边权重缩放到[0,1]，得到$A_1''$。&lt;/p&gt;
+&lt;p&gt;$$
+A' = \frac{1}{2} (A+A^T) \\
+(A_1'')_{ij} = \frac{A'_{ij}}{max(A')}
 $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Aggregation based Normalization&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;基于聚合的归一化聚合了可达结点的信息。该方法捕获结点(API)之间的一些详细的交互聚合特征，也可以说聚合了结点的方向信息，即列归一化，得到$A_2''$。
-$$
-(A_2)&lt;em&gt;{ij}=\frac{A&lt;/em&gt;{ij}}{\sum_{j} A_{ij}} \
-A_2'=\frac{1}{2}(A_2+A_2^T) \
-(A_2'')&lt;em&gt;{ij}=\frac{(A_2')&lt;/em&gt;{ij}}{max(A_2')}
+&lt;p&gt;基于聚合的归一化聚合了可达结点的信息。该方法捕获结点(API)之间的一些详细的交互聚合特征，也可以说聚合了结点的方向信息，即列归一化，得到$A_2''$。&lt;/p&gt;
+&lt;p&gt;$$
+(A_2)_{ij} = \frac{A_{ij}}{\sum_{j} A_{ij}} \\
+A_2' = \frac{1}{2} (A_2+A_2^T) \\
+(A_2'')_{ij} = \frac{(A_2')_{ij}}{max(A_2')}
 $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Propagation based Normalization&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;基于传播的归一化捕获结点(API)之间的一些详细交互传播特征，它考虑图结点之间的转移概率，即行归一化，得到$A_3''$。
-$$
-(A_3)&lt;em&gt;{ij}=\frac{A&lt;/em&gt;{ij}}{\sum_{i} A_{ij}} \
-A_3'=\frac{1}{2}(A_3+A_3^T) \
-(A_3'')&lt;em&gt;{ij}=\frac{(A_3')&lt;/em&gt;{ij}}{max(A_3')}
-$$
-这三种邻接矩阵生成生成过程可以看下图例子，(5)、(7)、(9)分别为Normal、Aggregation、Propagation生成的邻接矩阵。&lt;/p&gt;
+&lt;p&gt;基于传播的归一化捕获结点(API)之间的一些详细交互传播特征，它考虑图结点之间的转移概率，即行归一化，得到$A_3''$。&lt;/p&gt;
+&lt;p&gt;$$
+(A_3)_{ij} = \frac{A_{ij}}{\sum_{i} A_{ij}} \\
+A_3' = \frac{1}{2}(A_3+A_3^T) \\
+(A_3'')_{ij} = \frac{(A_3')_{ij}}{max(A_3')}
+$$&lt;/p&gt;
+&lt;p&gt;这三种邻接矩阵生成生成过程可以看下图例子，(5)、(7)、(9)分别为Normal、Aggregation、Propagation生成的邻接矩阵。&lt;/p&gt;
 &lt;p&gt;&lt;figure style="flex: 76.82926829268293" &gt;&lt;img width="1008" height="656" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/cda0189ec71b85aa00cafc6b9d7a8ef2.png" /&gt;&lt;figcaption&gt;normalization process&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;h4&gt;2.1.3 Different layers of MDGCN&lt;/h4&gt;
 &lt;p&gt;MDGCN网络结构如下图，它由结点特征学习、结点特征维度扩展和图表示学习三部分。&lt;/p&gt;
@@ -1817,7 +1817,7 @@ $$
 $$
 Z_{out}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_{in}W_{aug})
 $$
-其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$D_{kii}=\sum_j\tilde{A}&lt;em&gt;{kij}$，增强参数$W&lt;/em&gt;{aug}\in R^{F1\times F2}$。&lt;/p&gt;
+其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$D_{kii} = \sum_j \tilde{A} &lt;em&gt;{kij}$，增强参数$W&lt;/em&gt;{aug} \in R^{F1 \times F2}$。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Network of MDGCN&lt;/li&gt;
 &lt;/ul&gt;
