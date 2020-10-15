@@ -19,7 +19,7 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/6a276e6a5aba5251299645f09b36f3cb.json"
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/caea5979f7dc3b6a1fd3dafd8bbc046f.json"
         }
     </script>
     
@@ -83,8 +83,8 @@
                 <h1>经典入门</h1>
 <h2>排序</h2>
 <div class="highlight"><pre><span></span><span class="c1">// 所需头文件</span>
-<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt; // sort()</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;  // strcmp()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="c1"> // sort()</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="c1">  // strcmp()</span><span class="cp"></span>
 
 <span class="c1">// 对buf[n]升序排序</span>
 <span class="n">sort</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">n</span><span class="p">);</span> 
@@ -96,7 +96,7 @@
 <span class="n">sort</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">n</span><span class="p">,</span> <span class="n">cmp</span><span class="p">);</span>
 
 <span class="c1">// 结构体内重载运算符</span>
-<span class="k">struct</span> <span class="n">E</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">E</span><span class="p">{</span>
     <span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">101</span><span class="p">];</span>
     <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">score</span><span class="p">;</span>
@@ -145,7 +145,7 @@
 <span class="kt">int</span> <span class="n">buf</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
 <span class="n">sort</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="n">buf</span> <span class="o">+</span> <span class="n">n</span><span class="p">);</span>
 <span class="kt">int</span> <span class="n">base</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span>
 <span class="k">while</span><span class="p">(</span><span class="n">base</span> <span class="o">&lt;=</span> <span class="n">top</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">base</span> <span class="o">+</span> <span class="n">top</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
     <span class="k">if</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">mid</span><span class="p">]</span> <span class="o">==</span> <span class="n">target</span><span class="p">){</span>
@@ -157,7 +157,7 @@
     <span class="k">else</span>
     	<span class="n">top</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="k">if</span><span class="p">(</span><span class="n">ans</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+<span class="k">if</span><span class="p">(</span><span class="n">ans</span> <span class="o">!=</span> <span class="mi">-1</span><span class="p">){</span>
     <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d&quot;</span><span class="p">,</span><span class="n">ans</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
@@ -210,7 +210,7 @@
 <span class="n">Q</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="c1">// 堆中元素个数</span>
 
 <span class="c1">// 自定义结构体</span>
-<span class="k">struct</span> <span class="n">Node</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
     <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">Node</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span><span class="k">const</span><span class="p">{</span>
         <span class="k">return</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
@@ -228,7 +228,7 @@
 </ul>
 <h2>二叉树</h2>
 <div class="highlight"><pre><span></span><span class="c1">// 树结点结构体</span>
-<span class="k">struct</span> <span class="n">Node</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">Node</span><span class="p">{</span>
     <span class="n">Node</span> <span class="o">*</span><span class="n">lchild</span><span class="p">;</span>
     <span class="n">Node</span> <span class="o">*</span><span class="n">rchild</span><span class="p">;</span>
     <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
@@ -254,7 +254,7 @@
     	<span class="p">}</span>
     <span class="p">}</span>
     <span class="k">if</span><span class="p">(</span><span class="n">rootIdx</span> <span class="o">!=</span> <span class="n">s2</span><span class="p">){</span>
-    	<span class="n">ret</span><span class="o">-&gt;</span><span class="n">lchild</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="n">s1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">s1</span><span class="o">+</span><span class="p">(</span><span class="n">rootIdx</span><span class="o">-</span><span class="n">s2</span><span class="p">),</span> <span class="n">s2</span><span class="p">,</span> <span class="n">rootIdx</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    	<span class="n">ret</span><span class="o">-&gt;</span><span class="n">lchild</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="n">s1</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">s1</span><span class="o">+</span><span class="p">(</span><span class="n">rootIdx</span><span class="o">-</span><span class="n">s2</span><span class="p">),</span> <span class="n">s2</span><span class="p">,</span> <span class="n">rootIdx</span><span class="mi">-1</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">if</span><span class="p">(</span><span class="n">rootIdx</span> <span class="o">!=</span> <span class="n">e2</span><span class="p">){</span>
     	<span class="n">ret</span><span class="o">-&gt;</span><span class="n">rchild</span> <span class="o">=</span> <span class="n">build</span><span class="p">(</span><span class="n">s1</span><span class="o">+</span><span class="p">(</span><span class="n">rootIdx</span><span class="o">-</span><span class="n">s2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">e1</span><span class="p">,</span> <span class="n">rootIdx</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">e2</span><span class="p">);</span>
@@ -373,7 +373,7 @@
 <div class="highlight"><pre><span></span><span class="c1">// 结构体</span>
 <span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 <span class="cp">#define maxDigits 1000</span>
-<span class="k">struct</span> <span class="n">bigInteger</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">bigInteger</span><span class="p">{</span>
     <span class="kt">int</span> <span class="n">digit</span><span class="p">[</span><span class="n">maxDigits</span><span class="p">];</span>
     <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
     <span class="kt">void</span> <span class="nf">init</span><span class="p">(){</span>
@@ -430,7 +430,7 @@
 <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
 <span class="c1">// 结构体表示一条边</span>
-<span class="k">struct</span> <span class="n">Edge</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">Edge</span><span class="p">{</span>
     <span class="kt">int</span> <span class="n">nextNode</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">cost</span><span class="p">;</span>
 <span class="p">};</span>
@@ -463,7 +463,7 @@
 
 <span class="c1">// 查找根结点与路径压缩递归版</span>
 <span class="kt">int</span> <span class="nf">findRoot</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="mi">-1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
     <span class="k">else</span><span class="p">{</span>
         <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">findRoot</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]);</span>
@@ -476,11 +476,11 @@
 <span class="kt">int</span> <span class="nf">findRoot</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span>
     <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">-1</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
     <span class="n">ret</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">-1</span><span class="p">){</span>
         <span class="kt">int</span> <span class="n">t</span> <span class="o">=</span> <span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
         <span class="n">Tree</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="p">;</span>
@@ -504,7 +504,7 @@
 </li>
 </ul>
 <div class="highlight"><pre><span></span><span class="c1">// 边结构体</span>
-<span class="k">struct</span> <span class="n">Edge</span><span class="p">{</span>
+<span class="k">struct</span> <span class="nc">Edge</span><span class="p">{</span>
     <span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">cost</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="k">operator</span> <span class="o">&lt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">Edge</span> <span class="o">&amp;</span><span class="n">A</span><span class="p">)</span> <span class="k">const</span><span class="p">{</span>
@@ -529,15 +529,15 @@
 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">){</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
     	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
-    		<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">wuqiong</span> <span class="o">||</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">wuqiong</span><span class="p">){</span>
-    			<span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+    		<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">==</span> <span class="n">wuqiong</span> <span class="o">||</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">wuqiong</span><span class="p">){</span>
+    			<span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
     			<span class="k">continue</span><span class="p">;</span>
     		<span class="p">}</span>
 
-    		<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">wuqiong</span> <span class="o">||</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
-    			<span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+    		<span class="k">if</span><span class="p">(</span><span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">wuqiong</span> <span class="o">||</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>
+    			<span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">+</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
     		<span class="k">else</span>
-    			<span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+    			<span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ans</span><span class="p">[</span><span class="n">k</span><span class="mi">-1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
     	<span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
@@ -565,7 +565,7 @@
 </li>
 </ul>
 <div class="highlight"><pre><span></span><span class="c1">// 链表元素结构体</span>
-<span class="k">struct</span> <span class="n">E</span>
+<span class="k">struct</span> <span class="nc">E</span>
 <span class="p">{</span>
     <span class="kt">int</span> <span class="n">next</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">c</span><span class="p">;</span>
@@ -592,7 +592,7 @@
     <span class="n">edge</span><span class="p">[</span><span class="n">b</span><span class="p">].</span><span class="n">push_back</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span> <span class="c1">// 由于这里是无向图，所以两边都添加进单链表中</span>
 <span class="p">}</span>
 <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span> <span class="c1">// 初始化</span>
-    <span class="n">Dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// 所有结点为不可达</span>
+    <span class="n">Dis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">;</span> <span class="c1">// 所有结点为不可达</span>
     <span class="n">mark</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// 所有结点都不属于集合K</span>
 <span class="p">}</span>
 <span class="n">Dis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 得到最近的点为结点1，长度为0</span>
@@ -604,14 +604,14 @@
     	<span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="n">edge</span><span class="p">[</span><span class="n">newP</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">c</span><span class="p">;</span>
     	<span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
     		<span class="k">continue</span><span class="p">;</span>
-    	<span class="k">if</span><span class="p">(</span><span class="n">Dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="o">||</span> <span class="n">Dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Dis</span><span class="p">[</span><span class="n">newP</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+    	<span class="k">if</span><span class="p">(</span><span class="n">Dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="mi">-1</span> <span class="o">||</span> <span class="n">Dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Dis</span><span class="p">[</span><span class="n">newP</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
     		<span class="n">Dis</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">Dis</span><span class="p">[</span><span class="n">newP</span><span class="p">]</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="mh">0x7fffffff</span><span class="p">;</span>  <span class="c1">//最小值初始化为一个大整数，为找最小值做准备</span>
     <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
     	<span class="k">if</span><span class="p">(</span><span class="n">mark</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="nb">true</span><span class="p">)</span>
     		<span class="k">continue</span><span class="p">;</span>
-    	<span class="k">if</span><span class="p">(</span><span class="n">Dis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    	<span class="k">if</span><span class="p">(</span><span class="n">Dis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">-1</span><span class="p">)</span>
     		<span class="k">continue</span><span class="p">;</span>
     	<span class="k">if</span><span class="p">(</span><span class="n">Dis</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">min</span><span class="p">){</span>
     		<span class="n">min</span> <span class="o">=</span> <span class="n">Dis</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
@@ -688,8 +688,8 @@
 
 
     <div class="prev">
-        <a class="ga-highlight" href="/archives/nextrsa/">第二届强网杯nextrsa</a>
-        <p class="yue">有九关的RSA。</p>
+        <a class="ga-highlight" href="/archives/CanaryNote/">canary笔记</a>
+        <p class="yue">canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。</p>
     </div>
 
 </section>

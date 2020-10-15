@@ -1,0 +1,319 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+    <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Yuri,blog" />
+    <meta name="generator" content="Maverick 1.1" />
+    <meta name="template" content="Galileo" />
+    <link rel="alternate" type="application/rss+xml" title="YuriSec &raquo; RSS 2.0" href="/feed/index.xml" />
+    <link rel="alternate" type="application/atom+xml" title="YuriSec &raquo; ATOM 1.0" href="/feed/atom/index.xml" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/galileo-1c8f2638f2.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/ExSearch-182e5a8868.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/katex.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Code&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700&display=swap">
+    <script>
+        var ExSearchConfig = {
+            root: "",
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/caea5979f7dc3b6a1fd3dafd8bbc046f.json"
+        }
+    </script>
+    
+<title>pwntools使用 - YuriSec</title>
+<meta name="author" content="yuri" />
+<meta name="description" content="Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。" />
+<meta property="og:title" content="pwntools使用 - YuriSec" />
+<meta property="og:description" content="Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。" />
+<meta property="og:site_name" content="YuriSec" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/archives/pwntools/" />
+<meta property="og:image" content="" />
+<meta property="article:published_time" content="2018-03-28T17:00:36-00.00" />
+<meta name="twitter:title" content="pwntools使用 - YuriSec" />
+<meta name="twitter:description" content="Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:image" content="" />
+
+
+    
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
+
+    </head>
+    
+    <body>
+        
+        <div class="container">
+            <header id="ga-header">
+                <div first>
+                    <aside id="ga-brand">
+                        <h1 class="brand"><a class="no-style" href="/">YuriSec</a></h1>
+                        <p>A simple static blog.</p>
+                    </aside>
+                </div>
+                <div second id="ga-nav">
+                    <nav class="navs">
+                        <ul><li><a class="ga-highlight" href="/" target="_self">首页</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/archives/" target="_self">归档</a></li><span class="separator">·</span><li><a class="ga-highlight" href="/about/" target="_self">关于</a></li><span class="separator">·</span><li><a href="#" target="_self" class="search-form-input ga-highlight">搜索</a></li></ul>
+                    </nav>
+                </div>
+            </header>
+            <div class="wrapper">
+                
+<main>    
+    <section class="ga-section ga-content">
+        <article class="yue">
+            <h1 class="ga-post_title">pwntools使用</h1>
+            <span class="ga-post_meta ga-mono">
+                <span>yuri</span>
+                <time>
+                    2018-03-28
+                </time>
+                
+                in <a no-style class="category" href="/category/pwn/">
+                    pwn
+                </a>
+                
+                
+            </span>
+            <div class="ga-content_body">
+                <h1>pwntools使用</h1>
+<h2>安装</h2>
+<div class="highlight"><pre><span></span>$ apt-get update
+$ apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essential
+$ pip install --upgrade pip
+$ pip install --upgrade pwntools
+</pre></div>
+<p>如果想要在本地测试,可以这么做：</p>
+<div class="highlight"><pre><span></span>$ git clone https://github.com/Gallopsled/pwntools
+$ pip install --upgrade --editable ./pwntools
+</pre></div>
+<p>使用时这样导入：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+<hr />
+<h2>连接</h2>
+<div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;/bin/sh&#39;</span><span class="p">)</span> <span class="c1">#本地文件</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;ftp.ubuntu.org&#39;</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span> <span class="c1">#远程，hostname + port</span>
+
+<span class="n">r</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    <span class="c1">#发送数据</span>
+<span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    <span class="c1">#发送数据 + &#39;\n&#39;</span>
+
+<span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">numb</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>   <span class="c1">#接受指定字节数据,timeout指定超时</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">delims</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#接收到delims的pattern</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">(</span><span class="n">keepends</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1">#接收到&#39;\n&#39;，keepends指定保留&#39;\n&#39;</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvall</span><span class="p">()</span> <span class="c1">#接收到EOF</span>
+<span class="n">r</span><span class="o">.</span><span class="n">recvrepeat</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>   <span class="c1">#接收到EOF或timeout</span>
+
+<span class="n">r</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>   <span class="c1">#与shell交互</span>
+
+<span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>   <span class="c1">#断开连接</span>
+</pre></div>
+<hr />
+<h2>数据</h2>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; import struct
+
+&gt;&gt;&gt; p32<span class="o">(</span>0xdeadbeef<span class="o">)</span> <span class="o">==</span> struct.pack<span class="o">(</span><span class="s1">&#39;I&#39;</span>, 0xdeadbeef<span class="o">)</span> <span class="c1">#p32为打包,p64同理,小端序</span>
+True
+
+&gt;&gt;&gt; <span class="nv">leet</span> <span class="o">=</span> <span class="s1">&#39;37130000&#39;</span>.decode<span class="o">(</span><span class="s1">&#39;hex&#39;</span><span class="o">)</span>
+&gt;&gt;&gt; u32<span class="o">(</span><span class="s1">&#39;abcd&#39;</span><span class="o">)</span> <span class="o">==</span> struct.unpack<span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="s1">&#39;abcd&#39;</span><span class="o">)[</span><span class="m">0</span><span class="o">]</span>     <span class="c1">#u32为解包,u64同理,小端序</span>
+True
+
+&gt;&gt;&gt; u8<span class="o">(</span><span class="s1">&#39;A&#39;</span><span class="o">)</span> <span class="o">==</span> 0x41
+True
+</pre></div>
+<hr />
+<h2>设置目标架构和操作系统</h2>
+<p>全局设置context,可以包括字大小和端序。</p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; context.arch      <span class="o">=</span> <span class="s1">&#39;i386&#39;</span>
+&gt;&gt;&gt; context.os        <span class="o">=</span> <span class="s1">&#39;linux&#39;</span>
+&gt;&gt;&gt; context.endian    <span class="o">=</span> <span class="s1">&#39;little&#39;</span>
+&gt;&gt;&gt; context.word_size <span class="o">=</span> <span class="m">32</span>
+
+or
+
+&gt;&gt;&gt; context<span class="o">(</span><span class="nv">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span>, <span class="nv">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span>, <span class="nv">endian</span><span class="o">=</span><span class="s1">&#39;little&#39;</span>, <span class="nv">word_size</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+</pre></div>
+<p>还有一个实用的可以显示调试信息：</p>
+<div class="highlight"><pre><span></span><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s2">&quot;debug&quot;</span>
+</pre></div>
+<hr />
+<h2>ELF操作</h2>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; <span class="nv">e</span> <span class="o">=</span> ELF<span class="o">(</span><span class="s1">&#39;/bin/cat&#39;</span><span class="o">)</span> <span class="c1">#获取这个文件的句柄</span>
+&gt;&gt;&gt; print hex<span class="o">(</span>e.address<span class="o">)</span> <span class="c1">#基地址</span>
+0x400000
+&gt;&gt;&gt; print hex<span class="o">(</span>e.symbols<span class="o">[</span><span class="s1">&#39;write&#39;</span><span class="o">])</span> <span class="c1">#函数地址</span>
+0x401680
+&gt;&gt;&gt; print hex<span class="o">(</span>e.got<span class="o">[</span><span class="s1">&#39;write&#39;</span><span class="o">])</span> <span class="c1">#GOT表的地址</span>
+0x60b070
+&gt;&gt;&gt; print hex<span class="o">(</span>e.plt<span class="o">[</span><span class="s1">&#39;write&#39;</span><span class="o">])</span> <span class="c1">#PLT表的地址</span>
+0x401680
+</pre></div>
+<hr />
+<h2>小工具</h2>
+<h3>栈溢出找偏移</h3>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; print cyclic<span class="o">(</span><span class="m">20</span><span class="o">)</span>    <span class="c1">#生成20字节每4个字节(默认,可以给出参数如cyclic(20,n=8)指定)不随机的字符串</span>
+aaaabaaacaaadaaaeaaa
+&gt;&gt;&gt; <span class="c1"># Assume EIP = 0x62616166 (&#39;faab&#39; which is pack(0x62616166))  at crash time</span>
+&gt;&gt;&gt; print cyclic_find<span class="o">(</span><span class="s1">&#39;faab&#39;</span><span class="o">)</span>   <span class="c1">#根据4个字符查找偏移,若n!=4必须指明n的参数</span>
+<span class="m">120</span>
+</pre></div>
+<h3>汇编与反汇编</h3>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; asm<span class="o">(</span><span class="s1">&#39;mov eax, 0&#39;</span><span class="o">)</span>   <span class="c1">#汇编</span>
+<span class="s1">&#39;\xb8\x00\x00\x00\x00&#39;</span>
+&gt;&gt;&gt; disasm<span class="o">(</span><span class="s1">&#39;\xb8\x0b\x00\x00\x00&#39;</span><span class="o">)</span>  <span class="c1">#反汇编</span>
+<span class="s1">&#39;   0:   b8 0b 00 00 00          mov    eax,0xb&#39;</span>
+</pre></div>
+<h3>Shellcode生成</h3>
+<p>shellcraft模块是shellcode的模块，包含一些生成shellcode的函数。其中的子模块声明架构，比如：</p>
+<blockquote>
+<ul>
+<li>ARM架构: <strong>shellcraft.arm</strong></li>
+<li>AMD64架构: <strong>shellcraft.amd64</strong></li>
+<li>Intel 80386架构: <strong>shellcraft.i386</strong></li>
+<li>通用: <strong>shellcraft.common</strong></li>
+</ul>
+</blockquote>
+<p>可以先声明框架直接汇编shellcraft.sh()：</p>
+<div class="highlight"><pre><span></span><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
+<span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>
+</pre></div>
+<h3>DynELF</h3>
+<p>这里举了一个32位的例子：</p>
+<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./pwnme&#39;</span><span class="p">)</span>
+
+<span class="c1"># 声明一个只需要一个地址的函数，并在该地址至少泄漏（返回）一个字节</span>
+<span class="k">def</span> <span class="nf">leak</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%#x</span><span class="s2"> =&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># 因为是举例，假设以下地址我们都知道。其中一个指向目标二进制文件里，另两个指向so库里</span>
+<span class="n">main</span>   <span class="o">=</span> <span class="mh">0xfeedf4ce</span>
+<span class="n">libc</span>   <span class="o">=</span> <span class="mh">0xdeadb000</span>
+<span class="n">system</span> <span class="o">=</span> <span class="mh">0xdeadbeef</span>
+
+<span class="c1">#通过构造的leak函数和一个指向目标二进制文件里的指针，可以解析任何地址</span>
+<span class="c1">#而且可以看到我们不需要这个目标二进制文件副本，直接解析</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span>     <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">libc</span>
+<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">system</span>
+
+<span class="c1">#但是，如果我们确实有目标二进制文件的副本，可以解析更快</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">main</span><span class="p">,</span> <span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwnme&#39;</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span>     <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">libc</span>
+<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">system</span>
+
+<span class="c1">#或者，我们可以解析另一个库中的符号，并给出一个指针</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">libc</span> <span class="o">+</span> <span class="mh">0x1234</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>      <span class="o">==</span> <span class="n">system</span>
+</pre></div>
+<h3>fmtstr</h3>
+<p><code>payload = fmtstr_payload(offset, writes, numbwritten=0, write_size='byte')</code></p>
+<blockquote>
+<ul>
+<li>offset (int) – 第一个格式化偏移</li>
+<li>writes (dict) – 字典，向哪个地址写入什么值 {addr: value, addr2: value2}</li>
+<li>numbwritten (int) – 输出字符串已经写入字节数</li>
+<li>write_size (str) – byte, short or int.即每次写一个字节、两个字节还是四个字节</li>
+</ul>
+</blockquote>
+<h3>attach</h3>
+<p>该模块用于调用gdb调试
+在python文件中直接设置断点，当运行到该位置之后就会断下</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pwnlib</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./c&#39;</span><span class="p">)</span>
+<span class="n">pwnlib</span><span class="o">.</span><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+
+            </div>
+        </article>
+        <div id="ga-tags">
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/tag/pwn/">#pwn</a>
+    </span>
+    
+    <span class="ga-tag">
+        <a class="ga-highlight" href="/tag/pwntools/">#pwntools</a>
+    </span>
+    
+</div>
+    </section>
+
+    
+<section id="ga-content_pager">
+
+    <div class="next">
+        <a class="ga-highlight" href="/archives/fmtNote/">格式化字符串笔记</a>
+        <p class="yue">格式化字符串函数可以接受可变数量的参数，并将第一个参数作为格式化字符串，根据其来解析之后的参数。通俗来说，格式化字符串函数就是将计算机内存中表示的数据转化为我们人类可读的字符串格式。</p>
+    </div>
+
+
+    <div class="prev">
+        <a class="ga-highlight" href="/archives/RopNote/">一步一步学ROP笔记</a>
+        <p class="yue">ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等).</p>
+    </div>
+
+</section>
+
+
+    
+
+</main>
+
+                <footer class="ga-mono" id="ga-footer">
+                    <section>
+                        <span id="ga-uptime"></span>
+                        <span class="brand">YuriSec</span>
+                    </section>
+                    <section>
+                        <p class="copyright">
+                            <span>Copyright © 2020 Yuri</span>
+                            <span>Powered by <a no-style href="https://github.com/AlanDecode/Maverick" target="_blank">Maverick & Galileo</a></span>
+                        </p>
+                        <div class="copyright">
+                            <span class="footer-addon">
+                                
+<a href="http://www.beian.miit.gov.cn/" rel="noopener" target="_blank">京ICP备20016612号</a>
+
+                            </span>
+                            <nav class="social-links">
+                                <ul><li><a class="no-style" title="GitHub" href="https://github.com/yuriufo" target="_blank"><i class="gi gi-github"></i>GitHub</a></li><span class="separator">·</span><li><a class="no-style" title="Weibo" href="https://weibo.com/qq771739864" target="_blank"><i class="gi gi-weibo"></i>Weibo</a></li></ul>
+                            </nav>
+                        </div>
+                    </section>
+                    <script>
+                        var site_build_date = "2018-03-28T00:00+08:00"
+                    </script>
+                    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/galileo-dc4baa7cf4.js"></script>
+                </footer>
+            </div>
+        </div>
+    </div>
+
+    <!--katex-->
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/katex.min.js"></script>
+    <script>
+    mathOpts = {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "\\[", right: "\\]", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\(", right: "\\)", display: false}
+        ]
+    };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/auto-render.min.js" onload="renderMathInElement(document.body, mathOpts);"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/assets/ExSearch/ExSearch-493cb9cd89.js"></script>
+
+    
+    </body>
+</html>

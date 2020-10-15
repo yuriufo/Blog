@@ -19,22 +19,22 @@
     <script>
         var ExSearchConfig = {
             root: "",
-            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/6a276e6a5aba5251299645f09b36f3cb.json"
+            api: "https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/caea5979f7dc3b6a1fd3dafd8bbc046f.json"
         }
     </script>
     
-<title>pwntools使用 - YuriSec</title>
+<title>第二届强网杯nextrsa - YuriSec</title>
 <meta name="author" content="yuri" />
-<meta name="description" content="Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。" />
-<meta property="og:title" content="pwntools使用 - YuriSec" />
-<meta property="og:description" content="Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。" />
+<meta name="description" content="有九关的RSA。" />
+<meta property="og:title" content="第二届强网杯nextrsa - YuriSec" />
+<meta property="og:description" content="有九关的RSA。" />
 <meta property="og:site_name" content="YuriSec" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/archives/nextrsa/" />
 <meta property="og:image" content="" />
-<meta property="article:published_time" content="2018-03-28T17:00:36-00.00" />
-<meta name="twitter:title" content="pwntools使用 - YuriSec" />
-<meta name="twitter:description" content="Pwntools是一个CTF框架和利用开发库。用Python快速设计和开发，尽可能简化编写exploit过程。" />
+<meta property="article:published_time" content="2018-03-30T13:57:11-00.00" />
+<meta name="twitter:title" content="第二届强网杯nextrsa - YuriSec" />
+<meta name="twitter:description" content="有九关的RSA。" />
 <meta name="twitter:card" content="summary" />
 <meta name="twitter:image" content="" />
 
@@ -66,181 +66,357 @@
 <main>    
     <section class="ga-section ga-content">
         <article class="yue">
-            <h1 class="ga-post_title">pwntools使用</h1>
+            <h1 class="ga-post_title">第二届强网杯nextrsa</h1>
             <span class="ga-post_meta ga-mono">
                 <span>yuri</span>
                 <time>
-                    2018-03-28
+                    2018-03-30
                 </time>
                 
-                in <a no-style class="category" href="/category/pwn/">
-                    pwn
+                in <a no-style class="category" href="/category/crypto/">
+                    crypto
                 </a>
                 
                 
             </span>
             <div class="ga-content_body">
-                <h1>pwntools使用</h1>
-<h2>安装</h2>
-<div class="highlight"><pre><span></span>$ apt-get update
-$ apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essential
-$ pip install --upgrade pip
-$ pip install --upgrade pwntools
-</pre></div>
-<p>如果想要在本地测试,可以这么做：</p>
-<div class="highlight"><pre><span></span>$ git clone https://github.com/Gallopsled/pwntools
-$ pip install --upgrade --editable ./pwntools
-</pre></div>
-<p>使用时这样导入：</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+                <h1>nextrsa</h1>
+<hr />
+<h2>第一关</h2>
+<p><figure style="flex: 368.1159420289855" ><img width="508" height="69" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/7eae39a24e332b9ad6d647d48c7c233b.png" /><figcaption>第一关</figcaption></figure></p>
+<p>因为n的位数较低，所以可以直接用factor.db分解</p>
+<hr />
+<h2>第二关</h2>
+<p><figure style="flex: 118.87254901960785" ><img width="485" height="204" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/417277f93e74ec3d46172e16bcb73fba.png" /><figcaption>第二关</figcaption></figure></p>
+<p>可以发现e和n相差无几，则d就应当很小，适合Wiener's Attack攻击</p>
+<hr />
+<h2>第三关</h2>
+<p><figure style="flex: 194.57364341085272" ><img width="502" height="129" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/babde02fbbda5c69d112841c7c46449e.png" /><figcaption>第三关</figcaption></figure></p>
+<p>Coppersmith有一个相关已知明文高位的套路，根据其套路可以写脚本跑出x:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sage.all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">binascii</span>
+
+<span class="k">def</span> <span class="nf">coppersmith_howgrave_univariate</span><span class="p">(</span><span class="n">pol</span><span class="p">,</span> <span class="n">modulus</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">XX</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Coppersmith revisited by Howgrave-Graham</span>
+
+<span class="sd">    finds a solution if:</span>
+<span class="sd">    * b|modulus, b &gt;= modulus^beta , 0 &lt; beta &lt;= 1</span>
+<span class="sd">    * |x| &lt; XX</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#</span>
+    <span class="c1"># init</span>
+    <span class="c1">#</span>
+    <span class="n">dd</span> <span class="o">=</span> <span class="n">pol</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
+    <span class="n">nn</span> <span class="o">=</span> <span class="n">dd</span> <span class="o">*</span> <span class="n">mm</span> <span class="o">+</span> <span class="n">tt</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># checks</span>
+    <span class="c1">#</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">beta</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;beta should belongs in (0, 1]&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pol</span><span class="o">.</span><span class="n">is_monic</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ArithmeticError</span><span class="p">(</span><span class="s2">&quot;Polynomial must be monic.&quot;</span><span class="p">)</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># calculate bounds and display them</span>
+    <span class="c1">#</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    * we want to find g(x) such that ||g(xX)|| &lt;= b^m / sqrt(n)</span>
+<span class="sd">    * we know LLL will give us a short vector v such that:</span>
+<span class="sd">    ||v|| &lt;= 2^((n - 1)/4) * det(L)^(1/n)</span>
+<span class="sd">    * we will use that vector as a coefficient vector for our g(x)</span>
+
+<span class="sd">    * so we want to satisfy:</span>
+<span class="sd">    2^((n - 1)/4) * det(L)^(1/n) &lt; N^(beta*m) / sqrt(n)</span>
+
+<span class="sd">    so we can obtain ||v|| &lt; N^(beta*m) / sqrt(n) &lt;= b^m / sqrt(n)</span>
+<span class="sd">    (it&#39;s important to use N because we might not know b)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># Coppersmith revisited algo for univariate</span>
+    <span class="c1">#</span>
+
+    <span class="c1"># change ring of pol and x</span>
+    <span class="n">polZ</span> <span class="o">=</span> <span class="n">pol</span><span class="o">.</span><span class="n">change_ring</span><span class="p">(</span><span class="n">ZZ</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">polZ</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">gen</span><span class="p">()</span>
+
+    <span class="c1"># compute polynomials</span>
+    <span class="n">gg</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mm</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">dd</span><span class="p">):</span>
+            <span class="n">gg</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span> <span class="o">*</span> <span class="n">XX</span><span class="p">)</span><span class="o">**</span><span class="n">jj</span> <span class="o">*</span> <span class="n">modulus</span><span class="o">**</span><span class="p">(</span><span class="n">mm</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span> <span class="o">*</span> <span class="n">polZ</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">XX</span><span class="p">)</span><span class="o">**</span><span class="n">ii</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tt</span><span class="p">):</span>
+        <span class="n">gg</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span> <span class="o">*</span> <span class="n">XX</span><span class="p">)</span><span class="o">**</span><span class="n">ii</span> <span class="o">*</span> <span class="n">polZ</span><span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">XX</span><span class="p">)</span><span class="o">**</span><span class="n">mm</span><span class="p">)</span>
+
+    <span class="c1"># construct lattice B</span>
+    <span class="n">BB</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">ZZ</span><span class="p">,</span> <span class="n">nn</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nn</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">BB</span><span class="p">[</span><span class="n">ii</span><span class="p">,</span> <span class="n">jj</span><span class="p">]</span> <span class="o">=</span> <span class="n">gg</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span>
+
+
+    <span class="c1"># LLL</span>
+    <span class="n">BB</span> <span class="o">=</span> <span class="n">BB</span><span class="o">.</span><span class="n">LLL</span><span class="p">()</span>
+
+    <span class="c1"># transform shortest vector in polynomial    </span>
+    <span class="n">new_pol</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nn</span><span class="p">):</span>
+        <span class="n">new_pol</span> <span class="o">+=</span> <span class="n">x</span><span class="o">**</span><span class="n">ii</span> <span class="o">*</span> <span class="n">BB</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">ii</span><span class="p">]</span> <span class="o">/</span> <span class="n">XX</span><span class="o">**</span><span class="n">ii</span>
+
+    <span class="c1"># factor polynomial</span>
+    <span class="n">potential_roots</span> <span class="o">=</span> <span class="n">new_pol</span><span class="o">.</span><span class="n">roots</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="s2">&quot;potential roots:&quot;</span><span class="p">,</span> <span class="n">potential_roots</span>
+
+    <span class="c1"># test roots</span>
+    <span class="n">roots</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">root</span> <span class="ow">in</span> <span class="n">potential_roots</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">polZ</span><span class="p">(</span><span class="n">ZZ</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">if</span> <span class="n">gcd</span><span class="p">(</span><span class="n">modulus</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">modulus</span><span class="o">^</span><span class="n">beta</span><span class="p">:</span>
+                <span class="n">roots</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ZZ</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="c1"># </span>
+    <span class="k">return</span> <span class="n">roots</span>
+
+<span class="n">length_N</span> <span class="o">=</span> <span class="mi">512</span>
+<span class="n">Kbits</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">85386486679828599580613066311269711214589585481101615581296927592958807231446970184482261388474676486050444822516280749509523758510668655773404480913269316295175308996609608070541200210554579418533451998222898737697148663794221042817919855879902993658181608937735268591691305164506461133402548866059191941933</span><span class="n">L</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">C</span> <span class="o">=</span> <span class="mi">39405977400432024095329579138777905592731613749623714143014800208080426514337386767953501370330051575213583063517497523787104967672473851683888736374797826583547420259646720505700192827892104650587073833929922367521346003590720815367916103365434959190063774892078125987148203790224964513136099494214652877100</span><span class="n">L</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mh">0xfedcba98765432100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+
+<span class="n">P</span><span class="o">.&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">Zmod</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span> <span class="o">+</span> <span class="n">x</span><span class="p">)</span><span class="o">^</span><span class="n">e</span> <span class="o">-</span> <span class="n">C</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">degree</span><span class="p">()</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">epsilon</span> <span class="o">=</span> <span class="n">beta</span> <span class="o">/</span> <span class="mi">7</span>
+<span class="n">mm</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">beta</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">dd</span> <span class="o">*</span> <span class="n">epsilon</span><span class="p">))</span>
+<span class="n">tt</span> <span class="o">=</span> <span class="n">floor</span><span class="p">(</span><span class="n">dd</span> <span class="o">*</span> <span class="n">mm</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span><span class="o">/</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">XX</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">(</span><span class="n">N</span><span class="o">**</span><span class="p">((</span><span class="n">beta</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="n">dd</span><span class="p">)</span> <span class="o">-</span> <span class="n">epsilon</span><span class="p">))</span>
+<span class="n">roots</span> <span class="o">=</span> <span class="n">coppersmith_howgrave_univariate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">mm</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">XX</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2"># Solutions&quot;</span>
+<span class="nb">print</span> <span class="s2">&quot;we found:&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">roots</span><span class="p">)</span>
 </pre></div>
 <hr />
-<h2>连接</h2>
-<div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;/bin/sh&#39;</span><span class="p">)</span> <span class="c1">#本地文件</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;ftp.ubuntu.org&#39;</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span> <span class="c1">#远程，hostname + port</span>
-
-<span class="n">r</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    <span class="c1">#发送数据</span>
-<span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>    <span class="c1">#发送数据 + &#39;\n&#39;</span>
-
-<span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="n">numb</span><span class="o">=</span><span class="mi">4096</span><span class="p">,</span><span class="n">timeout</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>   <span class="c1">#接受指定字节数据,timeout指定超时</span>
-<span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="n">delims</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1">#接收到delims的pattern</span>
-<span class="n">r</span><span class="o">.</span><span class="n">recvline</span><span class="p">(</span><span class="n">keepends</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>   <span class="c1">#接收到&#39;\n&#39;，keepends指定保留&#39;\n&#39;</span>
-<span class="n">r</span><span class="o">.</span><span class="n">recvall</span><span class="p">()</span> <span class="c1">#接收到EOF</span>
-<span class="n">r</span><span class="o">.</span><span class="n">recvrepeat</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">default</span><span class="p">)</span>   <span class="c1">#接收到EOF或timeout</span>
-
-<span class="n">r</span><span class="o">.</span><span class="n">interactive</span><span class="p">()</span>   <span class="c1">#与shell交互</span>
-
-<span class="n">r</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>   <span class="c1">#断开连接</span>
-</pre></div>
+<h2>第四关</h2>
+<p><figure style="flex: 107.37704918032787" ><img width="524" height="244" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/6e73d0b53cfec2ba241c268f46733b9d.png" /><figcaption>第四关</figcaption></figure></p>
+<p><figure style="flex: 37.44769874476987" ><img width="358" height="478" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e050f676c7c692a0a3af5e50d906a935.png" /><figcaption>第四关</figcaption></figure></p>
 <hr />
-<h2>数据</h2>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; import struct
-
-&gt;&gt;&gt; p32<span class="o">(</span>0xdeadbeef<span class="o">)</span> <span class="o">==</span> struct.pack<span class="o">(</span><span class="s1">&#39;I&#39;</span>, 0xdeadbeef<span class="o">)</span> <span class="c1">#p32为打包,p64同理,小端序</span>
-True
-
-&gt;&gt;&gt; <span class="nv">leet</span> <span class="o">=</span> <span class="s1">&#39;37130000&#39;</span>.decode<span class="o">(</span><span class="s1">&#39;hex&#39;</span><span class="o">)</span>
-&gt;&gt;&gt; u32<span class="o">(</span><span class="s1">&#39;abcd&#39;</span><span class="o">)</span> <span class="o">==</span> struct.unpack<span class="o">(</span><span class="s1">&#39;I&#39;</span>, <span class="s1">&#39;abcd&#39;</span><span class="o">)[</span><span class="m">0</span><span class="o">]</span>     <span class="c1">#u32为解包,u64同理,小端序</span>
-True
-
-&gt;&gt;&gt; u8<span class="o">(</span><span class="s1">&#39;A&#39;</span><span class="o">)</span> <span class="o">==</span> 0x41
-True
-</pre></div>
+<h2>第五关</h2>
+<p><figure style="flex: 254.32692307692307" ><img width="529" height="104" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/5cd6a5d3bed3d69734f1be71a29741b1.png" /><figcaption>第五关</figcaption></figure></p>
+<p>把n尝试分解可知n含有一个小因数，但是这个n是隔一段时间（不是每一次）会变的，不过含小因数的性质不变，所以每次到这里先分解吧</p>
 <hr />
-<h2>设置目标架构和操作系统</h2>
-<p>全局设置context,可以包括字大小和端序。</p>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; context.arch      <span class="o">=</span> <span class="s1">&#39;i386&#39;</span>
-&gt;&gt;&gt; context.os        <span class="o">=</span> <span class="s1">&#39;linux&#39;</span>
-&gt;&gt;&gt; context.endian    <span class="o">=</span> <span class="s1">&#39;little&#39;</span>
-&gt;&gt;&gt; context.word_size <span class="o">=</span> <span class="m">32</span>
-
-or
-
-&gt;&gt;&gt; context<span class="o">(</span><span class="nv">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span>, <span class="nv">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span>, <span class="nv">endian</span><span class="o">=</span><span class="s1">&#39;little&#39;</span>, <span class="nv">word_size</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-</pre></div>
-<p>还有一个实用的可以显示调试信息：</p>
-<div class="highlight"><pre><span></span><span class="n">context</span><span class="o">.</span><span class="n">log_level</span> <span class="o">=</span> <span class="s2">&quot;debug&quot;</span>
-</pre></div>
+<h2>第六关</h2>
+<p><figure style="flex: 160.3030303030303" ><img width="529" height="165" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/865cb79aed4ea337bb55852aa7c8257f.png" /><figcaption>第六关</figcaption></figure></p>
+<p>可以直接看到e=0x3很小，估计就是爆破c+i*n中的i使其能被e开根，事实证明确实大概几万就出来了</p>
 <hr />
-<h2>ELF操作</h2>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; <span class="nv">e</span> <span class="o">=</span> ELF<span class="o">(</span><span class="s1">&#39;/bin/cat&#39;</span><span class="o">)</span> <span class="c1">#获取这个文件的句柄</span>
-&gt;&gt;&gt; print hex<span class="o">(</span>e.address<span class="o">)</span> <span class="c1">#基地址</span>
-0x400000
-&gt;&gt;&gt; print hex<span class="o">(</span>e.symbols<span class="o">[</span><span class="s1">&#39;write&#39;</span><span class="o">])</span> <span class="c1">#函数地址</span>
-0x401680
-&gt;&gt;&gt; print hex<span class="o">(</span>e.got<span class="o">[</span><span class="s1">&#39;write&#39;</span><span class="o">])</span> <span class="c1">#GOT表的地址</span>
-0x60b070
-&gt;&gt;&gt; print hex<span class="o">(</span>e.plt<span class="o">[</span><span class="s1">&#39;write&#39;</span><span class="o">])</span> <span class="c1">#PLT表的地址</span>
-0x401680
-</pre></div>
+<h2>第七关</h2>
+<p><figure style="flex: 85.13986013986013" ><img width="487" height="286" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/61a46ae1c1cd4dc2fcdda1b0cb313b9d.png" /><figcaption>第七关</figcaption></figure></p>
+<p>光看上去是没什么思路，但求gcd(n1,n2)不等于1，则可直接分解这两个n</p>
 <hr />
-<h2>小工具</h2>
-<h3>栈溢出找偏移</h3>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; print cyclic<span class="o">(</span><span class="m">20</span><span class="o">)</span>    <span class="c1">#生成20字节每4个字节(默认,可以给出参数如cyclic(20,n=8)指定)不随机的字符串</span>
-aaaabaaacaaadaaaeaaa
-&gt;&gt;&gt; <span class="c1"># Assume EIP = 0x62616166 (&#39;faab&#39; which is pack(0x62616166))  at crash time</span>
-&gt;&gt;&gt; print cyclic_find<span class="o">(</span><span class="s1">&#39;faab&#39;</span><span class="o">)</span>   <span class="c1">#根据4个字符查找偏移,若n!=4必须指明n的参数</span>
-<span class="m">120</span>
-</pre></div>
-<h3>汇编与反汇编</h3>
-<div class="highlight"><pre><span></span>&gt;&gt;&gt; asm<span class="o">(</span><span class="s1">&#39;mov eax, 0&#39;</span><span class="o">)</span>   <span class="c1">#汇编</span>
-<span class="s1">&#39;\xb8\x00\x00\x00\x00&#39;</span>
-&gt;&gt;&gt; disasm<span class="o">(</span><span class="s1">&#39;\xb8\x0b\x00\x00\x00&#39;</span><span class="o">)</span>  <span class="c1">#反汇编</span>
-<span class="s1">&#39;   0:   b8 0b 00 00 00          mov    eax,0xb&#39;</span>
-</pre></div>
-<h3>Shellcode生成</h3>
-<p>shellcraft模块是shellcode的模块，包含一些生成shellcode的函数。其中的子模块声明架构，比如：</p>
-<blockquote>
-<ul>
-<li>ARM架构: <strong>shellcraft.arm</strong></li>
-<li>AMD64架构: <strong>shellcraft.amd64</strong></li>
-<li>Intel 80386架构: <strong>shellcraft.i386</strong></li>
-<li>通用: <strong>shellcraft.common</strong></li>
-</ul>
-</blockquote>
-<p>可以先声明框架直接汇编shellcraft.sh()：</p>
-<div class="highlight"><pre><span></span><span class="n">context</span><span class="p">(</span><span class="n">arch</span><span class="o">=</span><span class="s1">&#39;i386&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">=</span><span class="s1">&#39;linux&#39;</span><span class="p">)</span>
-<span class="n">shellcode</span> <span class="o">=</span> <span class="n">asm</span><span class="p">(</span><span class="n">shellcraft</span><span class="o">.</span><span class="n">sh</span><span class="p">())</span>
-</pre></div>
-<h3>DynELF</h3>
-<p>这里举了一个32位的例子：</p>
-<div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./pwnme&#39;</span><span class="p">)</span>
+<h2>第八关</h2>
+<p><figure style="flex: 108.29787234042553" ><img width="509" height="235" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/c0f9b66cf15cc141b0dcd9a8b2fbd135.png" /><figcaption>第八关</figcaption></figure></p>
+<p>挺明显的共模攻击</p>
+<hr />
+<h2>第九关</h2>
+<p><figure style="flex: 59.44976076555024" ><img width="497" height="418" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/d5bce9ecbda9e57dc023de681f565b9c.png" /><figcaption>第九关</figcaption></figure></p>
+<p>也是很明显的广播攻击，e很小且明文相同，话说越到后面越简单么</p>
+<hr />
+<h2>脚本</h2>
+<div class="highlight"><pre><span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 
-<span class="c1"># 声明一个只需要一个地址的函数，并在该地址至少泄漏（返回）一个字节</span>
-<span class="k">def</span> <span class="nf">leak</span><span class="p">(</span><span class="n">address</span><span class="p">):</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%#x</span><span class="s2"> =&gt; </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="p">(</span><span class="n">data</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">data</span>
-
-<span class="c1"># 因为是举例，假设以下地址我们都知道。其中一个指向目标二进制文件里，另两个指向so库里</span>
-<span class="n">main</span>   <span class="o">=</span> <span class="mh">0xfeedf4ce</span>
-<span class="n">libc</span>   <span class="o">=</span> <span class="mh">0xdeadb000</span>
-<span class="n">system</span> <span class="o">=</span> <span class="mh">0xdeadbeef</span>
-
-<span class="c1">#通过构造的leak函数和一个指向目标二进制文件里的指针，可以解析任何地址</span>
-<span class="c1">#而且可以看到我们不需要这个目标二进制文件副本，直接解析</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span>     <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">libc</span>
-<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">system</span>
-
-<span class="c1">#但是，如果我们确实有目标二进制文件的副本，可以解析更快</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">main</span><span class="p">,</span> <span class="n">elf</span><span class="o">=</span><span class="n">ELF</span><span class="p">(</span><span class="s1">&#39;./pwnme&#39;</span><span class="p">))</span>
-<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span>     <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">libc</span>
-<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">,</span> <span class="s1">&#39;libc&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">system</span>
-
-<span class="c1">#或者，我们可以解析另一个库中的符号，并给出一个指针</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">DynELF</span><span class="p">(</span><span class="n">leak</span><span class="p">,</span> <span class="n">libc</span> <span class="o">+</span> <span class="mh">0x1234</span><span class="p">)</span>
-<span class="k">assert</span> <span class="n">d</span><span class="o">.</span><span class="n">lookup</span><span class="p">(</span><span class="s1">&#39;system&#39;</span><span class="p">)</span>      <span class="o">==</span> <span class="n">system</span>
-</pre></div>
-<h3>fmtstr</h3>
-<p><code>payload = fmtstr_payload(offset, writes, numbwritten=0, write_size='byte')</code></p>
-<blockquote>
-<ul>
-<li>offset (int) – 第一个格式化偏移</li>
-<li>writes (dict) – 字典，向哪个地址写入什么值 {addr: value, addr2: value2}</li>
-<li>numbwritten (int) – 输出字符串已经写入字节数</li>
-<li>write_size (str) – byte, short or int.即每次写一个字节、两个字节还是四个字节</li>
-</ul>
-</blockquote>
-<h3>attach</h3>
-<p>该模块用于调用gdb调试
-在python文件中直接设置断点，当运行到该位置之后就会断下</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pwnlib</span>
 <span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">process</span><span class="p">(</span><span class="s1">&#39;./c&#39;</span><span class="p">)</span>
-<span class="n">pwnlib</span><span class="o">.</span><span class="n">gdb</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">mylib</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">gmpy</span>
+
+<span class="c1">#context.log_level = &quot;debug&quot;</span>
+
+<span class="k">def</span> <span class="nf">before</span><span class="p">():</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="s2">&quot;icq850a27bc1dc210c9e10cc8d1ed28f&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s1">&#39;39.107.33.90&#39;</span><span class="p">,</span><span class="mi">9999</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mh">0xff</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mh">0xff</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mh">0x1f</span><span class="p">):</span>
+                            <span class="n">hashv</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="nb">chr</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                            <span class="k">if</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">hashv</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span> <span class="o">==</span> <span class="n">value</span><span class="p">):</span>
+                                    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="n">hashv</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;hex&#39;</span><span class="p">))</span>
+                                    <span class="k">return</span> <span class="n">r</span>
+
+<span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    位数少,可直接分解</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c=&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">289540461376837531747468286266019261659</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mi">306774653454153140532319815768090345109</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span>
+    <span class="n">ph</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ph</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wiener&#39;s Attack</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n=&#39;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;e=&#39;</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c=&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">hack_RSA</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Coppersmith</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>    <span class="c1">#10000 wrong</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">3704324190009897835</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    nextprime()性质构造一元二次方程求根</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c=&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mi">114791494681514143990268371423282183138226784645868909558224024738011633713833580549522009721245299751435183564384247261418984397745114977301564583085777881485180217075670585703780063072373569054286277474670485124459902688373648390826470893613150198411843162021692225644621249349903453125961550887837378298881</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">132940802289018336261987415312533953042764596984032548157327529495089307889127354914528507277209940457450746338751400025568015673025956762534143027257695791611900765053802453566263676389771478041671317414828940200119172760057249923066534954345956113954028278683477795444749575874548525999126508093286460575953</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">q</span> <span class="o">*</span> <span class="n">p</span>
+    <span class="n">ph</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ph</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    n含有小因数,过段时间会改变n</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c=&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mi">1827078707</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="mi">120393827811847730665892922601047874074897457839754965824187553709286586875999984122668238470178081377988439748992735957987417809407665405412580451688753139556272709693049760814986485709769800614157806922562929660004878835280427602632657375319022388348710785821982994403660254841027504457789884082670526620753</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span>
+    <span class="n">ph</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">ph</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    e为小指数</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n=&#39;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c=&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="mh">0x3</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">1000000</span><span class="p">):</span>
+        <span class="n">mm</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="n">c</span><span class="o">+</span><span class="n">i</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">mm</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">mm</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+        <span class="k">break</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    两个n不互素</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n1=&#39;</span><span class="p">)</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c1=&#39;</span><span class="p">)</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n2=&#39;</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c2=&#39;</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="n">e2</span> <span class="o">=</span> <span class="mh">0x10001</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">)</span>
+    <span class="n">q1</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">/</span> <span class="n">p1</span>
+    <span class="n">ph1</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">d1</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">ph1</span><span class="p">)</span>
+    <span class="n">m1</span> <span class="o">=</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">n1</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">q2</span> <span class="o">=</span> <span class="n">n2</span> <span class="o">/</span> <span class="n">p1</span>
+    <span class="n">ph2</span> <span class="o">=</span> <span class="p">(</span><span class="n">p1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">q2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">d2</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">ph2</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">n2</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    共模</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n=&#39;</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;e1=&#39;</span><span class="p">)</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c1=&#39;</span><span class="p">)</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;e2=&#39;</span><span class="p">)</span>
+    <span class="n">e2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c2=&#39;</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">gcd</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">t</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">gcdext</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span><span class="n">e2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="o">-</span><span class="n">s</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="o">-</span><span class="n">t</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">gmpy</span><span class="o">.</span><span class="n">invert</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">QuickPower</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">QuickPower</span><span class="p">(</span><span class="n">c2</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">%</span> <span class="n">n</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    广播攻击</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;e=&#39;</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n1=&#39;</span><span class="p">)</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c1=&#39;</span><span class="p">)</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n2=&#39;</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c2=&#39;</span><span class="p">)</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;n3=&#39;</span><span class="p">)</span>
+    <span class="n">n3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;c3=&#39;</span><span class="p">)</span>
+    <span class="n">c3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">),</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">chinese_remainder_theorem</span><span class="p">([(</span><span class="n">c1</span><span class="p">,</span><span class="n">n1</span><span class="p">),(</span><span class="n">c2</span><span class="p">,</span><span class="n">n2</span><span class="p">),(</span><span class="n">c3</span><span class="p">,</span><span class="n">n3</span><span class="p">)])</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">gmpy</span><span class="o">.</span><span class="n">root</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">e</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;L&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+    <span class="nb">print</span> <span class="n">r</span><span class="o">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s2">&quot;}&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">before</span><span class="p">()</span>
+    <span class="n">solve</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 </pre></div>
+<hr />
+<h2>flag</h2>
+<p><figure style="flex: 304.4117647058824" ><img width="414" height="68" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/d444509a94f7c25ba9e2c6804aa94c06.png" /><figcaption>flag</figcaption></figure></p>
 
             </div>
         </article>
         <div id="ga-tags">
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/tag/pwn/">#pwn</a>
+        <a class="ga-highlight" href="/tag/crypto/">#crypto</a>
     </span>
     
     <span class="ga-tag">
-        <a class="ga-highlight" href="/tag/pwntools/">#pwntools</a>
+        <a class="ga-highlight" href="/tag/rsa/">#rsa</a>
     </span>
     
 </div>
@@ -250,14 +426,14 @@ aaaabaaacaaadaaaeaaa
 <section id="ga-content_pager">
 
     <div class="next">
-        <a class="ga-highlight" href="/archives/fmtNote/">格式化字符串笔记</a>
-        <p class="yue">格式化字符串函数可以接受可变数量的参数，并将第一个参数作为格式化字符串，根据其来解析之后的参数。通俗来说，格式化字符串函数就是将计算机内存中表示的数据转化为我们人类可读的字符串格式。</p>
+        <a class="ga-highlight" href="/archives/CanaryNote/">canary笔记</a>
+        <p class="yue">canary(栈溢出保护)是一种缓冲区溢出攻击缓解手段。</p>
     </div>
 
 
     <div class="prev">
-        <a class="ga-highlight" href="/archives/RopNote/">一步一步学ROP笔记</a>
-        <p class="yue">ROP的全称为Return-oriented programming(返回导向编程),这是一种高级的内存攻击技术可以用来绕过现代操作系统的各种通用防御(比如DEP, ASLR等).</p>
+        <a class="ga-highlight" href="/archives/fmtNote/">格式化字符串笔记</a>
+        <p class="yue">格式化字符串函数可以接受可变数量的参数，并将第一个参数作为格式化字符串，根据其来解析之后的参数。通俗来说，格式化字符串函数就是将计算机内存中表示的数据转化为我们人类可读的字符串格式。</p>
     </div>
 
 </section>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>YuriSec</title><updated>2020-09-07T06:22:25.525545+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/RopNote/</id><title>一步一步学ROP笔记</title><updated>2020-09-07T06:22:25.525864+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh-CN"><id>/</id><title>YuriSec</title><updated>2020-10-15T06:42:45.112772+08:06</updated><author><name>Yuri</name><email>yuripwn@gmail.com</email></author><link href="/" rel="alternate"/><generator uri="https://lkiesow.github.io/python-feedgen" version="0.9.0">python-feedgen</generator><logo>logo.png</logo><subtitle>A simple static blog.</subtitle><entry><id>/archives/RopNote/</id><title>一步一步学ROP笔记</title><updated>2020-10-15T06:42:45.113096+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;一步一步学ROP笔记&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;原文地址: &lt;a href="drops.wooyun.org/tips/6597"&gt;一步一步学ROP&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -193,7 +193,7 @@
 &lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;pop_rax_ret&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mmap_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;payload3&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;linker_addr&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mh"&gt;0x35&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;34&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shellcode_addr&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;p64&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/RopNote/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry><entry><id>/archives/nextrsa/</id><title>pwntools使用</title><updated>2020-09-07T06:22:25.525837+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;pwntools使用&lt;/h1&gt;
+</content><link href="/archives/RopNote/" rel="alternate"/><published>2018-03-28T14:45:00+08:06</published></entry><entry><id>/archives/pwntools/</id><title>pwntools使用</title><updated>2020-10-15T06:42:45.113071+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;pwntools使用&lt;/h1&gt;
 &lt;h2&gt;安装&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ apt-get update
 $ apt-get install python2.7 python-pip python-dev git libssl-dev libffi-dev build-essential
@@ -343,7 +343,7 @@ aaaabaaacaaadaaaeaaa
 &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;process&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./c&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;pwnlib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gdb&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;attach&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/nextrsa/" rel="alternate"/><published>2018-03-28T17:00:36+08:06</published></entry><entry><id>/archives/fmtNote/</id><title>格式化字符串笔记</title><updated>2020-09-07T06:22:25.525810+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;格式化字符串笔记&lt;/h1&gt;
+</content><link href="/archives/pwntools/" rel="alternate"/><published>2018-03-28T17:00:36+08:06</published></entry><entry><id>/archives/fmtNote/</id><title>格式化字符串笔记</title><updated>2020-10-15T06:42:45.113046+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;格式化字符串笔记&lt;/h1&gt;
 &lt;h2&gt;基本格式&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;%[parameter][flags][field width][.precision][length]type&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;
@@ -454,50 +454,7 @@ aaaabaaacaaadaaaeaaa
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;gef➤  fmtarg 0x00007fffffffdb28
 The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/fmtNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/CanaryNote/</id><title>canary笔记</title><updated>2020-09-07T06:22:25.525783+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;canary笔记&lt;/h1&gt;
-&lt;h2&gt;布局&lt;/h2&gt;
-&lt;p&gt;&lt;figure style="flex: 44.227353463587924" &gt;&lt;img width="498" height="563" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e48b1e1a0f1feb6251e21c65e12c87bf.png" /&gt;&lt;figcaption&gt;canary布局&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;h2&gt;more&lt;/h2&gt;
-&lt;h3&gt;直接泄漏&lt;/h3&gt;
-&lt;p&gt;因为canary最低字节必是&lt;code&gt;'\x00'&lt;/code&gt;(防止填满把它打印出来)，则满足下面条件：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;缓冲区溢出可以填充到且只填充到canary最低字节&lt;/li&gt;
-&lt;li&gt;程序可以输出填充的内容&lt;/li&gt;
-&lt;li&gt;函数返回前还有再次填充机会&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;figure style="flex: 90.28497409326425" &gt;&lt;img width="697" height="386" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/2bb8d910437826ae78a9c4daa4fb598c.png" /&gt;&lt;figcaption&gt;填充到canary最低字节&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;这样就可以读出canary后再把它加到payload上，从而绕过canary。&lt;/p&gt;
-&lt;h3&gt;格式化字符串&lt;/h3&gt;
-&lt;p&gt;格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行&lt;code&gt;___stack_chk_fail()&lt;/code&gt;，具体用法：&lt;a href="http://yurixo.top/2018/03/29/%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%AC%94%E8%AE%B0/"&gt;格式化字符串笔记&lt;/a&gt;。&lt;/p&gt;
-&lt;h3&gt;爆破&lt;/h3&gt;
-&lt;p&gt;若程序有&lt;code&gt;fork()&lt;/code&gt;使子程序循环执行，可以通过子程序栈与主程序一致慢慢爆破。&lt;/p&gt;
-&lt;h3&gt;ssp leak&lt;/h3&gt;
-&lt;p&gt;因为函数返回前会检查canary，若不通过会跳转到&lt;code&gt;___stack_chk_fail()&lt;/code&gt;：&lt;/p&gt;
-&lt;p&gt;&lt;figure style="flex: 112.82051282051282" &gt;&lt;img width="264" height="117" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/69476bafed7d2ca0e9e4b9477e23b270.png" /&gt;&lt;figcaption&gt;___stack_chk_fail()&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;因此可以通过修改&lt;code&gt;___stack_chk_fail()&lt;/code&gt;地址和覆盖canary来劫持程序流程，但这里也有一种可以利用的东西：&lt;/p&gt;
-&lt;p&gt;看一下源码：
-&lt;code&gt;__stack_chk_fail&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; 
-&lt;span class="nf"&gt;__attribute__&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;noreturn&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
-&lt;span class="n"&gt;__stack_chk_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
-    &lt;span class="n"&gt;__fortify_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stack smashing detected&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
-&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;fortify_fail&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; 
-&lt;span class="nf"&gt;__attribute__&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;noreturn&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
-&lt;span class="n"&gt;__fortify_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-   &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
-      &lt;span class="cm"&gt;/* The loop is added only to keep gcc happy. */&lt;/span&gt;
-         &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-              &lt;span class="n"&gt;__libc_message&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*** %s ***: %s terminated&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;__libc_argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;?:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;unknown&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
-&lt;span class="p"&gt;}&lt;/span&gt; 
-&lt;span class="n"&gt;libc_hidden_def&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__fortify_fail&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;code&gt;__libc_message&lt;/code&gt; 的第二个%s输出的是&lt;code&gt;argv[0]&lt;/code&gt;，&lt;code&gt;argv[0]&lt;/code&gt;是指向第一个启动参数字符串的指针,由此我们可以通过缓冲区溢出覆盖掉&lt;code&gt;argv[0]&lt;/code&gt;打印我们想要的地址上的值。&lt;/p&gt;
-</content><link href="/archives/CanaryNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/nextrsa/</id><title>第二届强网杯nextrsa</title><updated>2020-09-07T06:22:25.525756+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;nextrsa&lt;/h1&gt;
+</content><link href="/archives/fmtNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/nextrsa/</id><title>第二届强网杯nextrsa</title><updated>2020-10-15T06:42:45.113022+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;nextrsa&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2&gt;第一关&lt;/h2&gt;
 &lt;p&gt;&lt;figure style="flex: 368.1159420289855" &gt;&lt;img width="508" height="69" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/7eae39a24e332b9ad6d647d48c7c233b.png" /&gt;&lt;figcaption&gt;第一关&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
@@ -823,11 +780,54 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;hr /&gt;
 &lt;h2&gt;flag&lt;/h2&gt;
 &lt;p&gt;&lt;figure style="flex: 304.4117647058824" &gt;&lt;img width="414" height="68" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/d444509a94f7c25ba9e2c6804aa94c06.png" /&gt;&lt;figcaption&gt;flag&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
-</content><link href="/archives/nextrsa/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/PPCNote/</id><title>读研机试准备</title><updated>2020-09-07T06:22:25.525729+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;经典入门&lt;/h1&gt;
+</content><link href="/archives/nextrsa/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/CanaryNote/</id><title>canary笔记</title><updated>2020-10-15T06:42:45.112998+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;canary笔记&lt;/h1&gt;
+&lt;h2&gt;布局&lt;/h2&gt;
+&lt;p&gt;&lt;figure style="flex: 44.227353463587924" &gt;&lt;img width="498" height="563" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e48b1e1a0f1feb6251e21c65e12c87bf.png" /&gt;&lt;figcaption&gt;canary布局&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h2&gt;more&lt;/h2&gt;
+&lt;h3&gt;直接泄漏&lt;/h3&gt;
+&lt;p&gt;因为canary最低字节必是&lt;code&gt;'\x00'&lt;/code&gt;(防止填满把它打印出来)，则满足下面条件：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;缓冲区溢出可以填充到且只填充到canary最低字节&lt;/li&gt;
+&lt;li&gt;程序可以输出填充的内容&lt;/li&gt;
+&lt;li&gt;函数返回前还有再次填充机会&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style="flex: 90.28497409326425" &gt;&lt;img width="697" height="386" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/2bb8d910437826ae78a9c4daa4fb598c.png" /&gt;&lt;figcaption&gt;填充到canary最低字节&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这样就可以读出canary后再把它加到payload上，从而绕过canary。&lt;/p&gt;
+&lt;h3&gt;格式化字符串&lt;/h3&gt;
+&lt;p&gt;格式化字符串能够实现任意地址读写的特性，可以读出canary或修改cannary执行&lt;code&gt;___stack_chk_fail()&lt;/code&gt;，具体用法：&lt;a href="https://yurisec.cn/archives/fmtNote/"&gt;格式化字符串笔记&lt;/a&gt;。&lt;/p&gt;
+&lt;h3&gt;爆破&lt;/h3&gt;
+&lt;p&gt;若程序有&lt;code&gt;fork()&lt;/code&gt;使子程序循环执行，可以通过子程序栈与主程序一致慢慢爆破。&lt;/p&gt;
+&lt;h3&gt;ssp leak&lt;/h3&gt;
+&lt;p&gt;因为函数返回前会检查canary，若不通过会跳转到&lt;code&gt;___stack_chk_fail()&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 112.82051282051282" &gt;&lt;img width="264" height="117" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/69476bafed7d2ca0e9e4b9477e23b270.png" /&gt;&lt;figcaption&gt;___stack_chk_fail()&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;因此可以通过修改&lt;code&gt;___stack_chk_fail()&lt;/code&gt;地址和覆盖canary来劫持程序流程，但这里也有一种可以利用的东西：&lt;/p&gt;
+&lt;p&gt;看一下源码：
+&lt;code&gt;__stack_chk_fail&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; 
+&lt;span class="nf"&gt;__attribute__&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;noreturn&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+&lt;span class="n"&gt;__stack_chk_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;   
+    &lt;span class="n"&gt;__fortify_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;stack smashing detected&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;fortify_fail&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt; 
+&lt;span class="nf"&gt;__attribute__&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="k"&gt;noreturn&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; 
+&lt;span class="n"&gt;__fortify_fail&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+   &lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+      &lt;span class="cm"&gt;/* The loop is added only to keep gcc happy. */&lt;/span&gt;
+         &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+              &lt;span class="n"&gt;__libc_message&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*** %s ***: %s terminated&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;__libc_argv&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;?:&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;unknown&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; 
+&lt;span class="p"&gt;}&lt;/span&gt; 
+&lt;span class="n"&gt;libc_hidden_def&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;__fortify_fail&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;__libc_message&lt;/code&gt; 的第二个%s输出的是&lt;code&gt;argv[0]&lt;/code&gt;，&lt;code&gt;argv[0]&lt;/code&gt;是指向第一个启动参数字符串的指针,由此我们可以通过缓冲区溢出覆盖掉&lt;code&gt;argv[0]&lt;/code&gt;打印我们想要的地址上的值。&lt;/p&gt;
+</content><link href="/archives/CanaryNote/" rel="alternate"/><published>2018-03-30T13:57:11+08:06</published></entry><entry><id>/archives/PPCNote/</id><title>读研机试准备</title><updated>2020-10-15T06:42:45.112972+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;经典入门&lt;/h1&gt;
 &lt;h2&gt;排序&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 所需头文件&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;algorithm&amp;gt; // sort()&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
-&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;string.h&amp;gt;  // strcmp()&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;algorithm&amp;gt;&lt;/span&gt;&lt;span class="c1"&gt; // sort()&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span class="c1"&gt;  // strcmp()&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 
 &lt;span class="c1"&gt;// 对buf[n]升序排序&lt;/span&gt;
 &lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; 
@@ -839,7 +839,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;cmp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 
 &lt;span class="c1"&gt;// 结构体内重载运算符&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;E&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;E&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;101&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;score&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -888,7 +888,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
 &lt;span class="n"&gt;sort&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;buf&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;base&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;base&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;buf&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;mid&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
@@ -900,7 +900,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;
     	&lt;span class="n"&gt;top&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;mid&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%d&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -953,7 +953,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="n"&gt;Q&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt; &lt;span class="c1"&gt;// 堆中元素个数&lt;/span&gt;
 
 &lt;span class="c1"&gt;// 自定义结构体&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -971,7 +971,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/ul&gt;
 &lt;h2&gt;二叉树&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 树结点结构体&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;Node&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;lchild&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="n"&gt;Node&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;rchild&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -997,7 +997,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
     	&lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rootIdx&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-    	&lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;lchild&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rootIdx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rootIdx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    	&lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;lchild&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rootIdx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rootIdx&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rootIdx&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;e2&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     	&lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="o"&gt;-&amp;gt;&lt;/span&gt;&lt;span class="n"&gt;rchild&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;build&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s1&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;rootIdx&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;e1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;rootIdx&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;e2&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
@@ -1116,7 +1116,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 结构体&lt;/span&gt;
 &lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
 &lt;span class="cp"&gt;#define maxDigits 1000&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;bigInteger&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;bigInteger&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;digit&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;maxDigits&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;size&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;init&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
@@ -1173,7 +1173,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="k"&gt;using&lt;/span&gt; &lt;span class="k"&gt;namespace&lt;/span&gt; &lt;span class="n"&gt;std&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 
 &lt;span class="c1"&gt;// 结构体表示一条边&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;Edge&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;Edge&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;nextNode&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
 &lt;span class="p"&gt;};&lt;/span&gt;
@@ -1206,7 +1206,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 
 &lt;span class="c1"&gt;// 查找根结点与路径压缩递归版&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;findRoot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
         &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;findRoot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]);&lt;/span&gt;
@@ -1219,11 +1219,11 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;findRoot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
         &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     &lt;span class="n"&gt;ret&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
         &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
         &lt;span class="n"&gt;Tree&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ret&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
         &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1247,7 +1247,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 边结构体&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;Edge&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;Edge&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;cost&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;bool&lt;/span&gt; &lt;span class="k"&gt;operator&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;const&lt;/span&gt; &lt;span class="n"&gt;Edge&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;const&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
@@ -1272,15 +1272,15 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     	&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-    		&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wuqiong&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wuqiong&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
-    			&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    		&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wuqiong&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wuqiong&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+    			&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     			&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     		&lt;span class="p"&gt;}&lt;/span&gt;
 
-    		&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wuqiong&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
-    			&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    		&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="n"&gt;wuqiong&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+    			&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     		&lt;span class="k"&gt;else&lt;/span&gt;
-    			&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
+    			&lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ans&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
     	&lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
@@ -1308,7 +1308,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;// 链表元素结构体&lt;/span&gt;
-&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="n"&gt;E&lt;/span&gt;
+&lt;span class="k"&gt;struct&lt;/span&gt; &lt;span class="nc"&gt;E&lt;/span&gt;
 &lt;span class="p"&gt;{&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;next&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
@@ -1335,7 +1335,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
     &lt;span class="n"&gt;edge&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;push_back&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tmp&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt; &lt;span class="c1"&gt;// 由于这里是无向图，所以两边都添加进单链表中&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt; &lt;span class="c1"&gt;// 初始化&lt;/span&gt;
-    &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 所有结点为不可达&lt;/span&gt;
+    &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 所有结点为不可达&lt;/span&gt;
     &lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 所有结点都不属于集合K&lt;/span&gt;
 &lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 得到最近的点为结点1，长度为0&lt;/span&gt;
@@ -1347,14 +1347,14 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
     	&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;edge&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;newP&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;].&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     		&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;newP&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt; &lt;span class="o"&gt;||&lt;/span&gt; &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;newP&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     		&lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;newP&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     &lt;span class="p"&gt;}&lt;/span&gt;
     &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mh"&gt;0x7fffffff&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;  &lt;span class="c1"&gt;//最小值初始化为一个大整数，为找最小值做准备&lt;/span&gt;
     &lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;mark&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     		&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-    	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
     		&lt;span class="k"&gt;continue&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
     	&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt; &lt;span class="n"&gt;min&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
     		&lt;span class="n"&gt;min&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Dis&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;j&lt;/span&gt;&lt;span class="p"&gt;];&lt;/span&gt;
@@ -1401,7 +1401,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</content><link href="/archives/PPCNote/" rel="alternate"/><published>2018-06-28T14:17:00+08:06</published></entry><entry><id>/archives/Return-to-dl-resolve/</id><title>Return-to-dl-resolve笔记</title><updated>2020-09-07T06:22:25.525700+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Return-to-dl-resolve&lt;/h1&gt;
+</content><link href="/archives/PPCNote/" rel="alternate"/><published>2018-06-28T14:17:00+08:06</published></entry><entry><id>/archives/Return-to-dl-resolve/</id><title>Return-to-dl-resolve笔记</title><updated>2020-10-15T06:42:45.112947+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Return-to-dl-resolve&lt;/h1&gt;
 &lt;h2&gt;&lt;code&gt;x86&lt;/code&gt;&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;pwn&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
 &lt;span class="n"&gt;elf&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;ELF&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;./bin&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
@@ -1594,7 +1594,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 
     &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
-</content><link href="/archives/Return-to-dl-resolve/" rel="alternate"/><published>2019-07-17T15:26:00+08:06</published></entry><entry><id>/archives/Radare2Note/</id><title>Radare2笔记</title><updated>2020-09-07T06:22:25.525667+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Radare2笔记&lt;/h1&gt;
+</content><link href="/archives/Return-to-dl-resolve/" rel="alternate"/><published>2019-07-17T15:26:00+08:06</published></entry><entry><id>/archives/Radare2Note/</id><title>Radare2笔记</title><updated>2020-10-15T06:42:45.112919+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;Radare2笔记&lt;/h1&gt;
 &lt;h2&gt;radare2&lt;/h2&gt;
 &lt;p&gt;common:&lt;/p&gt;
 &lt;table&gt;
@@ -1677,7 +1677,7 @@ The index of format argument : &lt;span class="m"&gt;10&lt;/span&gt;
 &lt;li&gt;字符串哈希：&lt;code&gt;rahash2 -a md5 -s admin&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;文件哈希：&lt;code&gt;rahash2 -a md5 bin&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</content><link href="/archives/Radare2Note/" rel="alternate"/><published>2020-07-05T17:20:00+08:06</published></entry><entry><id>/archives/IdaPlug/</id><title>IDA Pro 插件记录</title><updated>2020-09-07T06:22:25.525608+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;IDA Pro 插件记录&lt;/h1&gt;
+</content><link href="/archives/Radare2Note/" rel="alternate"/><published>2020-07-05T17:20:00+08:06</published></entry><entry><id>/archives/IdaPlug/</id><title>IDA Pro 插件记录</title><updated>2020-10-15T06:42:45.112888+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;IDA Pro 插件记录&lt;/h1&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;version: 7.5&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1730,4 +1730,214 @@ binaryai install_ida_plugin
 &lt;/ul&gt;
 &lt;h2&gt;&lt;a href="https://github.com/gaasedelen/lighthouse"&gt;Lighthouse&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;A Code Coverage Explorer&lt;/p&gt;
-</content><link href="/archives/IdaPlug/" rel="alternate"/><published>2020-07-08T22:18:00+08:06</published></entry></feed>
+</content><link href="/archives/IdaPlug/" rel="alternate"/><published>2020-07-08T22:18:00+08:06</published></entry><entry><id>/archives/SDGNet/</id><title>Spectral-based Directed Graph Network for Malware Detection 阅读笔记</title><updated>2020-10-15T06:42:45.112831+00:00</updated><author><name>yuri</name><email>yuripwn@gmail.com</email><uri>https://yurisec.cn</uri></author><content>&lt;h1&gt;基于谱域有向图网络的恶意软件检测方法&lt;/h1&gt;
+&lt;h2&gt;1、背景&lt;/h2&gt;
+&lt;h3&gt;1.1、刊物/会议级别&lt;/h3&gt;
+&lt;p&gt;IEEE TNSE.2020.3024557&lt;/p&gt;
+&lt;h3&gt;1.2、作者团队&lt;/h3&gt;
+&lt;p&gt;hidden&lt;/p&gt;
+&lt;h3&gt;1.3、论文背景&lt;/h3&gt;
+&lt;p&gt;基于谱域的深度学习方法作为一种基于行为特征的恶意软件检测方法，随着恶意威胁的快速增长，吸引了大量的研究工作。然而，由于图邻接矩阵的不对称性，以往基于谱域的图神经网络很难应用于有向图。为了解决现存的问题，作者提出了一种基于谱域的有向图网络(SDGNet)结构来对有向图进行分类。&lt;/p&gt;
+&lt;p&gt;为了解决有向图在谱域的应用问题，作者应用三种归一化(normal, aggregation and propagation)方法将不对称的图邻接矩阵转化为对称图矩阵。然后，作者提出了利用门控机制，augment GCN和全连接层的MDGCN，它完整连接了三个归一化的对称图矩阵，并生成相应的综合结点嵌入信息，将结点嵌入信息融合后得到相应的图表示。将每个MDGCN层的图表示连接在一起后，使用组合损失函数对恶意软件进行分类，以进一步提高性能。&lt;/p&gt;
+&lt;h2&gt;2、论文主要方法&lt;/h2&gt;
+&lt;h3&gt;2.1、SDGNet&lt;/h3&gt;
+&lt;p&gt;&lt;figure style="flex: 84.44272445820434" &gt;&lt;img width="1091" height="646" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/e7ef4a7fbcd5957ff1ba7410b190c55c.png" /&gt;&lt;figcaption&gt;SDGNet&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4&gt;2.1.1 API Graph Modeling&lt;/h4&gt;
+&lt;p&gt;API调用表示程序是一种通用的恶意软件检测方法，因为它不包含硬件平台信息和编程语言信息。API之间的交互很容易被监视和收集并得到API序列。要使用API之间的结构依赖关系，我们可以将API序列转换为图。形式上，给定一个API序列$S$，每个软件都可以表示为图$G=(V,E)$，其中$V$表示结点集，$E$表示边集。 每个结点表示一种API，每条边表示API之间的连接关系。我们将每个API结点的属性向量定义为$x$，并将属性矩阵定义为$X$。有$n$个结点图$G$的邻接矩阵定义为$A\in \Zeta^{n\times n}$，因为是有向图所以它是一个不对称矩阵。&lt;/p&gt;
+&lt;p&gt;在本文中，我们实现了两种类型的属性作为结点属性，如下表所示。&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 115.17571884984025" &gt;&lt;img width="721" height="313" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/4c0306beac49b69d6fd6b480d804b500.png" /&gt;&lt;figcaption&gt;node attributes&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;有以下两类属性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API序列&lt;ul&gt;
+&lt;li&gt;API序列中每种API（该结点）的出现次数&lt;/li&gt;
+&lt;li&gt;API（该结点）第一次出现在API序列中的索引(index)&lt;/li&gt;
+&lt;li&gt;API（该结点）最后一次出现在API序列中的索引(index)&lt;/li&gt;
+&lt;li&gt;API序列中API（该结点）的概率密度分布函数的参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;图结构&lt;ul&gt;
+&lt;li&gt;图中该结点的入度&lt;/li&gt;
+&lt;li&gt;图中该结点的出度&lt;/li&gt;
+&lt;li&gt;图中该结点的加权入度（平均值、最大值、最小值）&lt;/li&gt;
+&lt;li&gt;图中该结点的加权出度（平均值、最大值、最小值）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4&gt;2.1.2 Weighted Graph Matrix Normalization（加权图矩阵归一化）&lt;/h4&gt;
+&lt;p&gt;因为有向图邻接矩阵$A$是不对称的，通常可以直接使用公式$A'=\frac{1}{2}(A+A^T)$得到对称的归一化拉普拉斯矩阵$A'$，但是这会丢失结点间的部分信息。所以作者提出三种将其转化为对称矩阵的方法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Normal Normalization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;直接将各边权重缩放到[0,1]，得到$A_1''$。
+$$
+A'=\frac{1}{2}(A+A^T) \
+(A_1'')&lt;em&gt;{ij}=\frac{A'&lt;/em&gt;{ij}}{max(A')}
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Aggregation based Normalization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于聚合的归一化聚合了可达结点的信息。该方法捕获结点(API)之间的一些详细的交互聚合特征，也可以说聚合了结点的方向信息，即列归一化，得到$A_2''$。
+$$
+(A_2)&lt;em&gt;{ij}=\frac{A&lt;/em&gt;{ij}}{\sum_{j} A_{ij}} \
+A_2'=\frac{1}{2}(A_2+A_2^T) \
+(A_2'')&lt;em&gt;{ij}=\frac{(A_2')&lt;/em&gt;{ij}}{max(A_2')}
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Propagation based Normalization&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于传播的归一化捕获结点(API)之间的一些详细交互传播特征，它考虑图结点之间的转移概率，即行归一化，得到$A_3''$。
+$$
+(A_3)&lt;em&gt;{ij}=\frac{A&lt;/em&gt;{ij}}{\sum_{i} A_{ij}} \
+A_3'=\frac{1}{2}(A_3+A_3^T) \
+(A_3'')&lt;em&gt;{ij}=\frac{(A_3')&lt;/em&gt;{ij}}{max(A_3')}
+$$
+这三种邻接矩阵生成生成过程可以看下图例子，(5)、(7)、(9)分别为Normal、Aggregation、Propagation生成的邻接矩阵。&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 76.82926829268293" &gt;&lt;img width="1008" height="656" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/cda0189ec71b85aa00cafc6b9d7a8ef2.png" /&gt;&lt;figcaption&gt;normalization process&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h4&gt;2.1.3 Different layers of MDGCN&lt;/h4&gt;
+&lt;p&gt;MDGCN网络结构如下图，它由结点特征学习、结点特征维度扩展和图表示学习三部分。&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 63.21279554937413" &gt;&lt;img width="909" height="719" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/3f19d429cc6ee183117d32a26a5dd29c.png" /&gt;&lt;figcaption&gt;MDGCN&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Naive directed GCN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对给定的归一化对称矩阵$A_1''$，$A_2''$和$A_3''$，作者对它们使用图卷积技术获得相应的结点嵌入信息。递归方程如下：
+$$
+Z_k^{l+1}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_k^lW_k^l); Z_k^0=X
+$$
+其中第$l$层输入为$Z_k^l$，参数为$W_k^l$，$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$D_{kii}=\sum_j\tilde{A}_{kij}$。&lt;/p&gt;
+&lt;p&gt;第$l$层的结点嵌入信息可以使用公式$A'=\frac{1}{2}(A+A^T)$学习并表示为$Z_1^l$，$Z_2^l$，$Z_3^l$。 然后，为了从结点嵌入中得到一个全面的图表示，我们可以将它们与加权参数结合起来。第$l$层融合后输出的图表示的计算如下：
+$$
+Z^l=W_1^lZ_1^l+W_2^lZ_2^l+W_3^lZ_3^l
+$$
+其中为$W_1^l$，$W_2^l$，$W_3^l$为混合图表示的权重参数。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Augment GCN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一般基于图的方法检测恶意软件会存在两个问题：首先，API类型数量很大，但单个软件的API类型数量一般来说很少，这使得图特征矩阵是一个很大的稀疏矩阵；其次，图中各个API结点的重要性不一致，在某一个软件中有的API会被频繁调用而有的API却很少被调用。作者将两个问题归为欠拟合(underfitting)。&lt;/p&gt;
+&lt;p&gt;为解决这种欠拟合问题，作者提出一种增强GCN，利用图结构信息扩展结点的嵌入维数。给定结点嵌入矩阵$Z_{in}\in R^{N\times F1}$，增强GCN的目标则是生成增强结点嵌入矩阵$Z_{out}\in R^{N\times F2}(F2&amp;gt;F1)$，它用于融合全面的图表示，公式如下：
+$$
+Z_{out}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_{in}W_{aug})
+$$
+其中$\tilde{A_k}=A_k''+I$，图$G$的增广对角度为$D_{kii}=\sum_j\tilde{A}&lt;em&gt;{kij}$，增强参数$W&lt;/em&gt;{aug}\in R^{F1\times F2}$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Network of MDGCN&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作者利用所提出的naive directed GCN和gated convolutional neural network，提出了更好提取特征的MDGCN。&lt;/p&gt;
+&lt;p&gt;对于MDGCN的$l+1$层，该层的输入特征向量为$Z_1^l$，$Z_2^l$，$Z_3^l$。参考公式$Z_k^{l+1}=f(\tilde{D_k}^{-\frac{1}{2}}\tilde{A_k}\tilde{D_k}^{-\frac{1}{2}}Z_k^lW_k^l)$但不共享权值，我们可以得到$Z_{\alpha 1}^l$和$\hat{Z}&lt;em&gt;{\alpha 1}^l$，$Z&lt;/em&gt;{\alpha 2}^l$和$\hat{Z}&lt;em&gt;{\alpha 2}^l$，$Z&lt;/em&gt;{\alpha 3}^l$和$\hat{Z}&lt;em&gt;{\alpha 3}^l$。然后，为了获取带注意力的结点特征，用以下公式获取新的结点嵌入特征：
+$$
+Z_1^{l+1}=Z&lt;/em&gt;{\alpha 1}^l + (\hat{Z}&lt;em&gt;{\alpha 1}^l \bigotimes \sigma(Z&lt;/em&gt;{\alpha 1}^l)) \
+Z_2^{l+1}=Z_{\alpha 2}^l + (\hat{Z}&lt;em&gt;{\alpha 2}^l \bigotimes \sigma(Z&lt;/em&gt;{\alpha 2}^l)) \
+Z_3^{l+1}=Z_{\alpha 3}^l + (\hat{Z}&lt;em&gt;{\alpha 3}^l \bigotimes \sigma(Z&lt;/em&gt;{\alpha 3}^l))
+$$
+其中$\bigotimes$为哈达玛积，$\sigma()$是sigmoid函数，用于获得带注意力的结点嵌入。&lt;/p&gt;
+&lt;p&gt;在计算这些结点嵌入特征后，我们需要将它们融合在一起，以获得更全面的图特征。使用全连接层去扩展维度，我们可以得到增强结点嵌入$Z_{out1}$，它侧重于直接建立原始结点的信息。同时，使用Augment GCN，我们可以得到另一种增强结点嵌入$Z_{out2}$，它侧重于图结构中邻接结点特征的影响。通过使用参数$\alpha$将$Z_{out1}$和$Z_{out2}$结合，我们可以得到最终结点嵌入$Z_f$：&lt;/p&gt;
+&lt;p&gt;$$
+Z_f=(1-\alpha)Z_{out1}+\alpha Z_{out2}
+$$&lt;/p&gt;
+&lt;p&gt;在扩展维度后，我们可以得到第$l+1$层的三种不同方面的结点嵌入$Z_{f1}^{l+1}$，$Z_{f2}^{l+1}$，$Z_{f3}^{l+1}$。然后，使用$1×1$卷积层将它们融合在一起。最后，我们可以得到MDGCN的第$l+1$层的输出图表示$Z_{\beta}^{l+1}$。&lt;/p&gt;
+&lt;h4&gt;2.1.4 Classification&lt;/h4&gt;
+&lt;p&gt;分类时，利用CNN提取降维后，将输出图表示flatten，并将其输入三层全连接的神经网络中。 总损失为：&lt;/p&gt;
+&lt;p&gt;$$
+Loss=(1-\lambda)L_c + \lambda L_{gf}
+$$&lt;/p&gt;
+&lt;p&gt;其中$L_c$是分类损失，$L_{gf}$是图特征损失，来自于MDGCN的第一层和最后一层输出矩阵的相似度差。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分类损失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;交叉损失作为分类所示。对于N个样本的K类分类任务，分类损失为：
+$$
+L_c (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{k=0}^{K-1} y_{i,k} log p_{i,k}
+$$
+其中$Y$是ground truth，$P$是预测结果。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;图特征损失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为了训练3层MDGCNs以获得更好的分类性能，作者使用图特征损失作为一种正则化方法。
+$$
+L_{gf} (Y,P)=\frac{1}{N} \sum_{i=0}^{N-1} \sum_{j=0}^{J-1} f(x)sigmoid(log(\frac{|d_{i,j}\cdot m_{i,j}|}{|d_{i,j}|\cdot |m_{i,j}|})) \
+f(x) = \begin{cases} 
+-1,  &amp;amp; \mbox{if } y_{i,k}=\bar{p}&lt;em&gt;{i,k}; \
++1, &amp;amp; \mbox{otherwise}
+\end{cases} \
+\bar{p}&lt;/em&gt;{i,k}=k, p_{i,k} \mbox{is the biggest in } p_i \mbox{.}
+$$
+其中$d_{i,j}$代表第$i$个样本在MDGCN第1层的输出图表示$Z_{\beta}^{1}$的第$j$维结点特征向量，$m_{i,j}$代表第$i$个样本在MDGCN第3层的输出图表示$Z_{\beta}^{3}$的第$j$维结点特征向量。&lt;/p&gt;
+&lt;h2&gt;3、实验&lt;/h2&gt;
+&lt;h3&gt;3.1 实验设置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;数据来源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://tianchi.aliyun.com/competition/entrance/231694"&gt;阿里云安全恶意程序检测&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;数据集是沙箱模拟执行windows可执行程序文件中的API指令序列。阿里数据集包含8909个标记样本，有6亿个API记录。软件样本的类型可分为8类：{正常软件，勒索软件，挖矿软件，DDoS，蠕虫，病毒，后门，木马}，API类型总数为295种。&lt;/li&gt;
+&lt;li&gt;在作者的实验中，重建了一个平衡的数据集。正常软件与恶意软件的样本比例为1：1，每个恶意软件具有相同的样本数量。由于蠕虫在阿里数据集中只有100个样本，因此所有恶意软件类型都有100个样本，而正常软件在重建数据集中有700个样本。&lt;/li&gt;
+&lt;li&gt;值得注意的是，API执行序列可能包含许多线程的执行结果，但通过图表示连接后， 具有多个线程的软件的检测方式与只有一个线程的软件相同。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;模型训练与评估&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;200 epochs，五折，每个epoch训练：验证：测试=3：1：1。&lt;/li&gt;
+&lt;li&gt;评估指标：accuracy，micro-recall，micro-precision，micro-F-1 score。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Baselines&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用SDGNet（超参数$\lambda$设置为5）与其他恶意软件检测算法和图分类算法比较：&lt;ul&gt;
+&lt;li&gt;传统恶意软件检测算法：MLP、N-gram、LSTM、Graphlet&lt;/li&gt;
+&lt;li&gt;图卷积分类算法：GCN、Graphsage、PSCN、DGCNN、MatchGNet&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;3.2 实验结果&lt;/h3&gt;
+&lt;h4&gt;3.2.1 与其他传统恶意软件检测算法比较&lt;/h4&gt;
+&lt;p&gt;&lt;figure style="flex: 139.36170212765958" &gt;&lt;img width="524" height="188" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/800cb186962adfe78d66676b592a6fbe.png" /&gt;&lt;figcaption&gt;traditional malware detection&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;SDGNet的Acc最高0.973，也比其它算法有更小的假阳率和假阴率，mF-1分数也是最高，基本上可以说作者的方法在很大程度上优于传统的恶意软件分类算法。因为SDGNet可以学习更多的鉴别表示（特别是深层结构特征）。对于传统恶意软件分类算法的结果，N-gram和LSTM的结果优于其他两种算法。这表明API结点在序列的顺序和结点之间的关系是检测（分类）恶意软件的关键。&lt;/p&gt;
+&lt;h4&gt;3.2.2 与其他图卷积分类算法比较&lt;/h4&gt;
+&lt;p&gt;&lt;figure style="flex: 124.8780487804878" &gt;&lt;img width="512" height="205" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/013bf2442984b582feb087e6ab75f0cb.png" /&gt;&lt;figcaption&gt;graph convolution&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;SDGNet的Acc、mPrec和mF-1依旧最高，也就是说与其他基于图卷积的分类算法相比，作者的方法可以获得更高的性能。其中MDGCN和MatchGNet表现比GCN、PSCN、DGCNN和Graphsage，这说明多跳邻居的特征聚合有利于提高分类精度。&lt;/p&gt;
+&lt;h4&gt;3.2.3 超参数选择&lt;/h4&gt;
+&lt;p&gt;SDGCN的损失函数中使用超参数$\lambda$，下图为它的值与accuracy的关系：&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 78.41614906832298" &gt;&lt;img width="505" height="322" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/3dcfc401e11d09d0de49eb269e15bfea.png" /&gt;&lt;figcaption&gt;hyperparameter&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;当$\lambda$是0时，只有分类损失，acc为0.952；当$\lambda$是1时，只有图特征损失，acc为0.927。当$\lambda$在0.1到0.4区间时，分类损失权重比图特征损失权重大，分类acc随$\lambda$增大逐渐增高；当$\lambda$在0.6到0.9区间，图特征损失权重比分类损失权重小，分类acc随$\lambda$增大逐渐减小。当$\lambda$为0.5时，两者损失权重相等，得到最高的分类acc。这说明添加了适当的图特征损失可以提升恶意软件分类性能。&lt;/p&gt;
+&lt;h4&gt;3.2.4 不同类别恶意软件分类结果&lt;/h4&gt;
+&lt;p&gt;{0：正常软件，1：勒索软件，2：挖矿软件，3：DDoS，4：蠕虫，5：病毒，6：后门，7：木马}&lt;/p&gt;
+&lt;p&gt;&lt;figure style="flex: 44.18604651162791" &gt;&lt;img width="608" height="688" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/37ac2174f00b6708d4a153fa4defb1b7.png" /&gt;&lt;figcaption&gt;confusion matrix&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在归一化混淆矩阵中，从每种恶意软件之间的比较中得到了两个观察结果：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SDGNet在DDoS、病毒和木马上的分类性能优于其他分类，在后门上的分类性能是所有类别中最差的。&lt;/li&gt;
+&lt;li&gt;所有DDoS、病毒、后门和木马都被检测为恶意软件。但是，许多挖矿软件（占所有挖矿恶意软件的5%）被检测为正常软件，这是MDGNet的弱点。3%的挖矿恶意软件和2%的蠕虫被检测为正常软件，应加以改进。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4&gt;3.2.5 模型简化实验（Ablation Studies）&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SDGNet不同组件的影响&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style="flex: 158.75" &gt;&lt;img width="635" height="200" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/b0237e2d4f3351581a2baab8f4affdc9.png" /&gt;&lt;figcaption&gt;different components in SDGNet&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;四大组件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MF：融合结点嵌入的多个方面特征的特征融合组件&lt;/li&gt;
+&lt;li&gt;LC：连接不同层的图表示的特征连接组件&lt;/li&gt;
+&lt;li&gt;CN：为分类降维图表示的特征提取和降维组件&lt;/li&gt;
+&lt;li&gt;GL：图特征损失&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;“LC+MF+CN+GL”整体表现(mF-1)比“LC+MF+CN”差，表明附加的图特征损失可以提高分类精度性能，但会削弱召回性能。&lt;/p&gt;
+&lt;p&gt;对“LC+MF+CN”和“LC+MF”的比较表明，连接不同层图表示后的降维可以提高分类性能。&lt;/p&gt;
+&lt;p&gt;“LC+MF+CN”和“MF+CN”之间的比较表明，不同层的图表示的特征级联可以显著提高分类器的性能。&lt;/p&gt;
+&lt;p&gt;对“LC+MF”和“LC”的比较表明，不同层图表示的特征融合可以显著提高分类性能。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;MDGCN不同组件的影响&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style="flex: 134.55882352941177" &gt;&lt;img width="549" height="204" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/a1faae01563433916631b335f4a9a35b.png" /&gt;&lt;figcaption&gt;different components in MDGCN&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;前三项的比较表明融合结点嵌入的不同方面之前的维数扩展可以提高分类的性能，具有结构信息的维数扩展可以进一步提高性能。&lt;/p&gt;
+&lt;p&gt;对“Gate”和“naive GCN”的比较表明，采用门控机制的结点嵌入特征提取可以提高分类性能。然而，使用门控机制会使假阳率增加，这主要是因为门控机制通过动态加权图上的结点来概括全局特征。全局特征有助于识别恶意软件，而局部特征有助于识别良性软件。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;augment GCN的影响&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;figure style="flex: 71.14014251781472" &gt;&lt;img width="599" height="421" src="https://cdn.jsdelivr.net/gh/yuriufo/yuriufo.github.io@master/archives/assets/b4d44fa2f4970a813d1f2abbe0823b0e.png" /&gt;&lt;figcaption&gt;different dimension expansion methods&lt;/figcaption&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;与“FC”和“Aug”相比，“FC+Aug”达到了最高的准确率。这一结果表明，“Aug”捕获的结构信息更有助于提高分类算法的准确率。&lt;/p&gt;
+&lt;p&gt;与“FC”和“Aug”相比，“FC+Aug”具有最高的微精度值。这一结果表明，“Aug”捕获的结构信息更有助于提高分类算法的精度。&lt;/p&gt;
+&lt;p&gt;与“FC”和“Aug”相比，“Aug”具有最高的微召回率。这一结果表明，将“Aug”和“FC”捕获的信息融合在一起对识别恶意软件无帮助。&lt;/p&gt;
+&lt;p&gt;与“FC”和“Aug”相比，“FC+Aug”具有最高的微F-1值。由于“FC+Aug”的整体性能较好，本文选择了这种结构来扩展结点嵌入维数。&lt;/p&gt;
+&lt;h2&gt;4、总结与研究启发&lt;/h2&gt;
+&lt;p&gt;把API序列转化为有向图来解决恶意软件检测的问题，方法很新颖，唯一要担心的可能就是0day攻击和对抗性问题。训练集中的数据，例如API类型，是否能泛化到真实情况下。以及针对图网络的对抗攻击，例如增删结点或边，是否会影响检测结果。这些都需要未来做验证。&lt;/p&gt;
+&lt;p&gt;最后不知道图中是否能再细化以下结点和边的属性。例如对于结点来说，有一些API是专门针对文件的操作；对于边来说，邻接API结点间调用所用时间的大小等等。&lt;/p&gt;
+</content><link href="/archives/SDGNet/" rel="alternate"/><published>2020-10-15T14:39:45+08:06</published></entry></feed>
